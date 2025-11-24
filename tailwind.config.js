@@ -6,7 +6,7 @@ export default {
   ],
   theme: {
     extend: {
-      // Custom font sizes for consistent typography
+      // Custom font sizes with responsive variants
       fontSize: {
         'xs': ['0.75rem', { lineHeight: '1rem' }],        // 12px
         'sm': ['0.875rem', { lineHeight: '1.25rem' }],    // 14px
@@ -23,7 +23,12 @@ export default {
         '9xl': ['8rem', { lineHeight: '1' }],             // 128px
       },
       
-      // Custom spacing scale for consistent padding and margins
+      // Add responsive text utilities
+      textUtilities: {
+        responsive: true,
+      },
+      
+      // Custom spacing scale with responsive variants
       spacing: {
         'px': '1px',
         '0': '0px',
@@ -62,6 +67,11 @@ export default {
         '96': '24rem',         // 384px
       },
       
+      // Enable responsive spacing utilities
+      spacingUtilities: {
+        responsive: true,
+      },
+      
       // Custom screens for responsive breakpoints
       screens: {
         'xs': '475px',         // Extra small devices
@@ -70,6 +80,9 @@ export default {
         'lg': '1024px',        // Large devices
         'xl': '1280px',        // Extra large devices
         '2xl': '1536px',       // 2X large devices
+        // Add hover media queries for devices that support hover
+        'hover': { 'raw': '(hover: hover)' },
+        'not-hover': { 'raw': '(hover: none)' },
       },
       
       // Custom border radius values
@@ -85,6 +98,46 @@ export default {
         'full': '9999px',
       },
     },
+    
+    // Extend utilities with additional responsive features
+    utilities: {
+      responsive: true,
+      extend: {
+        // Add responsive variants for padding and margin
+        'padding': ({ theme }) => ({
+          ...Object.entries(theme('spacing')).reduce((acc, [key, value]) => {
+            acc[`p-${key}`] = { padding: value };
+            return acc;
+          }, {}),
+        }),
+        'margin': ({ theme }) => ({
+          ...Object.entries(theme('spacing')).reduce((acc, [key, value]) => {
+            acc[`m-${key}`] = { margin: value };
+            return acc;
+          }, {}),
+        }),
+      },
+    },
   },
-  plugins: [],
+  plugins: [
+    // Add plugin for responsive typography
+    function({ addUtilities, theme, variants }) {
+      const textUtilities = {
+        '.text-responsive': {
+          'font-size': 'clamp(1rem, 2vw + 0.5rem, 1.5rem)',
+        },
+        '.leading-tight': {
+          'line-height': '1.1',
+        },
+        '.leading-snug': {
+          'line-height': '1.3',
+        },
+        '.leading-normal': {
+          'line-height': '1.5',
+        },
+      };
+      
+      addUtilities(textUtilities, variants('textUtilities'));
+    }
+  ],
 }
