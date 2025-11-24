@@ -1,0 +1,248 @@
+/* Base styles for the entire application */
+@layer base {
+  /* Set the default font family for the entire application */
+  html {
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+  
+  /* Ensure proper box-sizing across all elements */
+  *, ::before, ::after {
+    box-sizing: border-box;
+  }
+  
+  /* Base body styles */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    color: #111827; /* gray-900 */
+    line-height: 1.5;
+  }
+  
+  /* Focus styles for accessibility */
+  *:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+    --tw-ring-color: #3b82f6; /* blue-500 */
+    --tw-ring-offset-width: 2px;
+  }
+  
+  /* Responsive typography base */
+  .text-display-1 {
+    font-size: 4.5rem; /* 72px */
+    font-weight: 700;
+    line-height: 1;
+  }
+  
+  .text-display-2 {
+    font-size: 3.75rem; /* 60px */
+    font-weight: 700;
+    line-height: 1;
+  }
+  
+  .text-display-3 {
+    font-size: 3rem; /* 48px */
+    font-weight: 700;
+    line-height: 1;
+  }
+  
+  .text-display-4 {
+    font-size: 2.25rem; /* 36px */
+    font-weight: 700;
+    line-height: 2.5rem; /* 40px */
+  }
+  
+  .text-heading-1 {
+    font-size: 1.875rem; /* 30px */
+    font-weight: 700;
+    line-height: 2.25rem; /* 36px */
+  }
+  
+  .text-heading-2 {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 700;
+    line-height: 2rem; /* 32px */
+  }
+  
+  .text-heading-3 {
+    font-size: 1.25rem; /* 20px */
+    font-weight: 700;
+    line-height: 1.75rem; /* 28px */
+  }
+  
+  .text-body-large {
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.75rem; /* 28px */
+  }
+  
+  .text-body {
+    font-size: 1rem; /* 16px */
+    line-height: 1.5rem; /* 24px */
+  }
+  
+  .text-body-small {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.25rem; /* 20px */
+  }
+  
+  .text-caption {
+    font-size: 0.75rem; /* 12px */
+    line-height: 1rem; /* 16px */
+  }
+  
+  /* Font weights */
+  .font-thin {
+    font-weight: 100;
+  }
+  
+  .font-extralight {
+    font-weight: 200;
+  }
+  
+  .font-light {
+    font-weight: 300;
+  }
+  
+  .font-normal {
+    font-weight: 400;
+  }
+  
+  .font-medium {
+    font-weight: 500;
+  }
+  
+  .font-semibold {
+    font-weight: 600;
+  }
+  
+  .font-bold {
+    font-weight: 700;
+  }
+  
+  .font-extrabold {
+    font-weight: 800;
+  }
+  
+  .font-black {
+    font-weight: 900;
+  }
+}
+
+
+/* Utility classes */
+@layer utilities {
+  /* Responsive text alignment */
+  .text-responsive {
+    text-align: center;
+  }
+  
+  @media (min-width: 640px) {
+    .text-responsive {
+      text-align: left;
+    }
+  }
+  
+  /* Responsive container padding */
+  .container-padding {
+    padding-left: 1rem; /* 16px */
+    padding-right: 1rem; /* 16px */
+  }
+  
+  @media (min-width: 640px) {
+    .container-padding {
+      padding-left: 1.5rem; /* 24px */
+      padding-right: 1.5rem; /* 24px */
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .container-padding {
+      padding-left: 2rem; /* 32px */
+      padding-right: 2rem; /* 32px */
+    }
+  }
+  
+  /* Responsive section padding */
+  .section-padding {
+    padding-top: 3rem; /* 48px */
+    padding-bottom: 3rem; /* 48px */
+  }
+  
+  @media (min-width: 640px) {
+    .section-padding {
+      padding-top: 4rem; /* 64px */
+      padding-bottom: 4rem; /* 64px */
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding-top: 5rem; /* 80px */
+      padding-bottom: 5rem; /* 80px */
+    }
+  }
+  
+  /* Responsive card padding */
+  .card-padding {
+    padding: 1.5rem; /* 24px */
+  }
+  
+  @media (min-width: 640px) {
+    .card-padding {
+      padding: 2rem; /* 32px */
+    }
+  }
+  
+  /* Responsive gap utilities */
+  .gap-section {
+    gap: 2rem; /* 32px */
+  }
+  
+  @media (min-width: 640px) {
+    .gap-section {
+      gap: 3rem; /* 48px */
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .gap-section {
+      gap: 4rem; /* 64px */
+    }
+  }
+  
+  .gap-component {
+    gap: 1.5rem; /* 24px */
+  }
+  
+  @media (min-width: 640px) {
+    .gap-component {
+      gap: 2rem; /* 32px */
+    }
+  }
+  
+  .gap-card {
+    gap: 1rem; /* 16px */
+  }
+  
+  @media (min-width: 640px) {
+    .gap-card {
+      gap: 1.25rem; /* 20px */
+    }
+  }
+  
+  /* Responsive max-width containers */
+  .max-w-content {
+    max-width: 1200px;
+  }
+  
+  .max-w-wide {
+    max-width: 1400px;
+  }
+  
+  .max-w-narrow {
+    max-width: 800px;
+  }
+}
