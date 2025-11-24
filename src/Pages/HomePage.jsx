@@ -136,7 +136,7 @@ const HomePage = () => {
       </div>
 
       {/* Brand Logos */}
-      <div className="bg-gray-100 py-8 mb-16">
+      <div className="bg-black py-8 mb-16">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-around items-center">
             <img src={frame2} alt="Frame" className="mx-4 my-2" />
