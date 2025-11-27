@@ -395,14 +395,11 @@ const HomePage = () => {
             STAY UPTO DATE ABOUT OUR LATEST OFFERS
           </div>
           <div className="flex flex-col gap-2 xs:gap-1 sm:gap-3.5 flex-1 min-w-60 xs:min-w-48 sm:min-w-70 max-w-80 xs:max-w-72 sm:max-w-87.25 relative">
-            <div className="bg-white rounded-4xl xs:rounded-4xl sm:rounded-4xl py-2 xs:py-1.5 sm:py-3 px-3 xs:px-2 sm:px-4 flex flex-row gap-2 xs:gap-1.5 sm:gap-3 items-start justify-start self-stretch shrink-0 relative overflow-hidden">
-              <div className="text-black text-opacity-40 text-left font-normal text-sm xs:text-xs sm:text-[1rem] relative flex-1">
-                Enter your email address
-              </div>
-              <img 
-                src={frame1} 
-                alt="" 
-                className="shrink-0 w-5 xs:w-4 sm:w-6 h-5 xs:h-4 sm:h-6 relative overflow-visible" 
+            <div className="bg-white rounded-4xl xs:rounded-4xl sm:rounded-4xl flex flex-row gap-2 xs:gap-1.5 sm:gap-3 items-center justify-start self-stretch shrink-0 relative overflow-hidden" style={{ height: '48px' }}>
+              <input 
+                type="email" 
+                placeholder="Enter your email address" 
+                className="text-black text-opacity-40 text-left font-normal text-sm xs:text-xs sm:text-[1rem] relative flex-1 py-2 xs:py-1.5 sm:py-3 px-3 xs:px-2 sm:px-4 outline-none"
               />
             </div>
             <button className="btn btn-secondary">

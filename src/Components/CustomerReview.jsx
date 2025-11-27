@@ -110,26 +110,27 @@ const CustomerReview = ({ testimonials, arrowDownBold2, arrowDownBold1 }) => {
               onClick={() => console.log(`Card ${index} clicked`)}
             >
               <div className="px-2 h-full">
-                <div className="border border-gray-200 rounded-2xl p-4 xs:p-3 sm:p-7 flex flex-col h-full">
-                  <div className="flex flex-row gap-2 xs:gap-1 sm:gap-3.5 items-start justify-start shrink-0 h-auto relative overflow-visible">
+                {/* Fixed height card container - same height on all screens */}
+                <div className="border border-gray-200 rounded-2xl p-4 flex flex-col h-60">
+                  <div className="flex flex-row gap-2 items-start justify-start shrink-0 h-auto relative overflow-visible">
                     <img 
                       src={testimonial.rating} 
                       alt="Rating" 
                       className="shrink-0 w-auto h-auto relative overflow-visible" 
                     />
                   </div>
-                  <div className="flex flex-col gap-2 xs:gap-1 sm:gap-3 items-start justify-start flex-grow">
+                  <div className="flex flex-col gap-2 items-start justify-start flex-grow">
                     <div className="flex flex-row gap-1 items-center justify-start shrink-0 relative">
-                      <div className="text-black text-left font-bold text-lg xs:text-base sm:text-[1.25rem] leading-4 xs:leading-4 sm:leading-5.5 relative">
+                      <div className="text-black text-left font-bold text-lg leading-4 relative">
                         {testimonial.name}
                       </div>
                       <img 
                         src={testimonial.verified} 
                         alt="Verified" 
-                        className="shrink-0 w-5 xs:w-4 sm:w-6 h-5 xs:h-4 sm:h-6 relative overflow-visible" 
+                        className="shrink-0 w-5 h-5 relative overflow-visible" 
                       />
                     </div>
-                    <div className="text-black text-opacity-60 text-left font-normal text-sm xs:text-xs sm:text-[1rem] leading-4 xs:leading-3 sm:leading-5.5 relative flex-grow">
+                    <div className="text-black text-opacity-60 text-left font-normal text-sm leading-4 relative flex-grow overflow-hidden">
                       "{testimonial.quote}"
                     </div>
                   </div>
