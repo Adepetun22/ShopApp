@@ -270,13 +270,13 @@ const HomePage = () => {
           <div className="flex flex-wrap justify-center gap-4 xs:gap-2 sm:gap-8 w-full">
             {/* Casual Card */}
             <div className="bg-white rounded-2xl overflow-hidden h-[200px] xs:h-[150px] sm:h-[289px] min-w-[150px] xs:min-w-[120px] sm:min-w-[200px] max-w-[300px] xs:max-w-[200px] sm:max-w-[407px] flex-1 relative">
-              <img src={image112} alt="Casual" className="w-[60.8125rem] h-[40.5625rem] absolute right-[-25.75rem] top-[-7.625rem] object-cover transform origin-[0_0] scale-x-[-1] xs:scale-[0.7] sm:scale-x-[-1]" />
+              <img src={image112} alt="Casual" className="w-full h-full object-cover" />
               <div className="absolute top-[1rem] xs:top-[0.75rem] sm:top-[1.5625rem] left-[1.5rem] xs:left-[1rem] sm:left-[2.25rem] text-xl xs:text-lg sm:text-2xl font-bold">Casual</div>
             </div>
             
             {/* Formal Card */}
             <div className="bg-white rounded-2xl overflow-hidden h-[200px] xs:h-[150px] sm:h-[289px] min-w-[150px] xs:min-w-[120px] sm:min-w-[200px] flex-1 relative">
-              <img src={image13} alt="Formal" className="w-[190.94%] h-[54.375rem] absolute right-[-105.94%] left-0 top-[-9.125rem] object-cover xs:scale-[0.7] sm:scale-100" />
+              <img src={image13} alt="Formal" className="w-full h-full object-cover" />
               <div className="absolute top-[1rem] xs:top-[0.75rem] sm:top-[1.5625rem] left-[1.5rem] xs:left-[1rem] sm:left-[2.25rem] text-xl xs:text-lg sm:text-2xl font-bold">Formal</div>
             </div>
           </div>
@@ -284,13 +284,13 @@ const HomePage = () => {
           <div className="flex flex-wrap justify-center gap-4 xs:gap-2 sm:gap-8 w-full mt-4 xs:mt-2 sm:mt-8">
             {/* Party Card */}
             <div className="bg-white rounded-2xl overflow-hidden h-[200px] xs:h-[150px] sm:h-[289px] min-w-[150px] xs:min-w-[120px] sm:min-w-[200px] flex-1 relative">
-              <img src={image122} alt="Party" className="w-[112.57%] h-[38.5rem] absolute right-[-18.71%] left-[6.14%] top-[-10.1875rem] object-cover xs:scale-[0.7] sm:scale-100" />
+              <img src={image122} alt="Party" className="w-full h-full object-cover" />
               <div className="absolute top-[1rem] xs:top-[0.75rem] sm:top-[1.5625rem] left-[1.5rem] xs:left-[1rem] sm:left-[2.25rem] text-xl xs:text-lg sm:text-2xl font-bold">Party</div>
             </div>
             
             {/* Gym Card */}
             <div className="bg-white rounded-2xl overflow-hidden h-[200px] xs:h-[150px] sm:h-[289px] min-w-[150px] xs:min-w-[120px] sm:min-w-[200px] max-w-[300px] xs:max-w-[200px] sm:max-w-[407px] flex-1 relative">
-              <img src={image14} alt="Gym" className="w-[111.06%] h-[42.3125rem] absolute right-[-24.08%] left-[13.02%] top-[-9.25rem] object-cover xs:scale-[0.7] sm:scale-100" />
+              <img src={image14} alt="Gym" className="w-full h-full object-cover" />
               <div className="absolute top-[1rem] xs:top-[0.75rem] sm:top-[1.5625rem] left-[1.5rem] xs:left-[1rem] sm:left-[2.25rem] text-xl xs:text-lg sm:text-2xl font-bold">Gym</div>
             </div>
           </div>

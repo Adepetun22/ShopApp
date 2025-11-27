@@ -14,10 +14,8 @@ const ProductCard = ({ image, title, rating, price, originalPrice, discount }) =
 
   return (
     <div className="flex flex-col gap-3 xs:gap-2 sm:gap-4 items-start justify-start flex-shrink-0 w-full relative">
-      <div className="bg-[#f0eeed] rounded-xl xs:rounded-lg sm:rounded-2xl flex flex-row gap-2.5 items-center justify-center self-stretch flex-shrink-0 max-h-[12rem] xs:max-h-[10rem] sm:max-h-[18.625rem] relative overflow-hidden w-full">
-        <div className="flex-1 h-[15rem] xs:h-[12rem] sm:h-[27.65625rem] relative aspect-[295/442.5] w-full">
-          <img src={image} alt={title} className="w-full h-full absolute right-0 left-0 bottom-0 top-0 object-cover" />
-        </div>
+      <div className="bg-[#f0eeed] rounded-xl xs:rounded-lg sm:rounded-2xl flex flex-row items-center justify-center self-stretch flex-shrink-0 relative overflow-hidden w-full aspect-[295/442.5]">
+        <img src={image} alt={title} className="w-full h-full object-cover" />
       </div>
       <div className="flex flex-col gap-1.5 xs:gap-1 sm:gap-2 items-start justify-start self-stretch flex-shrink-0 relative w-full">
         <h3 className="text-black text-left font-bold text-base xs:text-sm sm:text-[1.25rem] relative self-stretch flex items-center justify-start">
