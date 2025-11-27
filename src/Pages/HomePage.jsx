@@ -174,8 +174,8 @@ const HomePage = () => {
           </div>
 
           <div className="flex items-center space-x-3 xs:space-x-2 sm:space-x-4">
-            <img src={frame78} alt="Cart" className="w-5 h-5 xs:w-4 xs:h-4" />
-            <img src={frame091} alt="Profile" className="w-5 h-5 xs:w-4 xs:h-4" />
+            <img src={frame78} alt="Cart" className="w-5.5 h-5.5 xs:w-5.5 xs:h-5.5 cursor-pointer" />
+            <img src={frame091} alt="Profile" className="w-5.5 h-5.5 xs:w-5.5 xs:h-5.5 cursor-pointer" />
           </div>
         </div>
       </div>
