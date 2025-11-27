@@ -29,14 +29,7 @@ import frame101 from '../assets/frame-101.svg';
 import frame102 from '../assets/frame-102.svg';
 import frame103 from '../assets/frame-103.svg';
 import frame104 from '../assets/frame-104.svg';
-import frame105 from '../assets/frame-105.svg';
-import frame106 from '../assets/frame-106.svg';
-import frame107 from '../assets/frame-107.svg';
 import frame108 from '../assets/frame-108.svg';
-import frame109 from '../assets/frame-109.svg';
-import frame110 from '../assets/frame-1010.svg';
-import frame111 from '../assets/frame-1011.svg';
-import frame112 from '../assets/frame-1012.svg';
 import logoTwitter from '../assets/logo-twitter-20.svg';
 import logoFb from '../assets/logo-fb-simple-20.svg';
 import logoInstagram from '../assets/logo-instagram-10.svg';
@@ -82,7 +75,7 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="hidden md:flex items-center bg-gray-100 rounded-full px-3 xs:px-2 sm:px-4 py-1 xs:py-0.5 sm:py-2 flex-grow max-w-md mx-2 xs:mx-1 sm:mx-4">
+          <div className="hidden md:flex items-center bg-gray-100 rounded-full px-3 xs:px-2 sm:px-4 py-1 xs:py-0.5 sm:py-2 grow max-w-md mx-2 xs:mx-1 sm:mx-4">
             <img src={frame1} alt="" className="mr-2 w-4 h-4 xs:w-3 xs:h-3" />
             <input 
               type="text" 
@@ -319,28 +312,28 @@ const HomePage = () => {
           </div>
           <div className="flex flex-row gap-4 xs:gap-2 sm:gap-5 items-center justify-start self-stretch flex-shrink-0 relative overflow-x-auto w-full">
             {/* Customer 1 */}
-            <div className="border border-gray-200 rounded-2xl p-4 xs:p-3 sm:p-7 flex flex-row gap-[10rem] xs:gap-[5rem] sm:gap-[21.375rem] flex-wrap content-start flex-shrink-0 w-[20rem] xs:w-[15rem] sm:w-[25rem] h-[12rem] xs:h-[10rem] sm:h-[15rem] relative overflow-hidden">
+            <div className="border border-gray-200 rounded-2xl p-4 xs:p-3 sm:p-7 flex flex-row gap-40 xs:gap-20 sm:gap-85.5 flex-wrap content-start shrink-0 w-80 xs:w-60 sm:w-100 h-48 xs:h-40 sm:h-60 relative overflow-hidden">
               <div className="flex flex-row items-start justify-between flex-1 relative">
-                <div className="flex flex-col gap-[0.5rem] xs:gap-[0.3rem] sm:gap-[0.9375rem] items-start justify-start flex-1 relative">
-                  <div className="flex flex-row gap-[0.2rem] xs:gap-[0.1rem] sm:gap-[0.405625rem] items-start justify-start flex-shrink-0 h-auto relative overflow-visible">
+                <div className="flex flex-col gap-2 xs:gap-1 sm:gap-3.75 items-start justify-start flex-1 relative">
+                  <div className="flex flex-row gap-2 xs:gap-1 sm:gap-3.5 items-start justify-start shrink-0 h-auto relative overflow-visible">
                     <img 
                       src={frame100} 
                       alt="Rating" 
-                      className="flex-shrink-0 w-auto h-auto relative overflow-visible" 
+                      className="shrink-0 w-auto h-auto relative overflow-visible" 
                     />
                   </div>
-                  <div className="flex flex-col gap-2 xs:gap-1 sm:gap-3 items-start justify-start self-stretch flex-shrink-0 relative">
-                    <div className="flex flex-row gap-1 items-center justify-start flex-shrink-0 relative">
-                      <div className="text-black text-left font-bold text-lg xs:text-base sm:text-[1.25rem] leading-[1.2rem] xs:leading-[1rem] sm:leading-[1.375rem] relative">
+                  <div className="flex flex-col gap-2 xs:gap-1 sm:gap-3 items-start justify-start self-stretch shrink-0 relative">
+                    <div className="flex flex-row gap-1 items-center justify-start shrink-0 relative">
+                      <div className="text-black text-left font-bold text-lg xs:text-base sm:text-[1.25rem] leading-4 xs:leading-4 sm:leading-5.5 relative">
                         Sarah M.
                       </div>
                       <img 
                         src={frame0} 
                         alt="Verified" 
-                        className="flex-shrink-0 w-[1.2rem] xs:w-[1rem] sm:w-[1.5rem] h-[1.2rem] xs:h-[1rem] sm:h-[1.5rem] relative overflow-visible" 
+                        className="shrink-0 w-5 xs:w-4 sm:w-6 h-5 xs:h-4 sm:h-6 relative overflow-visible" 
                       />
                     </div>
-                    <div className="text-black text-opacity-60 text-left font-normal text-sm xs:text-xs sm:text-[1rem] leading-[1.1rem] xs:leading-[0.9rem] sm:leading-[1.375rem] relative self-stretch">
+                    <div className="text-black text-opacity-60 text-left font-normal text-sm xs:text-xs sm:text-[1rem] leading-4 xs:leading-3 sm:leading-5.5 relative self-stretch">
                       "I'm blown away by the quality and style of the clothes I received from Shop.co. 
                       From casual wear to elegant dresses, every piece I've bought has exceeded my expectations."
                     </div>
@@ -481,22 +474,22 @@ const HomePage = () => {
       
       {/* Newsletter Section */}
       <div className="container mx-auto px-4 mb-12 xs:mb-8 sm:mb-16">
-        <div className="bg-black rounded-2xl py-6 xs:py-4 sm:py-9 px-8 xs:px-4 sm:px-16 flex flex-col xs:flex-col sm:flex-row flex-wrap content-center items-center justify-between self-stretch flex-shrink-0 relative overflow-hidden">
-          <div className="text-white text-left text-2xl xs:text-xl sm:text-[2.5rem] leading-[2rem] xs:leading-[1.5rem] sm:leading-[2.8125rem] font-normal relative flex-1 min-w-[15rem] xs:min-w-[12rem] sm:min-w-[18.125rem] mb-6 sm:mb-0">
+        <div className="bg-black rounded-2xl py-6 xs:py-4 sm:py-9 px-8 xs:px-4 sm:px-16 flex flex-col xs:flex-col sm:flex-row flex-wrap content-center items-center justify-between self-stretch shrink-0 relative overflow-hidden">
+          <div className="text-white text-left text-2xl xs:text-xl sm:text-[2.5rem] leading-8 xs:leading-6 sm:leading-11.25 font-normal relative flex-1 min-w-60 xs:min-w-48 sm:min-w-72.5 mb-6 sm:mb-0">
             STAY UPTO DATE ABOUT OUR LATEST OFFERS
           </div>
-          <div className="flex flex-col gap-[0.5rem] xs:gap-[0.3rem] sm:gap-[0.875rem] flex-1 min-w-[15rem] xs:min-w-[12rem] sm:min-w-[17.5rem] max-w-[20rem] xs:max-w-[18rem] sm:max-w-[21.8125rem] relative">
-            <div className="bg-white rounded-[3rem] xs:rounded-[2rem] sm:rounded-[3.875rem] py-2 xs:py-1.5 sm:py-3 px-3 xs:px-2 sm:px-4 flex flex-row gap-2 xs:gap-1.5 sm:gap-3 items-start justify-start self-stretch flex-shrink-0 relative overflow-hidden">
+          <div className="flex flex-col gap-2 xs:gap-1 sm:gap-3.5 flex-1 min-w-60 xs:min-w-48 sm:min-w-70 max-w-80 xs:max-w-72 sm:max-w-87.25 relative">
+            <div className="bg-white rounded-4xl xs:rounded-4xl sm:rounded-4xl py-2 xs:py-1.5 sm:py-3 px-3 xs:px-2 sm:px-4 flex flex-row gap-2 xs:gap-1.5 sm:gap-3 items-start justify-start self-stretch shrink-0 relative overflow-hidden">
               <div className="text-black text-opacity-40 text-left font-normal text-sm xs:text-xs sm:text-[1rem] relative flex-1">
                 Enter your email address
               </div>
               <img 
                 src={frame1} 
                 alt="" 
-                className="flex-shrink-0 w-[1.2rem] xs:w-[1rem] sm:w-[1.5rem] h-[1.2rem] xs:h-[1rem] sm:h-[1.5rem] relative overflow-visible" 
+                className="shrink-0 w-5 xs:w-4 sm:w-6 h-5 xs:h-4 sm:h-6 relative overflow-visible" 
               />
             </div>
-            <div className="bg-white rounded-[3rem] xs:rounded-[2rem] sm:rounded-[3.875rem] py-2 xs:py-1.5 sm:py-3 px-3 xs:px-2 sm:px-4 flex flex-row gap-2 xs:gap-1.5 sm:gap-3 items-center justify-center self-stretch flex-shrink-0 relative overflow-hidden">
+            <div className="bg-white rounded-4xl xs:rounded-4xl sm:rounded-4xl py-2 xs:py-1.5 sm:py-3 px-3 xs:px-2 sm:px-4 flex flex-row gap-2 xs:gap-1.5 sm:gap-3 items-center justify-center self-stretch shrink-0 relative overflow-hidden">
               <div className="text-black text-center font-medium text-sm xs:text-xs sm:text-[1rem] relative flex-1">
                 Subscribe to Newsletter
               </div>
