@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import backgroundImage from '../assets/frame-149-10.png';
 import image7 from '../assets/image-70.png';
 import image82 from '../assets/image-82.png';
@@ -42,10 +42,99 @@ import badge4 from '../assets/badge4.svg';
 import arrowDownBold1 from '../assets/arrow-down-bold-10.svg';
 import arrowDownBold2 from '../assets/arrow-down-bold-20.svg';
 
-// Import ProductCard component
+// Import ProductCard and CustomerReview components
 import ProductCard from '../Components/ProductCard';
+import CustomerReview from '../Components/CustomerReview';
 
 const HomePage = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const carouselRef = useRef(null);
+  const intervalRef = useRef(null);
+  
+  // Customer testimonials data
+  const testimonials = [
+    {
+      id: 1,
+      name: "Sarah M.",
+      rating: frame100,
+      verified: frame0,
+      quote: "I'm blown away by the quality and style of the clothes I received from Shop.co. From casual wear to elegant dresses, every piece I've bought has exceeded my expectations."
+    },
+    {
+      id: 2,
+      name: "Sarah M.",
+      rating: frame101,
+      verified: frame1,
+      quote: "I'm blown away by the quality and style of the clothes I received from Shop.co. From casual wear to elegant dresses, every piece I've bought has exceeded my expectations."
+    },
+    {
+      id: 3,
+      name: "Alex K.",
+      rating: frame102,
+      verified: frame2,
+      quote: "Finding clothes that align with my personal style used to be a challenge until I discovered Shop.co. The range of options they offer is truly remarkable, catering to a variety of tastes and occasions."
+    },
+    {
+      id: 4,
+      name: "James L.",
+      rating: frame103,
+      verified: frame3,
+      quote: "As someone who's always on the lookout for unique fashion pieces, I'm thrilled to have stumbled upon Shop.co. The selection of clothes is not only diverse but also on-point with the latest trends."
+    },
+    {
+      id: 5,
+      name: "Mooen",
+      rating: frame104,
+      verified: frame108,
+      quote: "As someone who's always on the lookout for unique fashion pieces, I'm thrilled to have stumbled upon Shop.co. The selection of clothes is not only diverse but also on-point with the latest trends."
+    }
+  ];
+  
+  // Auto-scroll functionality
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      setCurrentSlide(prev => (prev === testimonials.length - 3 ? 0 : prev + 1));
+    }, 5000); // Change slide every 5 seconds
+    
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [testimonials.length]);
+  
+  // Handle slide change
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = setInterval(() => {
+        setCurrentSlide(prev => (prev === testimonials.length - 3 ? 0 : prev + 1));
+      }, 5000);
+    }
+  };
+  
+  // Navigation functions
+  const nextSlide = () => {
+    setCurrentSlide(currentSlide === testimonials.length - 3 ? 0 : currentSlide + 1);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = setInterval(() => {
+        setCurrentSlide(prev => (prev === testimonials.length - 3 ? 0 : prev + 1));
+      }, 5000);
+    }
+  };
+  
+  const prevSlide = () => {
+    setCurrentSlide(currentSlide === 0 ? testimonials.length - 3 : currentSlide - 1);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = setInterval(() => {
+        setCurrentSlide(prev => (prev === testimonials.length - 3 ? 0 : prev + 1));
+      }, 5000);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Top notification bar */}
@@ -292,184 +381,11 @@ const HomePage = () => {
       
       {/* Our Happy Customers */}
       <div className="container mx-auto px-4 mb-12 xs:mb-8 sm:mb-16">
-        <div className="flex flex-col gap-6 xs:gap-4 sm:gap-8 items-start justify-start self-stretch flex-shrink-0 relative">
-          <div className="flex flex-row items-center justify-between self-stretch flex-shrink-0 relative flex-wrap">
-            <div className="text-black text-left text-2xl xs:text-xl sm:text-3xl md:text-[3rem] font-normal relative flex-1 flex items-center justify-start mb-4 sm:mb-0">
-              OUR HAPPY CUSTOMERS
-            </div>
-            <div className="flex flex-row items-center justify-between flex-shrink-0 w-[4rem] xs:w-[3rem] sm:w-[4.5rem] relative">
-              <img 
-                src={arrowDownBold2} 
-                alt="Previous" 
-                className="flex-shrink-0 w-[1.5rem] xs:w-[1.25rem] sm:w-[1.75rem] h-[1.5rem] xs:h-[1.25rem] sm:h-[1.75rem] relative overflow-visible aspect-square" 
-              />
-              <img 
-                src={arrowDownBold1} 
-                alt="Next" 
-                className="flex-shrink-0 w-[1.5rem] xs:w-[1.25rem] sm:w-[1.75rem] h-[1.5rem] xs:h-[1.25rem] sm:h-[1.75rem] relative overflow-visible aspect-square" 
-              />
-            </div>
-          </div>
-          <div className="flex flex-row gap-4 xs:gap-2 sm:gap-5 items-center justify-start self-stretch flex-shrink-0 relative overflow-x-auto w-full">
-            {/* Customer 1 */}
-            <div className="border border-gray-200 rounded-2xl p-4 xs:p-3 sm:p-7 flex flex-row gap-40 xs:gap-20 sm:gap-85.5 flex-wrap content-start shrink-0 w-80 xs:w-60 sm:w-100 h-48 xs:h-40 sm:h-60 relative overflow-hidden">
-              <div className="flex flex-row items-start justify-between flex-1 relative">
-                <div className="flex flex-col gap-2 xs:gap-1 sm:gap-3.75 items-start justify-start flex-1 relative">
-                  <div className="flex flex-row gap-2 xs:gap-1 sm:gap-3.5 items-start justify-start shrink-0 h-auto relative overflow-visible">
-                    <img 
-                      src={frame100} 
-                      alt="Rating" 
-                      className="shrink-0 w-auto h-auto relative overflow-visible" 
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2 xs:gap-1 sm:gap-3 items-start justify-start self-stretch shrink-0 relative">
-                    <div className="flex flex-row gap-1 items-center justify-start shrink-0 relative">
-                      <div className="text-black text-left font-bold text-lg xs:text-base sm:text-[1.25rem] leading-4 xs:leading-4 sm:leading-5.5 relative">
-                        Sarah M.
-                      </div>
-                      <img 
-                        src={frame0} 
-                        alt="Verified" 
-                        className="shrink-0 w-5 xs:w-4 sm:w-6 h-5 xs:h-4 sm:h-6 relative overflow-visible" 
-                      />
-                    </div>
-                    <div className="text-black text-opacity-60 text-left font-normal text-sm xs:text-xs sm:text-[1rem] leading-4 xs:leading-3 sm:leading-5.5 relative self-stretch">
-                      "I'm blown away by the quality and style of the clothes I received from Shop.co. 
-                      From casual wear to elegant dresses, every piece I've bought has exceeded my expectations."
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Customer 2 */}
-            <div className="border border-gray-200 rounded-2xl p-4 xs:p-3 sm:p-7 flex flex-row gap-[10rem] xs:gap-[5rem] sm:gap-[21.375rem] flex-wrap content-start flex-shrink-0 w-[20rem] xs:w-[15rem] sm:w-[25rem] h-[12rem] xs:h-[10rem] sm:h-[15rem] relative overflow-hidden">
-              <div className="flex flex-row items-start justify-between flex-1 relative">
-                <div className="flex flex-col gap-[0.5rem] xs:gap-[0.3rem] sm:gap-[0.9375rem] items-start justify-start flex-1 relative">
-                  <div className="flex flex-row gap-[0.2rem] xs:gap-[0.1rem] sm:gap-[0.405625rem] items-start justify-start flex-shrink-0 h-auto relative overflow-visible">
-                    <img 
-                      src={frame101} 
-                      alt="Rating" 
-                      className="flex-shrink-0 w-auto h-auto relative overflow-visible" 
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2 xs:gap-1 sm:gap-3 items-start justify-start self-stretch flex-shrink-0 relative">
-                    <div className="flex flex-row gap-1 items-center justify-start flex-shrink-0 relative">
-                      <div className="text-black text-left font-bold text-lg xs:text-base sm:text-[1.25rem] leading-[1.2rem] xs:leading-[1rem] sm:leading-[1.375rem] relative">
-                        Sarah M.
-                      </div>
-                      <img 
-                        src={frame1} 
-                        alt="Verified" 
-                        className="flex-shrink-0 w-[1.2rem] xs:w-[1rem] sm:w-[1.5rem] h-[1.2rem] xs:h-[1rem] sm:h-[1.5rem] relative overflow-visible" 
-                      />
-                    </div>
-                    <div className="text-black text-opacity-60 text-left font-normal text-sm xs:text-xs sm:text-[1rem] leading-[1.1rem] xs:leading-[0.9rem] sm:leading-[1.375rem] relative self-stretch">
-                      "I'm blown away by the quality and style of the clothes I received from Shop.co. 
-                      From casual wear to elegant dresses, every piece I've bought has exceeded my expectations."
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Customer 3 */}
-            <div className="border border-gray-200 rounded-2xl p-4 xs:p-3 sm:p-7 flex flex-row gap-[10rem] xs:gap-[5rem] sm:gap-[21.375rem] flex-wrap content-start flex-shrink-0 w-[20rem] xs:w-[15rem] sm:w-[25rem] h-[12rem] xs:h-[10rem] sm:h-[15rem] relative overflow-hidden">
-              <div className="flex flex-row items-start justify-between flex-1 relative">
-                <div className="flex flex-col gap-[0.5rem] xs:gap-[0.3rem] sm:gap-[0.9375rem] items-start justify-start flex-1 relative">
-                  <div className="flex flex-row gap-[0.2rem] xs:gap-[0.1rem] sm:gap-[0.405625rem] items-start justify-start flex-shrink-0 h-auto relative overflow-visible">
-                    <img 
-                      src={frame102} 
-                      alt="Rating" 
-                      className="flex-shrink-0 w-auto h-auto relative overflow-visible" 
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2 xs:gap-1 sm:gap-3 items-start justify-start self-stretch flex-shrink-0 relative">
-                    <div className="flex flex-row gap-1 items-center justify-start flex-shrink-0 relative">
-                      <div className="text-black text-left font-bold text-lg xs:text-base sm:text-[1.25rem] leading-[1.2rem] xs:leading-[1rem] sm:leading-[1.375rem] relative">
-                        Alex K.
-                      </div>
-                      <img 
-                        src={frame2} 
-                        alt="Verified" 
-                        className="flex-shrink-0 w-[1.2rem] xs:w-[1rem] sm:w-[1.5rem] h-[1.2rem] xs:h-[1rem] sm:h-[1.5rem] relative overflow-visible" 
-                      />
-                    </div>
-                    <div className="text-black text-opacity-60 text-left font-normal text-sm xs:text-xs sm:text-[1rem] leading-[1.1rem] xs:leading-[0.9rem] sm:leading-[1.375rem] relative self-stretch">
-                      "Finding clothes that align with my personal style used to be a challenge until I 
-                      discovered Shop.co. The range of options they offer is truly remarkable, catering 
-                      to a variety of tastes and occasions."
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Customer 4 */}
-            <div className="border border-gray-200 rounded-2xl p-4 xs:p-3 sm:p-7 flex flex-row gap-[10rem] xs:gap-[5rem] sm:gap-[21.375rem] flex-wrap content-start flex-shrink-0 w-[20rem] xs:w-[15rem] sm:w-[25rem] h-[12rem] xs:h-[10rem] sm:h-[15rem] relative overflow-hidden">
-              <div className="flex flex-row items-start justify-between flex-1 relative">
-                <div className="flex flex-col gap-[0.5rem] xs:gap-[0.3rem] sm:gap-[0.9375rem] items-start justify-start flex-1 relative">
-                  <div className="flex flex-row gap-[0.2rem] xs:gap-[0.1rem] sm:gap-[0.405625rem] items-start justify-start flex-shrink-0 h-auto relative overflow-visible">
-                    <img 
-                      src={frame103} 
-                      alt="Rating" 
-                      className="flex-shrink-0 w-auto h-auto relative overflow-visible" 
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2 xs:gap-1 sm:gap-3 items-start justify-start self-stretch flex-shrink-0 relative">
-                    <div className="flex flex-row gap-1 items-center justify-start flex-shrink-0 relative">
-                      <div className="text-black text-left font-bold text-lg xs:text-base sm:text-[1.25rem] leading-[1.2rem] xs:leading-[1rem] sm:leading-[1.375rem] relative">
-                        James L.
-                      </div>
-                      <img 
-                        src={frame3} 
-                        alt="Verified" 
-                        className="flex-shrink-0 w-[1.2rem] xs:w-[1rem] sm:w-[1.5rem] h-[1.2rem] xs:h-[1rem] sm:h-[1.5rem] relative overflow-visible" 
-                      />
-                    </div>
-                    <div className="text-black text-opacity-60 text-left font-normal text-sm xs:text-xs sm:text-[1rem] leading-[1.1rem] xs:leading-[0.9rem] sm:leading-[1.375rem] relative self-stretch">
-                      "As someone who's always on the lookout for unique fashion pieces, I'm thrilled to 
-                      have stumbled upon Shop.co. The selection of clothes is not only diverse but also 
-                      on-point with the latest trends."
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Customer 5 */}
-            <div className="border border-gray-200 rounded-2xl p-4 xs:p-3 sm:p-7 flex flex-row gap-[10rem] xs:gap-[5rem] sm:gap-[21.375rem] flex-wrap content-start flex-shrink-0 w-[20rem] xs:w-[15rem] sm:w-[25rem] h-[12rem] xs:h-[10rem] sm:h-[15rem] relative overflow-hidden">
-              <div className="flex flex-row items-start justify-between flex-1 relative">
-                <div className="flex flex-col gap-[0.5rem] xs:gap-[0.3rem] sm:gap-[0.9375rem] items-start justify-start flex-1 relative">
-                  <div className="flex flex-row gap-[0.2rem] xs:gap-[0.1rem] sm:gap-[0.405625rem] items-start justify-start flex-shrink-0 h-auto relative overflow-visible">
-                    <img 
-                      src={frame104} 
-                      alt="Rating" 
-                      className="flex-shrink-0 w-auto h-auto relative overflow-visible" 
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2 xs:gap-1 sm:gap-3 items-start justify-start self-stretch flex-shrink-0 relative">
-                    <div className="flex flex-row gap-1 items-center justify-start flex-shrink-0 relative">
-                      <div className="text-black text-left font-bold text-lg xs:text-base sm:text-[1.25rem] leading-[1.2rem] xs:leading-[1rem] sm:leading-[1.375rem] relative">
-                        Mooen
-                      </div>
-                      <img 
-                        src={frame108} 
-                        alt="Verified" 
-                        className="flex-shrink-0 w-[1.2rem] xs:w-[1rem] sm:w-[1.5rem] h-[1.2rem] xs:h-[1rem] sm:h-[1.5rem] relative overflow-visible" 
-                      />
-                    </div>
-                    <div className="text-black text-opacity-60 text-left font-normal text-sm xs:text-xs sm:text-[1rem] leading-[1.1rem] xs:leading-[0.9rem] sm:leading-[1.375rem] relative self-stretch">
-                      "As someone who's always on the lookout for unique fashion pieces, I'm thrilled to 
-                      have stumbled upon Shop.co. The selection of clothes is not only diverse but also 
-                      on-point with the latest trends."
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <CustomerReview 
+          testimonials={testimonials} 
+          arrowDownBold1={arrowDownBold1} 
+          arrowDownBold2={arrowDownBold2} 
+        />
       </div>
       
       {/* Newsletter Section */}
