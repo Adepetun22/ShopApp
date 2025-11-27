@@ -100,7 +100,7 @@ const HomePage = () => {
               Browse through our diverse range of meticulously crafted garments, 
               designed to bring out your individuality and cater to your sense of style.
             </p>
-            <button className="bg-black text-white px-6 xs:px-4 sm:px-8 py-2 xs:py-1.5 sm:py-3 rounded-full font-medium mb-8 xs:mb-6 sm:mb-8 text-sm xs:text-xs sm:text-sm">
+            <button className="btn btn-primary">
               Shop Now
             </button>
             
@@ -194,7 +194,7 @@ const HomePage = () => {
         </div>
         
         <div className="text-center">
-          <button className="border border-black px-4 xs:px-3 sm:px-6 py-1.5 xs:py-1 sm:py-2 rounded-full font-medium text-sm xs:text-xs sm:text-sm">
+          <button className="btn btn-secondary">
             View All
           </button>
         </div>
@@ -249,7 +249,7 @@ const HomePage = () => {
         </div>
         
         <div className="text-center">
-          <button className="border border-black px-4 xs:px-3 sm:px-6 py-1.5 xs:py-1 sm:py-2 rounded-full font-medium text-sm xs:text-xs sm:text-sm">
+          <button className="btn btn-secondary">
             View All
           </button>
         </div>
@@ -489,11 +489,9 @@ const HomePage = () => {
                 className="shrink-0 w-5 xs:w-4 sm:w-6 h-5 xs:h-4 sm:h-6 relative overflow-visible" 
               />
             </div>
-            <div className="bg-white rounded-4xl xs:rounded-4xl sm:rounded-4xl py-2 xs:py-1.5 sm:py-3 px-3 xs:px-2 sm:px-4 flex flex-row gap-2 xs:gap-1.5 sm:gap-3 items-center justify-center self-stretch shrink-0 relative overflow-hidden">
-              <div className="text-black text-center font-medium text-sm xs:text-xs sm:text-[1rem] relative flex-1">
-                Subscribe to Newsletter
-              </div>
-            </div>
+            <button className="btn btn-secondary">
+              Subscribe to Newsletter
+            </button>
           </div>
         </div>
       </div>
