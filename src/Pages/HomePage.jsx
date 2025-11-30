@@ -42,9 +42,10 @@ import badge4 from '../assets/badge4.svg';
 import arrowDownBold1 from '../assets/arrow-down-bold-10.svg';
 import arrowDownBold2 from '../assets/arrow-down-bold-20.svg';
 
-// Import ProductCard and CustomerReview components
+// Import ProductCard, CustomerReview, and DesktopNav components
 import ProductCard from '../Components/ProductCard';
 import CustomerReview from '../Components/CustomerReview';
+import DesktopNav from '../Components/Navigation/DesktopNav';
 
 const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -149,36 +150,7 @@ const HomePage = () => {
       </div>
 
       {/* Navigation Bar */}
-      <div className="py-4 xs:py-3 sm:py-5 px-4 border-b">
-        <div className="container mx-auto flex flex-wrap items-center justify-between">
-          <div className="flex items-center space-x-6 xs:space-x-4 sm:space-x-6 md:space-x-10">
-            <div className="text-2xl xs:text-xl sm:text-3xl font-extrabold">SHOP.CO</div>
-            <div className="hidden md:flex space-x-4 xs:space-x-2 sm:space-x-4 md:space-x-6">
-              <div className="flex items-center">
-                <span className="text-sm xs:text-xs sm:text-sm">Shop</span>
-                <img src={frame0} alt="" className="ml-1 w-4 h-4" />
-              </div>
-              <span className="text-sm xs:text-xs sm:text-sm">On Sale</span>
-              <span className="text-sm xs:text-xs sm:text-sm">New Arrivals</span>
-              <span className="text-sm xs:text-xs sm:text-sm">Brands</span>
-            </div>
-          </div>
-
-          <div className="hidden md:flex items-center bg-gray-100 rounded-full px-3 xs:px-2 sm:px-4 py-1 xs:py-0.5 sm:py-2 grow max-w-md mx-2 xs:mx-1 sm:mx-4">
-            <img src={frame1} alt="" className="mr-2 w-4 h-4 xs:w-3 xs:h-3" />
-            <input 
-              type="text" 
-              placeholder="Search for products..." 
-              className="bg-transparent border-none outline-none w-full text-gray-500 text-sm xs:text-xs sm:text-sm"
-            />
-          </div>
-
-          <div className="flex items-center space-x-3 xs:space-x-2 sm:space-x-4">
-            <img src={frame78} alt="Cart" className="w-5.5 h-5.5 xs:w-5.5 xs:h-5.5 cursor-pointer" />
-            <img src={frame091} alt="Profile" className="w-5.5 h-5.5 xs:w-5.5 xs:h-5.5 cursor-pointer" />
-          </div>
-        </div>
-      </div>
+      <DesktopNav />
 
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-8 xs:py-6 sm:py-10 md:py-12">
