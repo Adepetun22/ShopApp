@@ -8,20 +8,22 @@ import frameIcon from '../../assets/frame0.svg';
 import frame054rt from '../../assets/Frame054rt.png';
 
 const DesktopNav = () => {
+  console.log('DesktopNav rendered');
+  
   return (
-    <>
+    <div className="sticky top-0 z-50">
       {/* Show MobileNav on tablet and mobile views (md and below) */}
       <div className="md:hidden">
         <MobileNav />
       </div>
       
       {/* Show DesktopNav on desktop views (lg and above) */}
-      <div className="hidden md:block">
+      <div className="hidden md:block bg-green-100">
         <div className="py-4 xs:py-3 sm:py-5 px-4 border-b">
-          <div className="container mx-auto flex flex-row flex-wrap items-center justify-between">
-            <div className="flex items-center space-x-6 xs:space-x-4 sm:space-x-6 md:space-x-10">
+          <div className="container mx-auto flex flex-row items-center justify-between flex-wrap">
+            <div className="flex items-center space-x-6 xs:space-x-4 sm:space-x-6 md:space-x-10 w-auto">
               <div className="text-2xl xs:text-xl sm:text-3xl font-extrabold">SHOP.CO</div>
-              <div className="hidden md:flex space-x-4 xs:space-x-2 sm:space-x-4 md:space-x-6">
+              <div className="hidden md:flex space-x-4 xs:space-x-2 sm:space-x-4 md:space-x-6 w-auto">
                 <div className="flex items-center">
                   <span className="text-sm xs:text-xs sm:text-sm">Shop</span>
                   <img 
@@ -35,10 +37,10 @@ const DesktopNav = () => {
                 <span className="text-sm xs:text-xs sm:text-sm">Brands</span>
               </div>
             </div>
-            <div className="hidden md:flex items-center bg-gray-100 rounded-full px-3 xs:px-2 sm:px-4 py-1 xs:py-0.5 sm:py-2 grow max-w-md mx-2 xs:mx-1 sm:mx-4">
+            <div className="hidden md:flex items-center bg-gray-100 rounded-full px-3 xs:px-2 sm:px-4 py-1 xs:py-0.5 sm:py-2 w-full max-w-[400px] mx-2 xs:mx-1 sm:mx-4">
               <img 
                 alt="" 
-                className="mr-2 w-4 h-4 xs:w-3 xs:h-3" 
+                className="mr-2 w-6 h-6" 
                 src={searchIcon}
               />
               <input 
@@ -62,7 +64,7 @@ const DesktopNav = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
