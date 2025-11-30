@@ -30,6 +30,8 @@ const MobileNav = () => {
             alt="Search" 
             onClick={() => setShowSearch(!showSearch)}
           />
+          <img className="w-6 h-6" src={frame1} alt="" />
+          <img className="w-6 h-6" src={frame2} alt="" />
         </div>
       </div>
       {showSearch && (
