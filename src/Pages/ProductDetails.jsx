@@ -5,39 +5,24 @@ import image5 from '../assets/image-50.png';
 import image6 from '../assets/image-60.png';
 import CustomerReview from '../Components/CustomerReview';
 import ProductCard from '../Components/ProductCard';
+import ProductImageGallery from '../Components/ProductImageGallery';
 import arrowDownBold1 from '../assets/arrow-down-bold-10.svg';
 import arrowDownBold2 from '../assets/arrow-down-bold-20.svg';
 import frame0 from '../assets/frame0.svg';
 import frame1 from '../assets/frame1.svg';
 import frame2 from '../assets/frame2.svg';
-import frame3 from '../assets/frame3.svg';
 import frame4 from '../assets/frame4.svg';
 import frame5 from '../assets/frame5.svg';
-import frame6 from '../assets/frame6.svg';
-import frame7 from '../assets/frame7.svg';
 import frame8 from '../assets/frame8.svg';
 import frame9 from '../assets/frame9.svg';
 import frame10 from '../assets/frame10.svg';
 import frame11 from '../assets/frame11.svg';
 import frame12 from '../assets/frame12.svg';
-import frame13 from '../assets/frame13.svg';
-import frame14 from '../assets/frame14.svg';
-import frame15 from '../assets/frame15.svg';
-import frame16 from '../assets/frame16.svg';
-import frame17 from '../assets/frame17.svg';
-import frame18 from '../assets/frame18.svg';
-import frame19 from '../assets/frame19.svg';
-import frame20 from '../assets/frame20.svg';
 import frame101 from '../assets/frame-101.svg';
 import frame102 from '../assets/frame-102.svg';
 import frame103 from '../assets/frame-103.svg';
 import frame104 from '../assets/frame-104.svg';
 import frame105 from '../assets/frame-105.svg';
-import frame106 from '../assets/frame-106.svg';
-import frame107 from '../assets/frame-107.svg';
-import frame108 from '../assets/frame-108.svg';
-import frame109 from '../assets/frame-109.svg';
-import frame1010 from '../assets/frame-1010.svg';
 import logoTwitter from '../assets/logo-twitter-20.svg';
 import logoFb from '../assets/logo-fb-simple-20.svg';
 import logoInstagram from '../assets/logo-instagram-10.svg';
@@ -49,8 +34,9 @@ import badge3 from '../assets/badge3.svg';
 import badge4 from '../assets/badge4.svg';
 
 const ProductDetails = () => {
-  // State to track the currently selected image
-  const [selectedImage, setSelectedImage] = useState(image1);
+  const [selectedSize, setSelectedSize] = useState('Small'); // Default to Small
+  const [quantity, setQuantity] = useState(1); // Default quantity is 1
+  const [selectedColor, setSelectedColor] = useState('gray'); // Default to gray color
   
   // Customer testimonials data for product reviews
   const testimonials = [
@@ -114,29 +100,9 @@ const ProductDetails = () => {
       <div className="flex flex-col gap-[4.375rem] items-start justify-start self-stretch flex-shrink-0 relative">
         <div className="flex flex-row gap-8 items-center justify-start flex-wrap content-center self-stretch flex-shrink-0 relative">
           {/* Image Gallery */}
-          <div className="flex flex-row gap-[0.875rem] items-center justify-start flex-wrap content-center flex-shrink-0 w-[38.125rem] h-[33.125rem] relative aspect-[610/530]">
-            <div className="flex flex-col gap-[0.875rem] items-start justify-start flex-shrink-0 w-[9.5rem] relative">
-              <img 
-                className={`rounded-[1.25rem] border border-solid ${selectedImage === image2 ? 'border-black' : 'border-transparent'} self-stretch flex-shrink-0 h-[10.4375rem] relative object-cover aspect-[152/167] cursor-pointer`} 
-                src={image2} 
-                alt="" 
-                onClick={() => setSelectedImage(image2)}
-              />
-              <img 
-                className={`rounded-[1.25rem] border border-solid ${selectedImage === image5 ? 'border-black' : 'border-transparent'} self-stretch flex-shrink-0 h-[10.5rem] relative object-cover aspect-[152/168] cursor-pointer`} 
-                src={image5} 
-                alt="" 
-                onClick={() => setSelectedImage(image5)}
-              />
-              <img 
-                className={`rounded-[1.25rem] border border-solid ${selectedImage === image6 ? 'border-black' : 'border-transparent'} self-stretch flex-shrink-0 h-[10.4375rem] relative object-cover aspect-[152/167] cursor-pointer`} 
-                src={image6} 
-                alt="" 
-                onClick={() => setSelectedImage(image6)}
-              />
-            </div>
-            <img className="bg-gradient-to-l from-[#f0eeed] to-[#f0eeed] rounded-[1.25rem] flex-1 h-[33.125rem] relative object-cover aspect-[444/530]" src={selectedImage} alt="" />
-          </div>
+          <ProductImageGallery 
+            images={[image2, image5, image6]}
+          />
 
           {/* Product Info */}
           <div className="flex flex-col gap-6 items-end justify-start flex-1 max-w-[37.5rem] relative">
@@ -172,16 +138,43 @@ const ProductDetails = () => {
               <div className="flex flex-col gap-4 w-full">
                 <div className="text-black text-left font-sans font-medium text-base">Select Colors</div>
                 <div className="flex flex-row gap-3 items-center justify-start">
-                  <div className="relative cursor-pointer">
+                  <div 
+                    className="relative cursor-pointer"
+                    onClick={() => setSelectedColor('gray')}
+                  >
                     <div className="w-8 h-8 rounded-full bg-gray-900"></div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M14.5306 5.03081L6.5306 13.0308C6.46092 13.1007 6.37813 13.1562 6.28696 13.1941C6.1958 13.2319 6.09806 13.2514 5.99935 13.2514C5.90064 13.2514 5.8029 13.2319 5.71173 13.1941C5.62057 13.1562 5.53778 13.1007 5.4681 13.0308L1.9681 9.53081C1.89833 9.46105 1.84299 9.37823 1.80524 9.28707C1.76748 9.19592 1.74805 9.09823 1.74805 8.99956C1.74805 8.9009 1.76748 8.8032 1.80524 8.71205C1.84299 8.6209 1.89833 8.53808 1.9681 8.46831C2.03786 8.39855 2.12069 8.34321 2.21184 8.30545C2.30299 8.26769 2.40069 8.24826 2.49935 8.24826C2.59801 8.24826 2.69571 8.26769 2.78686 8.30545C2.87801 8.34321 2.96083 8.39855 3.0306 8.46831L5.99997 11.4377L13.4693 3.96956C13.6102 3.82867 13.8013 3.74951 14.0006 3.74951C14.1999 3.74951 14.391 3.82867 14.5318 3.96956C14.6727 4.11046 14.7519 4.30156 14.7519 4.50081C14.7519 4.70007 14.6727 4.89117 14.5318 5.03206L14.5306 5.03081Z" fill="white"/>
-                      </svg>
-                    </div>
+                    {selectedColor === 'gray' && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M14.5306 5.03081L6.5306 13.0308C6.46092 13.1007 6.37813 13.1562 6.28696 13.1941C6.1958 13.2319 6.09806 13.2514 5.99935 13.2514C5.90064 13.2514 5.8029 13.2319 5.71173 13.1941C5.62057 13.1562 5.53778 13.1007 5.4681 13.0308L1.9681 9.53081C1.89833 9.46105 1.84299 9.37823 1.80524 9.28707C1.76748 9.19592 1.74805 9.09823 1.74805 8.99956C1.74805 8.9009 1.76748 8.8032 1.80524 8.71205C1.84299 8.6209 1.89833 8.53808 1.9681 8.46831C2.03786 8.39855 2.12069 8.34321 2.21184 8.30545C2.30299 8.26769 2.40069 8.24826 2.49935 8.24826C2.59801 8.24826 2.69571 8.26769 2.78686 8.30545C2.87801 8.34321 2.96083 8.39855 3.0306 8.46831L5.99997 11.4377L13.4693 3.96956C13.6102 3.82867 13.8013 3.74951 14.0006 3.74951C14.1999 3.74951 14.391 3.82867 14.5318 3.96956C14.6727 4.11046 14.7519 4.30156 14.7519 4.50081C14.7519 4.70007 14.6727 4.89117 14.5318 5.03206L14.5306 5.03081Z" fill="white"/>
+                        </svg>
+                      </div>
+                    )}
                   </div>
-                  <div className="w-8 h-8 rounded-full bg-blue-500 cursor-pointer"></div>
-                  <div className="w-8 h-8 rounded-full bg-red-500 cursor-pointer"></div>
+                  <div 
+                    className="relative w-8 h-8 rounded-full bg-blue-500 cursor-pointer"
+                    onClick={() => setSelectedColor('blue')}
+                  >
+                    {selectedColor === 'blue' && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M14.5306 5.03081L6.5306 13.0308C6.46092 13.1007 6.37813 13.1562 6.28696 13.1941C6.1958 13.2319 6.09806 13.2514 5.99935 13.2514C5.90064 13.2514 5.8029 13.2319 5.71173 13.1941C5.62057 13.1562 5.53778 13.1007 5.4681 13.0308L1.9681 9.53081C1.89833 9.46105 1.84299 9.37823 1.80524 9.28707C1.76748 9.19592 1.74805 9.09823 1.74805 8.99956C1.74805 8.9009 1.76748 8.8032 1.80524 8.71205C1.84299 8.6209 1.89833 8.53808 1.9681 8.46831C2.03786 8.39855 2.12069 8.34321 2.21184 8.30545C2.30299 8.26769 2.40069 8.24826 2.49935 8.24826C2.59801 8.24826 2.69571 8.26769 2.78686 8.30545C2.87801 8.34321 2.96083 8.39855 3.0306 8.46831L5.99997 11.4377L13.4693 3.96956C13.6102 3.82867 13.8013 3.74951 14.0006 3.74951C14.1999 3.74951 14.391 3.82867 14.5318 3.96956C14.6727 4.11046 14.7519 4.30156 14.7519 4.50081C14.7519 4.70007 14.6727 4.89117 14.5318 5.03206L14.5306 5.03081Z" fill="white"/>
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                  <div 
+                    className="relative w-8 h-8 rounded-full bg-red-500 cursor-pointer"
+                    onClick={() => setSelectedColor('red')}
+                  >
+                    {selectedColor === 'red' && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M14.5306 5.03081L6.5306 13.0308C6.46092 13.1007 6.37813 13.1562 6.28696 13.1941C6.1958 13.2319 6.09806 13.2514 5.99935 13.2514C5.90064 13.2514 5.8029 13.2319 5.71173 13.1941C5.62057 13.1562 5.53778 13.1007 5.4681 13.0308L1.9681 9.53081C1.89833 9.46105 1.84299 9.37823 1.80524 9.28707C1.76748 9.19592 1.74805 9.09823 1.74805 8.99956C1.74805 8.9009 1.76748 8.8032 1.80524 8.71205C1.84299 8.6209 1.89833 8.53808 1.9681 8.46831C2.03786 8.39855 2.12069 8.34321 2.21184 8.30545C2.30299 8.26769 2.40069 8.24826 2.49935 8.24826C2.59801 8.24826 2.69571 8.26769 2.78686 8.30545C2.87801 8.34321 2.96083 8.39855 3.0306 8.46831L5.99997 11.4377L13.4693 3.96956C13.6102 3.82867 13.8013 3.74951 14.0006 3.74951C14.1999 3.74951 14.391 3.82867 14.5318 3.96956C14.6727 4.11046 14.7519 4.30156 14.7519 4.50081C14.7519 4.70007 14.6727 4.89117 14.5318 5.03206L14.5306 5.03081Z" fill="white"/>
+                        </svg>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
               
@@ -190,17 +183,29 @@ const ProductDetails = () => {
               <div className="flex flex-col gap-4 w-full">
                 <div className="text-black text-left font-sans font-medium text-base">Choose Size</div>
                 <div className="flex flex-row gap-3 items-center justify-start flex-wrap">
-                  <button className="border border-black rounded-full px-5 py-3 hover:bg-black hover:text-white transition-colors">
-                    <span className="text-black text-left font-sans font-normal text-base">Small</span>
+                  <button 
+                    className={`border rounded-full px-5 py-3 transition-colors ${selectedSize === 'Small' ? 'bg-black text-white' : 'border-gray-300 hover:border-black hover:bg-black hover:text-white'}`}
+                    onClick={() => setSelectedSize('Small')}
+                  >
+                    <span className="text-left font-sans font-normal text-base">Small</span>
                   </button>
-                  <button className="border border-gray-300 rounded-full px-5 py-3 hover:border-black transition-colors">
-                    <span className="text-black text-left font-sans font-normal text-base">Medium</span>
+                  <button 
+                    className={`border rounded-full px-5 py-3 transition-colors ${selectedSize === 'Medium' ? 'bg-black text-white' : 'border-gray-300 hover:border-black hover:bg-black hover:text-white'}`}
+                    onClick={() => setSelectedSize('Medium')}
+                  >
+                    <span className="text-left font-sans font-normal text-base">Medium</span>
                   </button>
-                  <button className="border border-gray-300 rounded-full px-5 py-3 hover:border-black transition-colors">
-                    <span className="text-black text-left font-sans font-normal text-base">Large</span>
+                  <button 
+                    className={`border rounded-full px-5 py-3 transition-colors ${selectedSize === 'Large' ? 'bg-black text-white' : 'border-gray-300 hover:border-black hover:bg-black hover:text-white'}`}
+                    onClick={() => setSelectedSize('Large')}
+                  >
+                    <span className="text-left font-sans font-normal text-base">Large</span>
                   </button>
-                  <button className="border border-gray-300 rounded-full px-5 py-3 hover:border-black transition-colors">
-                    <span className="text-black text-left font-sans font-normal text-base">X-Large</span>
+                  <button 
+                    className={`border rounded-full px-5 py-3 transition-colors ${selectedSize === 'X-Large' ? 'bg-black text-white' : 'border-gray-300 hover:border-black hover:bg-black hover:text-white'}`}
+                    onClick={() => setSelectedSize('X-Large')}
+                  >
+                    <span className="text-left font-sans font-normal text-base">X-Large</span>
                   </button>
                 </div>
               </div>
@@ -210,9 +215,19 @@ const ProductDetails = () => {
             
             <div className="flex flex-row gap-4 items-center justify-between self-stretch">
               <div className="flex flex-row items-center justify-between border border-gray-300 rounded-full p-3 min-w-[100px]">
-                <img className="w-5 h-5" src={frame4} alt="" />
-                <div className="text-black text-center font-sans font-normal text-lg mx-4">1</div>
-                <img className="w-5 h-5" src={frame5} alt="" />
+                <img 
+                  className="w-5 h-5 cursor-pointer" 
+                  src={frame4} 
+                  alt="Decrease quantity" 
+                  onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
+                />
+                <div className="text-black text-center font-sans font-normal text-lg mx-4">{quantity}</div>
+                <img 
+                  className="w-5 h-5 cursor-pointer" 
+                  src={frame5} 
+                  alt="Increase quantity" 
+                  onClick={() => setQuantity(prev => prev + 1)}
+                />
               </div>
               <button className="bg-black rounded-full px-12 py-4">
                 <div className="text-white text-center font-sans font-medium text-base">Add to Cart</div>
