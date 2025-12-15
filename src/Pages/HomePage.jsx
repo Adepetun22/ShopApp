@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import backgroundImage from '../assets/frame-149-10.png';
 import image7 from '../assets/image-70.png';
 import image82 from '../assets/image-82.png';
@@ -42,15 +42,16 @@ import badge4 from '../assets/badge4.svg';
 import arrowDownBold1 from '../assets/arrow-down-bold-10.svg';
 import arrowDownBold2 from '../assets/arrow-down-bold-20.svg';
 
+// Import PNG brand logos
+import versaceLogo from '../assets/versace-22.png';
+import calvinKleinLogo from '../assets/calvin-klein-33.png';
+
 // Import ProductCard, CustomerReview, and DesktopNav components
 import ProductCard from '../Components/ProductCard';
 import CustomerReview from '../Components/CustomerReview';
 import DesktopNav from '../Components/Navigation/DesktopNav';
 
 const HomePage = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const carouselRef = useRef(null);
-  const intervalRef = useRef(null);
   
   // Customer testimonials data
   const testimonials = [
@@ -91,50 +92,7 @@ const HomePage = () => {
     }
   ];
   
-  // Auto-scroll functionality
-  useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      setCurrentSlide(prev => (prev === testimonials.length - 3 ? 0 : prev + 1));
-    }, 5000); // Change slide every 5 seconds
-    
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, [testimonials.length]);
-  
-  // Handle slide change
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = setInterval(() => {
-        setCurrentSlide(prev => (prev === testimonials.length - 3 ? 0 : prev + 1));
-      }, 5000);
-    }
-  };
-  
-  // Navigation functions
-  const nextSlide = () => {
-    setCurrentSlide(currentSlide === testimonials.length - 3 ? 0 : currentSlide + 1);
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = setInterval(() => {
-        setCurrentSlide(prev => (prev === testimonials.length - 3 ? 0 : prev + 1));
-      }, 5000);
-    }
-  };
-  
-  const prevSlide = () => {
-    setCurrentSlide(currentSlide === 0 ? testimonials.length - 3 : currentSlide - 1);
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = setInterval(() => {
-        setCurrentSlide(prev => (prev === testimonials.length - 3 ? 0 : prev + 1));
-      }, 5000);
-    }
-  };
+
 
   return (
     <div className="min-h-screen bg-white">
@@ -159,11 +117,16 @@ const HomePage = () => {
             <h1 className="text-3xl xs:text-2xl sm:text-4xl md:text-5xl font-bold mb-4 xs:mb-2 sm:mb-4">FIND CLOTHES THAT MATCHES YOUR STYLE</h1>
             <p className="text-gray-600 mb-6 xs:mb-4 sm:mb-6 md:mb-8 text-sm xs:text-xs sm:text-base">
               Browse through our diverse range of meticulously crafted garments, 
-              designed to bring out your individuality and cater to your sense of style.
+              designed to bring out your individuality and style.
             </p>
-            <button className="btn btn-primary">
-              Shop Now
-            </button>
+            <div className="flex flex-wrap gap-4 mb-8">
+              <a href="/product-details" className="bg-black text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-800 transition duration-300">
+                View Product Details
+              </a>
+              <button className="border border-black px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-100 transition duration-300">
+                Shop Now
+              </button>
+            </div>
             
             <div className="flex flex-wrap items-center justify-between">
               <div className="text-center mr-4 xs:mr-2 sm:mr-6 mb-4">
@@ -193,13 +156,13 @@ const HomePage = () => {
       <div className="bg-black py-6 xs:py-4 sm:py-8 mb-12 xs:mb-8 sm:mb-16">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-around items-center">
-            <img src={frame2} alt="Frame" className="mx-2 xs:mx-1 sm:mx-4 my-2 w-20 xs:w-16 sm:w-24 md:w-28" />
+            <img src={versaceLogo} alt="Versace" className="mx-2 xs:mx-1 sm:mx-4 my-2 w-20 xs:w-16 sm:w-24 md:w-28" />
             <img src={zaraLogo} alt="Zara" className="mx-2 xs:mx-1 sm:mx-4 my-2 w-16 xs:w-12 sm:w-20 md:w-24" />
             <img src={gucciLogo} alt="Gucci" className="mx-2 xs:mx-1 sm:mx-4 my-2 w-20 xs:w-16 sm:w-24 md:w-28" />
             <div className="mx-2 xs:mx-1 sm:mx-4 my-2">
               <img src={group0} alt="Prada" className="mx-2 xs:mx-1 sm:mx-4 my-2 w-24 xs:w-20 sm:w-28 md:w-32" />
             </div>
-            <img src={frame3} alt="Frame" className="mx-2 xs:mx-1 sm:mx-4 my-2 w-20 xs:w-16 sm:w-24 md:w-28" />
+            <img src={calvinKleinLogo} alt="Calvin Klein" className="mx-2 xs:mx-1 sm:mx-4 my-2 w-20 xs:w-16 sm:w-24 md:w-28" />
           </div>
         </div>
       </div>
