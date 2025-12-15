@@ -36,7 +36,7 @@ const ProductCard = ({ image, title, rating, price, originalPrice, discount }) =
           </div>
           {originalPrice && (
             <>
-              <div className="text-black text-opacity-40 text-left font-bold text-lg xs:text-base sm:text-[1.5rem] line-through relative flex items-center justify-start">
+              <div className="text-[#969494] text-left font-bold text-lg xs:text-base sm:text-[1.5rem] line-through relative flex items-center justify-start">
                 {originalPrice}
               </div>
               {discount && (
