@@ -79,65 +79,82 @@ const ProductDetails = () => {
   ];
 
   return (
-    <div className="bg-white py-0 px-[6.25rem] flex flex-col gap-[2.5625rem] items-start justify-start">
+    <div className="min-h-screen bg-white">
       {/* Breadcrumb */}
-      <div className="flex flex-row gap-3 items-center justify-start">
-        <div className="flex flex-row gap-1 items-center justify-start">
-          <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-base">Home</div>
-          <img className="w-4 h-4 relative overflow-visible" src={frame0} alt="" />
+      <div className="container mx-auto px-4 py-4 xs:py-2 sm:py-6">
+        <div className="flex flex-row gap-3 items-center justify-start">
+          <div className="flex flex-row gap-1 items-center justify-start">
+            <div className="text-gray-600 text-sm xs:text-xs sm:text-base">Home</div>
+            <img className="w-4 h-4" src={frame0} alt="" />
+          </div>
+          <div className="flex flex-row gap-1 items-center justify-start">
+            <div className="text-gray-600 text-sm xs:text-xs sm:text-base">Shop</div>
+            <img className="w-4 h-4" src={frame1} alt="" />
+          </div>
+          <div className="flex flex-row gap-1 items-center justify-start">
+            <div className="text-gray-600 text-sm xs:text-xs sm:text-base">Men</div>
+            <img className="w-4 h-4" src={frame2} alt="" />
+          </div>
+          <div className="text-black text-sm xs:text-xs sm:text-base">T-shirts</div>
         </div>
-        <div className="flex flex-row gap-1 items-center justify-start">
-          <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-base">Shop</div>
-          <img className="w-4 h-4 relative overflow-visible" src={frame1} alt="" />
-        </div>
-        <div className="flex flex-row gap-1 items-center justify-start">
-          <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-base">Men</div>
-          <img className="w-4 h-4 relative overflow-visible" src={frame2} alt="" />
-        </div>
-        <div className="text-black text-left font-sans font-normal text-base">T-shirts</div>
       </div>
 
       {/* Main Content */}
-      <div className="flex flex-col gap-[4.375rem] items-start justify-start self-stretch flex-shrink-0 relative">
-        <div className="flex flex-row gap-8 items-center justify-start flex-wrap content-center self-stretch flex-shrink-0 relative">
+      <div className="container mx-auto px-4 py-8 xs:py-6 sm:py-10 md:py-12">
+        <div className="flex flex-col lg:flex-row gap-8 xs:gap-6 sm:gap-8 items-start justify-start">
           {/* Image Gallery */}
-          <ProductImageGallery 
-            images={[image2, image5, image6]}
-          />
+          <div className="w-full lg:w-1/2">
+            <div className="flex flex-col md:flex-row gap-4 xs:gap-2 sm:gap-4 items-center justify-start w-full">
+              {/* Desktop thumbnails */}
+              <div className="hidden md:flex md:flex-col md:gap-4 md:items-start md:justify-start md:w-24">
+                <img className="rounded-xl border border-black w-full h-24 xs:h-20 sm:h-28 object-cover cursor-pointer" src={image2} alt="" />
+                <img className="rounded-xl border border-transparent w-full h-24 xs:h-20 sm:h-28 object-cover cursor-pointer" src={image5} alt="" />
+                <img className="rounded-xl border border-transparent w-full h-24 xs:h-20 sm:h-28 object-cover cursor-pointer" src={image6} alt="" />
+              </div>
+              {/* Main image */}
+              <img className="bg-gray-100 rounded-xl flex-1 w-full h-80 xs:h-64 sm:h-96 md:h-[530px] object-cover" src={image2} alt="" />
+            </div>
+            {/* Mobile thumbnails */}
+            <div className="flex md:hidden flex-row gap-4 xs:gap-2 sm:gap-4 items-center justify-center w-full mt-4 overflow-x-auto">
+              <img className="rounded-xl border border-black w-16 h-16 xs:w-12 xs:h-12 sm:w-20 sm:h-20 object-cover cursor-pointer flex-shrink-0" src={image2} alt="" />
+              <img className="rounded-xl border border-transparent w-16 h-16 xs:w-12 xs:h-12 sm:w-20 sm:h-20 object-cover cursor-pointer flex-shrink-0" src={image5} alt="" />
+              <img className="rounded-xl border border-transparent w-16 h-16 xs:w-12 xs:h-12 sm:w-20 sm:h-20 object-cover cursor-pointer flex-shrink-0" src={image6} alt="" />
+            </div>
+          </div>
 
           {/* Product Info */}
-          <div className="flex flex-col gap-6 items-end justify-start flex-1 max-w-[37.5rem] relative">
-            <div className="flex flex-col gap-6 w-full">
-              <div className="flex flex-col gap-4">
-                <h1 className="text-black text-left font-sans font-medium text-2xl">One Life Graphic T-shirt</h1>
+          <div className="w-full lg:w-1/2">
+            <div className="flex flex-col gap-6 xs:gap-4 sm:gap-6">
+              <div className="flex flex-col gap-4 xs:gap-3 sm:gap-4">
+                <h1 className="text-2xl xs:text-xl sm:text-2xl md:text-3xl font-bold mb-4 xs:mb-2 sm:mb-4">One Life Graphic T-shirt</h1>
                 
                 <div className="flex flex-row gap-2 items-center justify-start">
-                  <img className="w-auto h-5 relative" src={frame101} alt="Rating stars" />
+                  <img className="w-auto h-5" src={frame101} alt="Rating stars" />
                   <div className="flex items-center">
-                    <span className="text-black text-left font-sans font-normal text-sm">4.5/</span>
-                    <span className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-sm">5</span>
+                    <span className="text-black text-sm xs:text-xs sm:text-sm">4.5/</span>
+                    <span className="text-gray-600 text-sm xs:text-xs sm:text-sm">5</span>
                   </div>
                 </div>
                 
                 <div className="flex flex-row items-center justify-start gap-4">
                   <div className="flex flex-row items-center justify-start gap-2">
-                    <div className="text-black text-left font-sans font-medium text-xl">$260</div>
-                    <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-base line-through">$300</div>
+                    <div className="text-black font-bold text-xl xs:text-lg sm:text-xl">$260</div>
+                    <div className="text-gray-600 text-base xs:text-sm sm:text-base line-through">$300</div>
                   </div>
                   <div className="bg-red-500 rounded-full px-3 py-1">
-                    <div className="text-white text-left font-sans font-normal text-sm">-40%</div>
+                    <div className="text-white text-sm xs:text-xs sm:text-sm">-40%</div>
                   </div>
                 </div>
                 
-                <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-base">
+                <div className="text-gray-600 text-sm xs:text-xs sm:text-base">
                   This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.
                 </div>
               </div>
               
               <hr className="border-t border-gray-300 w-full" />
               
-              <div className="flex flex-col gap-4 w-full">
-                <div className="text-black text-left font-sans font-medium text-base">Select Colors</div>
+              <div className="flex flex-col gap-4 xs:gap-3 sm:gap-4 w-full">
+                <div className="text-black font-medium text-base xs:text-sm sm:text-base">Select Colors</div>
                 <div className="flex flex-row gap-3 items-center justify-start">
                   <div 
                     className="relative cursor-pointer"
@@ -181,32 +198,32 @@ const ProductDetails = () => {
               
               <hr className="border-t border-gray-300 w-full" />
               
-              <div className="flex flex-col gap-4 w-full">
-                <div className="text-black text-left font-sans font-medium text-base">Choose Size</div>
+              <div className="flex flex-col gap-4 xs:gap-3 sm:gap-4 w-full">
+                <div className="text-black font-medium text-base xs:text-sm sm:text-base">Choose Size</div>
                 <div className="flex flex-row gap-3 items-center justify-start flex-wrap">
                   <button 
-                    className={`border rounded-full px-5 py-3 transition-colors ${selectedSize === 'Small' ? 'bg-black text-white' : 'border-gray-300 hover:border-black hover:bg-black hover:text-white'}`}
+                    className={`border rounded-full px-4 py-2 xs:px-3 xs:py-1 sm:px-5 sm:py-3 transition-colors ${selectedSize === 'Small' ? 'bg-black text-white' : 'border-gray-300 hover:border-black hover:bg-black hover:text-white'}`}
                     onClick={() => setSelectedSize('Small')}
                   >
-                    <span className="text-left font-sans font-normal text-base">Small</span>
+                    <span className="text-sm xs:text-xs sm:text-base">Small</span>
                   </button>
                   <button 
-                    className={`border rounded-full px-5 py-3 transition-colors ${selectedSize === 'Medium' ? 'bg-black text-white' : 'border-gray-300 hover:border-black hover:bg-black hover:text-white'}`}
+                    className={`border rounded-full px-4 py-2 xs:px-3 xs:py-1 sm:px-5 sm:py-3 transition-colors ${selectedSize === 'Medium' ? 'bg-black text-white' : 'border-gray-300 hover:border-black hover:bg-black hover:text-white'}`}
                     onClick={() => setSelectedSize('Medium')}
                   >
-                    <span className="text-left font-sans font-normal text-base">Medium</span>
+                    <span className="text-sm xs:text-xs sm:text-base">Medium</span>
                   </button>
                   <button 
-                    className={`border rounded-full px-5 py-3 transition-colors ${selectedSize === 'Large' ? 'bg-black text-white' : 'border-gray-300 hover:border-black hover:bg-black hover:text-white'}`}
+                    className={`border rounded-full px-4 py-2 xs:px-3 xs:py-1 sm:px-5 sm:py-3 transition-colors ${selectedSize === 'Large' ? 'bg-black text-white' : 'border-gray-300 hover:border-black hover:bg-black hover:text-white'}`}
                     onClick={() => setSelectedSize('Large')}
                   >
-                    <span className="text-left font-sans font-normal text-base">Large</span>
+                    <span className="text-sm xs:text-xs sm:text-base">Large</span>
                   </button>
                   <button 
-                    className={`border rounded-full px-5 py-3 transition-colors ${selectedSize === 'X-Large' ? 'bg-black text-white' : 'border-gray-300 hover:border-black hover:bg-black hover:text-white'}`}
+                    className={`border rounded-full px-4 py-2 xs:px-3 xs:py-1 sm:px-5 sm:py-3 transition-colors ${selectedSize === 'X-Large' ? 'bg-black text-white' : 'border-gray-300 hover:border-black hover:bg-black hover:text-white'}`}
                     onClick={() => setSelectedSize('X-Large')}
                   >
-                    <span className="text-left font-sans font-normal text-base">X-Large</span>
+                    <span className="text-sm xs:text-xs sm:text-base">X-Large</span>
                   </button>
                 </div>
               </div>
@@ -214,45 +231,47 @@ const ProductDetails = () => {
             
             <hr className="border-t border-gray-300 w-full" />
             
-            <div className="flex flex-row gap-4 items-center justify-between self-stretch">
-              <div className="flex flex-row items-center justify-between border border-gray-300 rounded-full p-3 min-w-[100px]">
+            <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between w-full">
+              <div className="flex flex-row items-center justify-between border border-gray-300 rounded-full p-3 xs:p-2 sm:p-3 min-w-[100px] xs:min-w-[80px] sm:min-w-[120px]">
                 <img 
-                  className="w-5 h-5 cursor-pointer" 
+                  className="w-5 h-5 xs:w-4 xs:h-4 sm:w-5 sm:h-5 cursor-pointer" 
                   src={frame4} 
                   alt="Decrease quantity" 
                   onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
                 />
-                <div className="text-black text-center font-sans font-normal text-lg mx-4">{quantity}</div>
+                <div className="text-black text-center text-lg xs:text-base sm:text-lg mx-4 xs:mx-2 sm:mx-4">{quantity}</div>
                 <img 
-                  className="w-5 h-5 cursor-pointer" 
+                  className="w-5 h-5 xs:w-4 xs:h-4 sm:w-5 sm:h-5 cursor-pointer" 
                   src={frame5} 
                   alt="Increase quantity" 
                   onClick={() => setQuantity(prev => prev + 1)}
                 />
               </div>
-              <button className="bg-black rounded-full px-12 py-4">
-                <div className="text-white text-center font-sans font-medium text-base">Add to Cart</div>
+              <button className="bg-black rounded-full px-8 py-3 xs:px-6 xs:py-2 sm:px-12 sm:py-4 flex-1 sm:flex-initial">
+                <div className="text-white text-center font-medium text-base xs:text-sm sm:text-base">Add to Cart</div>
               </button>
             </div>
           </div>
         </div>
         
         {/* Tabs Section */}
-        <div className="flex flex-row gap-8 items-center justify-start self-stretch">
-          <div className="pb-2 border-b-2 border-black">
-            <div className="text-black text-left font-sans font-medium text-base">Product Details</div>
-          </div>
-          <div className="pb-2">
-            <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-medium text-base">Rating & Reviews</div>
-          </div>
-          <div className="pb-2">
-            <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-medium text-base">FAQs</div>
+        <div className="container mx-auto px-4 py-8 xs:py-6 sm:py-8">
+          <div className="flex flex-row gap-6 xs:gap-4 sm:gap-8 items-center justify-start overflow-x-auto">
+            <div className="pb-2 border-b-2 border-black whitespace-nowrap">
+              <div className="text-black font-medium text-base xs:text-sm sm:text-base">Product Details</div>
+            </div>
+            <div className="pb-2 whitespace-nowrap">
+              <div className="text-gray-600 font-medium text-base xs:text-sm sm:text-base">Rating & Reviews</div>
+            </div>
+            <div className="pb-2 whitespace-nowrap">
+              <div className="text-gray-600 font-medium text-base xs:text-sm sm:text-base">FAQs</div>
+            </div>
           </div>
         </div>
       </div>
       
       {/* Reviews Section */}
-      <div className="flex flex-col gap-6 self-stretch">
+      <div className="container mx-auto px-4 mb-12 xs:mb-8 sm:mb-16">
         <CustomerReview 
           testimonials={testimonials} 
           arrowDownBold1={arrowDownBold1} 
@@ -262,9 +281,9 @@ const ProductDetails = () => {
       </div>
       
       {/* You might also like section */}
-      <div className="flex flex-col gap-8 self-stretch">
-        <div className="text-black text-left font-sans font-bold text-2xl">You might also like</div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="container mx-auto px-4 mb-12 xs:mb-8 sm:mb-16">
+        <h2 className="text-2xl xs:text-xl sm:text-2xl md:text-3xl font-bold mb-6 xs:mb-4 sm:mb-8">You might also like</h2>
+        <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-2 sm:gap-6">
           <ProductCard 
             image={image7}
             title="Polo with Contrast Trims"
@@ -299,13 +318,8 @@ const ProductDetails = () => {
         </div>
       </div>
       
-      {/* Footer section */}
-      <div className="flex flex-col self-stretch">
-        {/* Newsletter section */}
-        <EmailSubscription />
-        
-
-      </div>
+      {/* Newsletter section */}
+      <EmailSubscription />
     </div>
   );
 };
