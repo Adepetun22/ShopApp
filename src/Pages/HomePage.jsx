@@ -14,7 +14,7 @@ import image122 from '../assets/image-121.png';
 import image14 from '../assets/image-140.png';
 
 // Import SVG assets
-import frame561 from '../assets/frame-5610.svg';
+
 import frame0 from '../assets/frame0.svg';
 import frame1 from '../assets/frame1.svg';
 import frame2 from '../assets/frame2.svg';
@@ -87,18 +87,6 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Top notification bar */}
-      <div className="bg-black py-2 px-4">
-        <div className="container mx-auto flex flex-wrap justify-between items-center">
-          <div className="text-white text-sm xs:text-xs sm:text-sm">
-            <span className="font-normal">Sign up and get 20% off to your first order. </span>
-            <span className="font-medium underline cursor-pointer">Sign Up Now</span>
-          </div>
-          <img src={frame561} alt="Close" className="w-5 h-5" />
-        </div>
-      </div>
-
-
 
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-8 xs:py-6 sm:py-10 md:py-12">

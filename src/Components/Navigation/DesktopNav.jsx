@@ -12,6 +12,17 @@ const DesktopNav = () => {
   
   return (
     <div className="sticky top-0 z-50">
+      {/* Top notification bar */}
+      <div className="bg-black py-2 px-4">
+        <div className="container mx-auto flex flex-wrap justify-between items-center">
+          <div className="text-white text-sm xs:text-xs sm:text-sm">
+            <span className="font-normal">Sign up and get 20% off to your first order. </span>
+            <span className="font-medium underline cursor-pointer">Sign Up Now</span>
+          </div>
+          <img src={frameIcon} alt="Close" className="w-5 h-5" />
+        </div>
+      </div>
+      
       {/* Show MobileNav on tablet and mobile views (md and below) */}
       <div className="md:hidden">
         <MobileNav />
