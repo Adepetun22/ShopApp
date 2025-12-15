@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import image1 from '../assets/image-10.png';
 import image2 from '../assets/image-2.png';
 import image5 from '../assets/image-50.png';
 import image6 from '../assets/image-60.png';
+import image7 from '../assets/image-70.png';
+import image8 from '../assets/image-80.png';
+import image9 from '../assets/image-90.png';
+import image10 from '../assets/image-100.png';
 import CustomerReview from '../Components/CustomerReview';
 import ProductCard from '../Components/ProductCard';
 import ProductImageGallery from '../Components/ProductImageGallery';
+import EmailSubscription from '../Components/EmailSubscription';
 import arrowDownBold1 from '../assets/arrow-down-bold-10.svg';
 import arrowDownBold2 from '../assets/arrow-down-bold-20.svg';
 import frame0 from '../assets/frame0.svg';
@@ -23,20 +27,17 @@ import frame102 from '../assets/frame-102.svg';
 import frame103 from '../assets/frame-103.svg';
 import frame104 from '../assets/frame-104.svg';
 import frame105 from '../assets/frame-105.svg';
-import logoTwitter from '../assets/logo-twitter-20.svg';
-import logoFb from '../assets/logo-fb-simple-20.svg';
-import logoInstagram from '../assets/logo-instagram-10.svg';
-import logoGithub from '../assets/logo-github-10.svg';
-import badge0 from '../assets/badge0.svg';
-import badge1 from '../assets/badge1.svg';
-import badge2 from '../assets/badge2.svg';
-import badge3 from '../assets/badge3.svg';
-import badge4 from '../assets/badge4.svg';
+
 
 const ProductDetails = () => {
   const [selectedSize, setSelectedSize] = useState('Small'); // Default to Small
   const [quantity, setQuantity] = useState(1); // Default quantity is 1
   const [selectedColor, setSelectedColor] = useState('gray'); // Default to gray color
+  
+  // Check if we're on localhost:5187
+  const isLocalhost5187 = typeof window !== 'undefined' && 
+    (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && 
+    window.location.port === '5187';
   
   // Customer testimonials data for product reviews
   const testimonials = [
@@ -265,7 +266,7 @@ const ProductDetails = () => {
         <div className="text-black text-left font-sans font-bold text-2xl">You might also like</div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <ProductCard 
-            image={image1}
+            image={image7}
             title="Polo with Contrast Trims"
             rating="4.0/5"
             price="$212"
@@ -274,21 +275,21 @@ const ProductDetails = () => {
           />
           
           <ProductCard 
-            image={image1}
+            image={image8}
             title="Gradient Graphic T-shirt"
             rating="3.5/5"
             price="$145"
           />
           
           <ProductCard 
-            image={image1}
+            image={image9}
             title="Polo with Tipping Details"
             rating="4.5/5"
             price="$180"
           />
           
           <ProductCard 
-            image={image1}
+            image={image10}
             title="Black Striped T-shirt"
             rating="5.0/5"
             price="$120"
@@ -301,100 +302,9 @@ const ProductDetails = () => {
       {/* Footer section */}
       <div className="flex flex-col self-stretch">
         {/* Newsletter section */}
-        <div className="flex flex-col items-center justify-start py-12 px-20 bg-black rounded-[1.25rem] self-stretch">
-          <div className="flex flex-col gap-8 items-center justify-start self-stretch">
-            <div className="text-white text-center font-sans font-bold text-2xl md:text-3xl lg:text-4xl">
-              STAY UPTO DATE ABOUT OUR LATEST OFFERS
-            </div>
-            <div className="flex flex-row gap-4 items-center justify-center self-stretch max-w-2xl">
-              <div className="flex flex-row items-center justify-between flex-1 px-4 py-3 bg-white rounded-full">
-                <div className="text-gray-500 text-left font-sans font-normal text-base">
-                  Enter your email address
-                </div>
-              </div>
-              <button className="bg-white rounded-full px-6 py-3">
-                <div className="text-black text-center font-sans font-medium text-base">Subscribe to Newsletter</div>
-              </button>
-            </div>
-          </div>
-        </div>
+        <EmailSubscription />
         
-        {/* Main footer */}
-        <div className="flex flex-col self-stretch">
-          <div className="flex flex-row gap-10 items-start justify-between py-12 self-stretch border-b border-gray-300">
-            {/* Brand info */}
-            <div className="flex flex-col gap-6 items-start justify-start max-w-xs">
-              <div className="text-black text-left font-sans font-bold text-2xl">SHOP.CO</div>
-              <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-base">
-                We have clothes that suits your style and which you're proud to wear. From women to men.
-              </div>
-              <div className="flex flex-row gap-4 items-start justify-start">
-                <img className="w-5 h-5" src={logoTwitter} alt="Twitter" />
-                <img className="w-5 h-5" src={logoFb} alt="Facebook" />
-                <img className="w-5 h-5" src={logoInstagram} alt="Instagram" />
-                <img className="w-5 h-5" src={logoGithub} alt="GitHub" />
-              </div>
-            </div>
-            
-            {/* Company links */}
-            <div className="flex flex-col gap-4 items-start justify-start">
-              <div className="text-black text-left font-sans font-medium text-base">Company</div>
-              <div className="flex flex-col gap-2 items-start justify-start">
-                <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-sm">About</div>
-                <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-sm">Features</div>
-                <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-sm">Works</div>
-                <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-sm">Career</div>
-              </div>
-            </div>
-            
-            {/* Help links */}
-            <div className="flex flex-col gap-4 items-start justify-start">
-              <div className="text-black text-left font-sans font-medium text-base">Help</div>
-              <div className="flex flex-col gap-2 items-start justify-start">
-                <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-sm">Customer Support</div>
-                <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-sm">Delivery Details</div>
-                <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-sm">Terms & Conditions</div>
-                <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-sm">Privacy Policy</div>
-              </div>
-            </div>
-            
-            {/* FAQ links */}
-            <div className="flex flex-col gap-4 items-start justify-start">
-              <div className="text-black text-left font-sans font-medium text-base">FAQ</div>
-              <div className="flex flex-col gap-2 items-start justify-start">
-                <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-sm">Account</div>
-                <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-sm">Manage Deliveries</div>
-                <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-sm">Orders</div>
-                <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-sm">Payments</div>
-              </div>
-            </div>
-            
-            {/* Resources links */}
-            <div className="flex flex-col gap-4 items-start justify-start">
-              <div className="text-black text-left font-sans font-medium text-base">Resources</div>
-              <div className="flex flex-col gap-2 items-start justify-start">
-                <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-sm">Free eBooks</div>
-                <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-sm">Development Tutorial</div>
-                <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-sm">How to - Blog</div>
-                <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-sm">Youtube Playlist</div>
-              </div>
-            </div>
-          </div>
-          
-          {/* Copyright and payment methods */}
-          <div className="flex flex-row items-center justify-between py-6 self-stretch">
-            <div className="text-[rgba(0,0,0,0.6)] text-left font-sans font-normal text-sm">
-              Shop.co © 2000-2023, All Rights Reserved
-            </div>
-            <div className="flex flex-row gap-2 items-center justify-end">
-              <img className="w-8 h-5" src={badge0} alt="Payment method" />
-              <img className="w-8 h-5" src={badge1} alt="Payment method" />
-              <img className="w-8 h-5" src={badge2} alt="Payment method" />
-              <img className="w-8 h-5" src={badge3} alt="Payment method" />
-              <img className="w-8 h-5" src={badge4} alt="Payment method" />
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
   );
