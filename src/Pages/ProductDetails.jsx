@@ -104,22 +104,13 @@ const ProductDetails = () => {
         <div className="flex flex-col lg:flex-row gap-8 xs:gap-6 sm:gap-8 items-start justify-start">
           {/* Image Gallery */}
           <div className="w-full lg:w-1/2">
-            <div className="flex flex-col md:flex-row gap-4 xs:gap-2 sm:gap-4 items-center justify-start w-full">
-              {/* Desktop thumbnails */}
-              <div className="hidden md:flex md:flex-col md:gap-4 md:items-start md:justify-start md:w-24">
-                <img className="rounded-xl border border-black w-full h-24 xs:h-20 sm:h-28 object-cover cursor-pointer" src={image2} alt="" />
-                <img className="rounded-xl border border-transparent w-full h-24 xs:h-20 sm:h-28 object-cover cursor-pointer" src={image5} alt="" />
-                <img className="rounded-xl border border-transparent w-full h-24 xs:h-20 sm:h-28 object-cover cursor-pointer" src={image6} alt="" />
-              </div>
-              {/* Main image */}
-              <img className="bg-gray-100 rounded-xl flex-1 w-full h-80 xs:h-64 sm:h-96 md:h-[530px] object-cover" src={image2} alt="" />
-            </div>
-            {/* Mobile thumbnails */}
-            <div className="flex md:hidden flex-row gap-4 xs:gap-2 sm:gap-4 items-center justify-center w-full mt-4 overflow-x-auto">
-              <img className="rounded-xl border border-black w-16 h-16 xs:w-12 xs:h-12 sm:w-20 sm:h-20 object-cover cursor-pointer flex-shrink-0" src={image2} alt="" />
-              <img className="rounded-xl border border-transparent w-16 h-16 xs:w-12 xs:h-12 sm:w-20 sm:h-20 object-cover cursor-pointer flex-shrink-0" src={image5} alt="" />
-              <img className="rounded-xl border border-transparent w-16 h-16 xs:w-12 xs:h-12 sm:w-20 sm:h-20 object-cover cursor-pointer flex-shrink-0" src={image6} alt="" />
-            </div>
+            <ProductImageGallery 
+              images={[image2, image5, image6]}
+              mainImageClassName="bg-gray-100 rounded-xl w-full h-80 xs:h-64 sm:h-96 md:h-[530px] object-cover"
+              thumbnailClassName="rounded-xl border border-solid w-full h-24 xs:h-20 sm:h-28 object-cover cursor-pointer"
+              selectedThumbnailClassName="border-black"
+              unselectedThumbnailClassName="border-transparent"
+            />
           </div>
 
           {/* Product Info */}
