@@ -17,39 +17,36 @@ import image14 from '../assets/image-140.png';
 import frame561 from '../assets/frame-5610.svg';
 import frame0 from '../assets/frame0.svg';
 import frame1 from '../assets/frame1.svg';
-import frame78 from '../assets/frame-780.svg';
-import frame091 from '../assets/frame-0910.svg';
 import frame2 from '../assets/frame2.svg';
 import frame3 from '../assets/frame3.svg';
-import group0 from '../assets/group0.svg';
-import zaraLogo from '../assets/zara-logo-1-10.svg';
-import gucciLogo from '../assets/gucci-logo-1-10.svg';
 import frame100 from '../assets/frame-100.svg';
 import frame101 from '../assets/frame-101.svg';
 import frame102 from '../assets/frame-102.svg';
 import frame103 from '../assets/frame-103.svg';
 import frame104 from '../assets/frame-104.svg';
 import frame108 from '../assets/frame-108.svg';
-import logoTwitter from '../assets/logo-twitter-20.svg';
-import logoFb from '../assets/logo-fb-simple-20.svg';
-import logoInstagram from '../assets/logo-instagram-10.svg';
-import logoGithub from '../assets/logo-github-10.svg';
+import arrowDownBold1 from '../assets/arrow-down-bold-10.svg';
+import arrowDownBold2 from '../assets/arrow-down-bold-20.svg';
 import badge0 from '../assets/badge0.svg';
 import badge1 from '../assets/badge1.svg';
 import badge2 from '../assets/badge2.svg';
 import badge3 from '../assets/badge3.svg';
 import badge4 from '../assets/badge4.svg';
-import arrowDownBold1 from '../assets/arrow-down-bold-10.svg';
-import arrowDownBold2 from '../assets/arrow-down-bold-20.svg';
-
-// Import PNG brand logos
+import logoTwitter from '../assets/logo-twitter-20.svg';
+import logoFb from '../assets/logo-fb-simple-20.svg';
+import logoInstagram from '../assets/logo-instagram-10.svg';
+import logoGithub from '../assets/logo-github-10.svg';
+import group0 from '../assets/group0.svg';
 import versaceLogo from '../assets/versace-22.png';
+import zaraLogo from '../assets/zara-logo-1-10.svg';
+import gucciLogo from '../assets/gucci-logo-1-10.svg';
 import calvinKleinLogo from '../assets/calvin-klein-33.png';
 
-// Import ProductCard, CustomerReview, and DesktopNav components
+// Import components
 import ProductCard from '../Components/ProductCard';
 import CustomerReview from '../Components/CustomerReview';
 import DesktopNav from '../Components/Navigation/DesktopNav';
+import EmailSubscription from '../Components/EmailSubscription';
 
 const HomePage = () => {
   
@@ -324,25 +321,7 @@ const HomePage = () => {
       </div>
       
       {/* Newsletter Section */}
-      <div className="container mx-auto px-4 mb-12 xs:mb-8 sm:mb-16">
-        <div className="bg-black rounded-2xl py-6 xs:py-4 sm:py-9 px-8 xs:px-4 sm:px-16 flex flex-col xs:flex-col sm:flex-row flex-wrap content-center items-center justify-between self-stretch shrink-0 relative overflow-hidden">
-          <div className="text-white text-left text-2xl xs:text-xl sm:text-[2.5rem] leading-8 xs:leading-6 sm:leading-11.25 font-normal relative flex-1 min-w-60 xs:min-w-48 sm:min-w-72.5 mb-6 sm:mb-0">
-            STAY UPTO DATE ABOUT OUR LATEST OFFERS
-          </div>
-          <div className="flex flex-col gap-2 xs:gap-1 sm:gap-3.5 flex-1 min-w-60 xs:min-w-48 sm:min-w-70 max-w-80 xs:max-w-72 sm:max-w-87.25 relative">
-            <div className="bg-white rounded-4xl xs:rounded-4xl sm:rounded-4xl flex flex-row gap-2 xs:gap-1.5 sm:gap-3 items-center justify-start self-stretch shrink-0 relative overflow-hidden" style={{ height: '48px' }}>
-              <input 
-                type="email" 
-                placeholder="Enter your email address" 
-                className="text-black text-opacity-40 text-left font-normal text-sm xs:text-xs sm:text-[1rem] relative flex-1 py-2 xs:py-1.5 sm:py-3 px-3 xs:px-2 sm:px-4 outline-none"
-              />
-            </div>
-            <button className="btn btn-secondary">
-              Subscribe to Newsletter
-            </button>
-          </div>
-        </div>
-      </div>
+      <EmailSubscription />
       
       {/* Footer */}
       <div className="bg-gray-100 pt-8 xs:pt-6 sm:pt-12 pb-6 xs:pb-4 sm:pb-8">
