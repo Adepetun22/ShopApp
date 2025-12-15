@@ -303,4 +303,47 @@
   .max-w-narrow {
     max-width: 800px;
   }
+  
+  /* CustomerReview component specific styles */
+  .customer-review-carousel {
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .customer-review-slide {
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .customer-review-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    padding: 1rem;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .customer-review-card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  .customer-review-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  .customer-review-dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background-color: #d1d5db;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .customer-review-dot.active {
+    background-color: #000000;
+  }
 }

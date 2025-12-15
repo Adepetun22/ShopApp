@@ -1,17 +1,31 @@
 import React, { useState, useEffect } from 'react';
 
-const CustomerReview = ({ testimonials, arrowDownBold2, arrowDownBold1 }) => {
+const CustomerReview = ({ testimonials = [], arrowDownBold2, arrowDownBold1, title = "OUR HAPPY CUSTOMERS" }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const intervalRef = React.useRef(null);
+  
+  // Early return if no testimonials
+  if (!testimonials || testimonials.length === 0) {
+    return (
+      <div className="flex flex-col gap-6 items-start justify-start self-stretch flex-shrink-0 relative">
+        <div className="text-black text-left text-2xl xs:text-xl sm:text-3xl md:text-[3rem] font-normal relative flex-1 flex items-center justify-start">
+          {title}
+        </div>
+        <div className="text-gray-500 text-center py-8">
+          No customer reviews available at the moment.
+        </div>
+      </div>
+    );
+  }
   
   // Determine how many cards to show based on screen size
   const getCardsToShow = () => {
     if (typeof window !== 'undefined') {
       if (window.innerWidth >= 1024) return 3; // Desktop: 3 cards
-      if (window.innerWidth >= 640) return 2;  // Tablet: 2 cards
+      if (window.innerWidth >= 768) return 2;  // Tablet: 2 cards
       return 1; // Mobile: 1 card
     }
-    return 3; // Default to 3 on server-side rendering
+    return 1; // Default to 1 on server-side rendering
   };
   
   const [cardsToShow, setCardsToShow] = useState(getCardsToShow());
@@ -28,6 +42,8 @@ const CustomerReview = ({ testimonials, arrowDownBold2, arrowDownBold1 }) => {
   
   // Auto-scroll functionality
   useEffect(() => {
+    if (testimonials.length <= cardsToShow) return; // Don't auto-scroll if all cards are visible
+    
     intervalRef.current = setInterval(() => {
       setCurrentSlide(prev => (prev >= testimonials.length - cardsToShow ? 0 : prev + 1));
     }, 5000); // Change slide every 5 seconds
@@ -78,28 +94,38 @@ const CustomerReview = ({ testimonials, arrowDownBold2, arrowDownBold1 }) => {
     <div className="flex flex-col gap-6 xs:gap-4 sm:gap-8 items-start justify-start self-stretch flex-shrink-0 relative">
       <div className="flex flex-row items-center justify-between self-stretch flex-shrink-0 relative flex-wrap">
         <div className="text-black text-left text-2xl xs:text-xl sm:text-3xl md:text-[3rem] font-normal relative flex-1 flex items-center justify-start mb-4 sm:mb-0">
-          OUR HAPPY CUSTOMERS
+          {title}
         </div>
-        <div className="flex flex-row items-center justify-between flex-shrink-0 w-[4rem] xs:w-[3rem] sm:w-[4.5rem] relative">
-          <img 
-            src={arrowDownBold2} 
-            alt="Previous" 
-            className="flex-shrink-0 w-[1.5rem] xs:w-[1.25rem] sm:w-[1.75rem] h-[1.5rem] xs:h-[1.25rem] sm:h-[1.75rem] relative overflow-visible aspect-square cursor-pointer" 
+        <div className="flex flex-row items-center justify-between flex-shrink-0 gap-4 relative">
+          <button 
             onClick={prevSlide}
-          />
-          <img 
-            src={arrowDownBold1} 
-            alt="Next" 
-            className="flex-shrink-0 w-[1.5rem] xs:w-[1.25rem] sm:w-[1.75rem] h-[1.5rem] xs:h-[1.25rem] sm:h-[1.75rem] relative overflow-visible aspect-square cursor-pointer" 
+            className="flex-shrink-0 w-6 h-6 relative overflow-visible aspect-square cursor-pointer hover:opacity-70 transition-opacity"
+            aria-label="Previous testimonial"
+          >
+            <img 
+              src={arrowDownBold2} 
+              alt="Previous" 
+              className="w-full h-full transform rotate-90" 
+            />
+          </button>
+          <button 
             onClick={nextSlide}
-          />
+            className="flex-shrink-0 w-6 h-6 relative overflow-visible aspect-square cursor-pointer hover:opacity-70 transition-opacity"
+            aria-label="Next testimonial"
+          >
+            <img 
+              src={arrowDownBold1} 
+              alt="Next" 
+              className="w-full h-full transform -rotate-90" 
+            />
+          </button>
         </div>
       </div>
       
       {/* Carousel Container */}
-      <div className="relative w-full overflow-hidden">
+      <div className="customer-review-carousel relative w-full">
         <div 
-          className="flex transition-transform duration-500 ease-in-out"
+          className="customer-review-slide flex"
           style={{ transform: `translateX(-${currentSlide * cardWidth}%)` }}
         >
           {testimonials.map((testimonial, index) => (
@@ -110,18 +136,18 @@ const CustomerReview = ({ testimonials, arrowDownBold2, arrowDownBold1 }) => {
               onClick={() => console.log(`Card ${index} clicked`)}
             >
               <div className="px-2 h-full">
-                {/* Fixed height card container - same height on all screens */}
-                <div className="border border-gray-200 rounded-2xl p-4 flex flex-col h-60">
-                  <div className="flex flex-row gap-2 items-start justify-start shrink-0 h-auto relative overflow-visible">
+                {/* Responsive height card container */}
+                <div className="customer-review-card flex flex-col min-h-[240px] h-full">
+                  <div className="flex flex-row gap-2 items-start justify-start shrink-0 mb-3">
                     <img 
                       src={testimonial.rating} 
                       alt="Rating" 
-                      className="shrink-0 w-auto h-auto relative overflow-visible" 
+                      className="shrink-0 w-auto h-5 relative overflow-visible" 
                     />
                   </div>
-                  <div className="flex flex-col gap-2 items-start justify-start flex-grow">
-                    <div className="flex flex-row gap-1 items-center justify-start shrink-0 relative">
-                      <div className="text-black text-left font-bold text-lg leading-4 relative">
+                  <div className="flex flex-col gap-3 items-start justify-start flex-grow">
+                    <div className="flex flex-row gap-2 items-center justify-start shrink-0 relative">
+                      <div className="text-black text-left font-bold text-lg leading-5 relative">
                         {testimonial.name}
                       </div>
                       <img 
@@ -130,7 +156,7 @@ const CustomerReview = ({ testimonials, arrowDownBold2, arrowDownBold1 }) => {
                         className="shrink-0 w-5 h-5 relative overflow-visible" 
                       />
                     </div>
-                    <div className="text-black text-opacity-60 text-left font-normal text-sm leading-4 relative flex-grow overflow-hidden">
+                    <div className="text-black text-opacity-60 text-left font-normal text-sm leading-5 relative flex-grow">
                       "{testimonial.quote}"
                     </div>
                   </div>
@@ -141,13 +167,13 @@ const CustomerReview = ({ testimonials, arrowDownBold2, arrowDownBold1 }) => {
         </div>
         
         {/* Dots indicator */}
-        <div className="flex justify-center mt-6 space-x-2">
+        <div className="customer-review-dots">
           {Array.from({ length: Math.max(1, testimonials.length - cardsToShow + 1) }).map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full ${
-                currentSlide === index ? 'bg-black' : 'bg-gray-300'
+              className={`customer-review-dot ${
+                currentSlide === index ? 'active' : ''
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
