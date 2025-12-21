@@ -31,30 +31,30 @@ const Footer = () => {
           <div>
             <h4 className="font-bold mb-3 xs:mb-2 sm:mb-4 text-sm xs:text-xs sm:text-base">Company</h4>
             <ul className="text-gray-600 space-y-1 xs:space-y-0.5 sm:space-y-2 text-sm xs:text-xs">
-              <li>About</li>
-              <li>Features</li>
-              <li>Works</li>
-              <li>Career</li>
+              <li className="cursor-pointer">About</li>
+              <li className="cursor-pointer">Features</li>
+              <li className="cursor-pointer">Works</li>
+              <li className="cursor-pointer">Career</li>
             </ul>
           </div>
           
           <div>
             <h4 className="font-bold mb-3 xs:mb-2 sm:mb-4 text-sm xs:text-xs sm:text-base">Help</h4>
             <ul className="text-gray-600 space-y-1 xs:space-y-0.5 sm:space-y-2 text-sm xs:text-xs">
-              <li>Customer Support</li>
-              <li>Delivery Details</li>
-              <li>Terms & Conditions</li>
-              <li>Privacy Policy</li>
+              <li className="cursor-pointer">Customer Support</li>
+              <li className="cursor-pointer">Delivery Details</li>
+              <li className="cursor-pointer">Terms & Conditions</li>
+              <li className="cursor-pointer">Privacy Policy</li>
             </ul>
           </div>
           
           <div>
             <h4 className="font-bold mb-3 xs:mb-2 sm:mb-4 text-sm xs:text-xs sm:text-base">FAQ</h4>
             <ul className="text-gray-600 space-y-1 xs:space-y-0.5 sm:space-y-2 text-sm xs:text-xs">
-              <li>Account</li>
-              <li>Manage Deliveries</li>
-              <li>Orders</li>
-              <li>Payments</li>
+              <li className="cursor-pointer">Account</li>
+              <li className="cursor-pointer">Manage Deliveries</li>
+              <li className="cursor-pointer">Orders</li>
+              <li className="cursor-pointer">Payments</li>
             </ul>
           </div>
         </div>
