@@ -4,9 +4,11 @@ import searchIcon from '../../assets/search-780.svg';
 import cartIcon from '../../assets/cart0.svg';
 import profileIcon from '../../assets/profile0.svg';
 import frameIcon from '../../assets/frame0.svg';
+import { useCart } from '../../CartContext';
 
 const MobileNav = () => {
   const [showSearch, setShowSearch] = useState(false);
+  const { cartCount } = useCart();
   
   console.log('MobileNav rendered');
 
@@ -44,7 +46,14 @@ const MobileNav = () => {
             alt="Search" 
             onClick={() => setShowSearch(!showSearch)}
           />
-          <img className="w-6 h-6" src={cartIcon} alt="Cart" />
+          <div className="relative">
+            <img className="w-6 h-6" src={cartIcon} alt="Cart" />
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                {cartCount}
+              </span>
+            )}
+          </div>
           <img className="w-6 h-6" src={profileIcon} alt="Profile" />
         </div>
       </div>

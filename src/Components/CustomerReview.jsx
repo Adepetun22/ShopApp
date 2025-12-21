@@ -8,7 +8,7 @@ const CustomerReview = ({ testimonials = [], arrowDownBold2, arrowDownBold1, tit
   if (!testimonials || testimonials.length === 0) {
     return (
       <div className="flex flex-col gap-6 items-start justify-start self-stretch flex-shrink-0 relative">
-        <div className="text-black text-left text-2xl xs:text-xl sm:text-3xl md:text-[3rem] font-normal relative flex-1 flex items-center justify-start">
+        <div className="text-black text-left text-2xl xs:text-xl sm:text-3xl md:text-[32px] font-normal relative flex-1 flex items-center justify-start">
           {title}
         </div>
         <div className="text-gray-500 text-center py-8">
@@ -93,7 +93,7 @@ const CustomerReview = ({ testimonials = [], arrowDownBold2, arrowDownBold1, tit
   return (
     <div className="flex flex-col gap-6 xs:gap-4 sm:gap-8 items-start justify-start self-stretch flex-shrink-0 relative">
       <div className="flex flex-row items-center justify-between self-stretch flex-shrink-0 relative flex-wrap">
-        <div className="text-black text-left text-2xl xs:text-xl sm:text-3xl md:text-[3rem] font-normal relative flex-1 flex items-center justify-start mb-4 sm:mb-0">
+        <div className="text-black text-left text-2xl xs:text-xl sm:text-3xl md:text-[32px] font-normal relative flex-1 flex items-center justify-start mb-4 sm:mb-0">
           {title}
         </div>
         <div className="flex flex-row items-center justify-between flex-shrink-0 gap-4 relative">
