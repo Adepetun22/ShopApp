@@ -34,6 +34,7 @@ const ProductDetails = () => {
   const [selectedSize, setSelectedSize] = useState('Small'); // Default to Small
   const [quantity, setQuantity] = useState(1); // Default quantity is 1
   const [selectedColor, setSelectedColor] = useState('gray'); // Default to gray color
+  const [activeTab, setActiveTab] = useState('product-details'); // Default to product details tab
   
   // Check if we're on localhost:5187
   const isLocalhost5187 = typeof window !== 'undefined' && 
@@ -268,27 +269,116 @@ const ProductDetails = () => {
         {/* Tabs Section */}
         <div className="container mx-auto px-4 py-8 xs:py-6 sm:py-8">
           <div className="flex flex-row gap-6 xs:gap-4 sm:gap-8 items-center justify-start overflow-x-auto">
-            <div className="pb-2 border-b-2 border-black whitespace-nowrap">
-              <div className="text-black font-medium text-base xs:text-sm sm:text-base">Product Details</div>
-            </div>
-            <div className="pb-2 whitespace-nowrap">
-              <div className="text-gray-600 font-medium text-base xs:text-sm sm:text-base">Rating & Reviews</div>
-            </div>
-            <div className="pb-2 whitespace-nowrap">
-              <div className="text-gray-600 font-medium text-base xs:text-sm sm:text-base">FAQs</div>
-            </div>
+            <button 
+              className={`pb-2 whitespace-nowrap cursor-pointer ${activeTab === 'product-details' ? 'border-b-2 border-black' : ''}`}
+              onClick={() => setActiveTab('product-details')}
+            >
+              <div className={`${activeTab === 'product-details' ? 'text-black' : 'text-gray-600'} font-medium text-base xs:text-sm sm:text-base`}>Product Details</div>
+            </button>
+            <button 
+              className={`pb-2 whitespace-nowrap cursor-pointer ${activeTab === 'reviews' ? 'border-b-2 border-black' : ''}`}
+              onClick={() => setActiveTab('reviews')}
+            >
+              <div className={`${activeTab === 'reviews' ? 'text-black' : 'text-gray-600'} font-medium text-base xs:text-sm sm:text-base`}>Rating & Reviews</div>
+            </button>
+            <button 
+              className={`pb-2 whitespace-nowrap cursor-pointer ${activeTab === 'faqs' ? 'border-b-2 border-black' : ''}`}
+              onClick={() => setActiveTab('faqs')}
+            >
+              <div className={`${activeTab === 'faqs' ? 'text-black' : 'text-gray-600'} font-medium text-base xs:text-sm sm:text-base`}>FAQs</div>
+            </button>
           </div>
         </div>
       </div>
       
-      {/* Reviews Section */}
+      {/* Tab Content */}
       <div className="container mx-auto px-4 mb-12 xs:mb-8 sm:mb-16">
-        <CustomerReview 
-          testimonials={testimonials} 
-          arrowDownBold1={arrowDownBold1} 
-          arrowDownBold2={arrowDownBold2}
-          title="All Reviews (451)" 
-        />
+        {/* Product Details Content */}
+        {activeTab === 'product-details' && (
+          <div className="flex flex-col gap-6 xs:gap-4 sm:gap-8">
+            <h2 className="text-2xl xs:text-xl sm:text-2xl md:text-3xl font-bold">Product Information</h2>
+            <div className="flex flex-col sm:flex-row gap-8 xs:gap-4 sm:gap-8">
+              <div className="flex-1">
+                <h3 className="text-lg xs:text-base sm:text-xl font-bold mb-4">Product Details</h3>
+                <p className="text-gray-600 text-base xs:text-sm sm:text-base leading-relaxed">
+                  Elevate your style with our One Life Graphic T-shirt. Made from premium cotton, this tee features a unique graphic design that captures the essence of living life to the fullest. Perfect for casual outings, this t-shirt combines comfort and style effortlessly.
+                </p>
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg xs:text-base sm:text-xl font-bold mb-4">Features</h3>
+                <ul className="list-disc pl-5 text-gray-600 text-base xs:text-sm sm:text-base space-y-2">
+                  <li>Premium cotton fabric for ultimate comfort</li>
+                  <li>Unique graphic design</li>
+                  <li>Available in multiple sizes and colors</li>
+                  <li>Machine washable for easy care</li>
+                  <li>Unisex fit for all genders</li>
+                </ul>
+              </div>
+            </div>
+            <div className="pt-4">
+              <h3 className="text-lg xs:text-base sm:text-xl font-bold mb-4">Material & Care</h3>
+              <div className="flex flex-col sm:flex-row gap-6 xs:gap-4 sm:gap-6">
+                <div className="flex-1">
+                  <h4 className="font-semibold text-base xs:text-sm sm:text-base">Material</h4>
+                  <p className="text-gray-600 text-base xs:text-sm sm:text-base">100% Premium Cotton</p>
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-base xs:text-sm sm:text-base">Care Instructions</h4>
+                  <p className="text-gray-600 text-base xs:text-sm sm:text-base">Machine wash cold, tumble dry low, iron on low heat if needed</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        
+        {/* Reviews Content */}
+        {activeTab === 'reviews' && (
+          <CustomerReview 
+            testimonials={testimonials} 
+            arrowDownBold1={arrowDownBold1} 
+            arrowDownBold2={arrowDownBold2}
+            title="All Reviews (451)" 
+          />
+        )}
+        
+        {/* FAQs Content */}
+        {activeTab === 'faqs' && (
+          <div className="flex flex-col gap-6 xs:gap-4 sm:gap-8">
+            <h2 className="text-2xl xs:text-xl sm:text-2xl md:text-3xl font-bold">Frequently Asked Questions</h2>
+            <div className="flex flex-col gap-4">
+              <div className="border-b border-gray-200 pb-4">
+                <h3 className="text-lg xs:text-base sm:text-xl font-semibold mb-2">What materials are used in this t-shirt?</h3>
+                <p className="text-gray-600 text-base xs:text-sm sm:text-base">
+                  Our One Life Graphic T-shirt is made from 100% premium cotton, ensuring both comfort and durability. The fabric is specially treated to maintain its softness and color vibrancy even after multiple washes.
+                </p>
+              </div>
+              <div className="border-b border-gray-200 pb-4">
+                <h3 className="text-lg xs:text-base sm:text-xl font-semibold mb-2">How should I care for this t-shirt?</h3>
+                <p className="text-gray-600 text-base xs:text-sm sm:text-base">
+                  We recommend machine washing in cold water and tumble drying on low heat. Avoid using bleach or harsh detergents to preserve the graphic design and fabric quality.
+                </p>
+              </div>
+              <div className="border-b border-gray-200 pb-4">
+                <h3 className="text-lg xs:text-base sm:text-xl font-semibold mb-2">What is the sizing guide for this t-shirt?</h3>
+                <p className="text-gray-600 text-base xs:text-sm sm:text-base">
+                  Our t-shirts are designed with a regular fit. We recommend checking our sizing chart on the product page. If you prefer a looser fit, consider ordering one size up.
+                </p>
+              </div>
+              <div className="border-b border-gray-200 pb-4">
+                <h3 className="text-lg xs:text-base sm:text-xl font-semibold mb-2">Is the graphic print durable?</h3>
+                <p className="text-gray-600 text-base xs:text-sm sm:text-base">
+                  Yes, we use high-quality printing techniques and eco-friendly inks that are designed to last. With proper care, the graphic will retain its vibrancy for years.
+                </p>
+              </div>
+              <div className="border-b border-gray-200 pb-4">
+                <h3 className="text-lg xs:text-base sm:text-xl font-semibold mb-2">Can I return or exchange if the size doesn't fit?</h3>
+                <p className="text-gray-600 text-base xs:text-sm sm:text-base">
+                  Absolutely! We offer a 30-day return policy for unworn and unwashed items with tags attached. Please visit our Returns & Exchanges page for more information.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
       
       {/* You might also like section */}
