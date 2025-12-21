@@ -116,8 +116,8 @@ const ProductDetails = () => {
           {/* Product Info */}
           <div className="w-full lg:w-1/2">
             <div className="flex flex-col gap-6 xs:gap-4 sm:gap-6">
-              <div className="flex flex-col gap-4 xs:gap-3 sm:gap-4">
-                <h1 className="text-2xl xs:text-xl sm:text-2xl md:text-3xl font-bold mb-4 xs:mb-2 sm:mb-4">One Life Graphic T-shirt</h1>
+              <div className="flex flex-col gap-4 xs:gap-3">
+                <h1 className="text-black text-left font-sans font-bold text-[50px] xs:text-[40px] sm:text-[50px] md:text-[55px] lg:text-[60px] mb-4 xs:mb-2 sm:mb-4">One Life Graphic T-shirt</h1>
                 
                 <div className="flex flex-row gap-2 items-center justify-start">
                   <img className="w-auto h-5" src={frame101} alt="Rating stars" />
@@ -144,8 +144,8 @@ const ProductDetails = () => {
               
               <hr className="border-t border-gray-300 w-full" />
               
-              <div className="flex flex-col gap-4 xs:gap-3 sm:gap-4 w-full">
-                <div className="text-black font-medium text-base xs:text-sm sm:text-base">Select Colors</div>
+              <div className="flex flex-col gap-4 w-full">
+                <div className="text-[#969494] text-left font-sans font-medium text-base xs:text-sm">Select Colors</div>
                 <div className="flex flex-row gap-3 items-center justify-start">
                   <div 
                     className="relative cursor-pointer"
@@ -189,9 +189,9 @@ const ProductDetails = () => {
               
               <hr className="border-t border-gray-300 w-full" />
               
-              <div className="flex flex-col gap-4 xs:gap-3 sm:gap-4 w-full">
-                <div className="text-black font-medium text-base xs:text-sm sm:text-base">Choose Size</div>
-                <div className="flex flex-row gap-3 items-center justify-start flex-wrap">
+              <div className="flex flex-col gap-4 xs:gap-3 w-full">
+                <div className="text-[#969494] text-left font-sans font-medium text-base xs:text-sm">Choose Size</div>
+                <div className="flex flex-row gap-3 items-center justify-start flex-wrap pb-6">
                   <button 
                     className={`border rounded-full px-4 py-2 xs:px-3 xs:py-1 sm:px-5 sm:py-3 transition-colors ${selectedSize === 'Small' ? 'bg-black text-white' : 'border-gray-300 hover:border-black hover:bg-black hover:text-white'}`}
                     onClick={() => setSelectedSize('Small')}
@@ -222,25 +222,27 @@ const ProductDetails = () => {
             
             <hr className="border-t border-gray-300 w-full" />
             
-            <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between w-full">
-              <div className="flex flex-row items-center justify-between border border-gray-300 rounded-full p-3 xs:p-2 sm:p-3 min-w-[100px] xs:min-w-[80px] sm:min-w-[120px]">
-                <img 
-                  className="w-5 h-5 xs:w-4 xs:h-4 sm:w-5 sm:h-5 cursor-pointer" 
-                  src={frame4} 
-                  alt="Decrease quantity" 
-                  onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
-                />
-                <div className="text-black text-center text-lg xs:text-base sm:text-lg mx-4 xs:mx-2 sm:mx-4">{quantity}</div>
-                <img 
-                  className="w-5 h-5 xs:w-4 xs:h-4 sm:w-5 sm:h-5 cursor-pointer" 
-                  src={frame5} 
-                  alt="Increase quantity" 
-                  onClick={() => setQuantity(prev => prev + 1)}
-                />
+            <div className="pt-6">
+              <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between w-full">
+                <div className="flex flex-row items-center justify-between border border-gray-300 rounded-full p-3 xs:p-2 sm:p-3 min-w-[100px] xs:min-w-[80px] sm:min-w-[120px]">
+                  <img 
+                    className="w-5 h-5 xs:w-4 xs:h-4 sm:w-5 sm:h-5 cursor-pointer" 
+                    src={frame4} 
+                    alt="Decrease quantity" 
+                    onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
+                  />
+                  <div className="text-black text-center text-lg xs:text-base sm:text-lg mx-4 xs:mx-2 sm:mx-4">{quantity}</div>
+                  <img 
+                    className="w-5 h-5 xs:w-4 xs:h-4 sm:w-5 sm:h-5 cursor-pointer" 
+                    src={frame5} 
+                    alt="Increase quantity" 
+                    onClick={() => setQuantity(prev => prev + 1)}
+                  />
+                </div>
+                <button className="bg-black rounded-full px-8 py-3 xs:px-6 xs:py-2 sm:px-12 sm:py-4 flex-1 sm:flex-initial">
+                  <div className="text-white text-center font-sans font-medium text-base xs:text-sm sm:text-base">Add to Cart</div>
+                </button>
               </div>
-              <button className="bg-black rounded-full px-8 py-3 xs:px-6 xs:py-2 sm:px-12 sm:py-4 flex-1 sm:flex-initial">
-                <div className="text-white text-center font-medium text-base xs:text-sm sm:text-base">Add to Cart</div>
-              </button>
             </div>
           </div>
         </div>

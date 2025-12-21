@@ -105,7 +105,7 @@ const CustomerReview = ({ testimonials = [], arrowDownBold2, arrowDownBold1, tit
             <img 
               src={arrowDownBold2} 
               alt="Previous" 
-              className="w-full h-full transform rotate-90" 
+              className="w-full h-full" 
             />
           </button>
           <button 
@@ -116,7 +116,7 @@ const CustomerReview = ({ testimonials = [], arrowDownBold2, arrowDownBold1, tit
             <img 
               src={arrowDownBold1} 
               alt="Next" 
-              className="w-full h-full transform -rotate-90" 
+              className="w-full h-full" 
             />
           </button>
         </div>
