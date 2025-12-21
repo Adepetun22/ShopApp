@@ -12,8 +12,8 @@ const DesktopNav = () => {
   
   return (
     <div className="sticky top-0 z-50">
-      {/* Top notification bar */}
-      <div className="bg-black py-2 px-4">
+      {/* Top notification bar - hidden on mobile since MobileNav has its own */}
+      <div className="bg-black py-2 px-4 hidden md:block">
         <div className="container mx-auto flex flex-wrap justify-between items-center">
           <div className="text-white text-sm xs:text-xs sm:text-sm">
             <span className="font-normal">Sign up and get 20% off to your first order. </span>
