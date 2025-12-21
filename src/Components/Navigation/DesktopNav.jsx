@@ -6,8 +6,11 @@ import cartIcon from '../../assets/cart0.svg';
 import profileIcon from '../../assets/profile0.svg';
 import frameIcon from '../../assets/frame0.svg';
 import frame054rt from '../../assets/Frame054rt.png';
+import { useCart } from '../../CartContext';
 
 const DesktopNav = () => {
+  const { cartCount } = useCart();
+  
   console.log('DesktopNav rendered');
   
   return (
@@ -61,11 +64,18 @@ const DesktopNav = () => {
               />
             </div>
             <div className="flex items-center space-x-3 xs:space-x-2 sm:space-x-4">
-              <img 
-                alt="Cart" 
-                className="w-5.5 h-5.5 xs:w-5.5 xs:h-5.5 cursor-pointer" 
-                src={cartIcon}
-              />
+              <div className="relative">
+                <img 
+                  alt="Cart" 
+                  className="w-5.5 h-5.5 xs:w-5.5 xs:h-5.5 cursor-pointer" 
+                  src={cartIcon}
+                />
+                {cartCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                    {cartCount}
+                  </span>
+                )}
+              </div>
               <img 
                 alt="Profile" 
                 className="w-5.5 h-5.5 xs:w-5.5 xs:h-5.5 cursor-pointer" 

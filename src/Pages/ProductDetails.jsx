@@ -27,9 +27,10 @@ import frame102 from '../assets/frame-102.svg';
 import frame103 from '../assets/frame-103.svg';
 import frame104 from '../assets/frame-104.svg';
 import frame105 from '../assets/frame-105.svg';
-
+import { useCart } from '../CartContext';
 
 const ProductDetails = () => {
+  const { addToCart } = useCart();
   const [selectedSize, setSelectedSize] = useState('Small'); // Default to Small
   const [quantity, setQuantity] = useState(1); // Default quantity is 1
   const [selectedColor, setSelectedColor] = useState('gray'); // Default to gray color
@@ -77,6 +78,20 @@ const ProductDetails = () => {
       quote: "This t-shirt is a fusion of comfort and creativity. The fabric is soft, and the design speaks volumes about the designer's skill. It's like wearing a piece of art that reflects my passion for both design and fashion."
     }
   ];
+
+  // Sample product data
+  const product = {
+    id: 1,
+    name: "One Life Graphic T-shirt",
+    price: 260,
+    originalPrice: 300,
+    discount: 40,
+    description: "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style."
+  };
+
+  const handleAddToCart = () => {
+    addToCart(product, quantity);
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -193,25 +208,25 @@ const ProductDetails = () => {
                 <div className="text-[#969494] text-left font-sans font-medium text-base xs:text-sm">Choose Size</div>
                 <div className="flex flex-row gap-3 items-center justify-start flex-wrap pb-6">
                   <button 
-                    className={`border rounded-full px-4 py-2 xs:px-3 xs:py-1 sm:px-5 sm:py-3 transition-colors ${selectedSize === 'Small' ? 'bg-black text-white' : 'border-gray-300 hover:border-black hover:bg-black hover:text-white'}`}
+                    className={`border rounded-full px-4 py-2 xs:px-3 xs:py-1 sm:px-5 sm:py-3 transition-colors cursor-pointer ${selectedSize === 'Small' ? 'bg-black text-white' : 'border-gray-300 hover:border-black hover:bg-black hover:text-white'}`}
                     onClick={() => setSelectedSize('Small')}
                   >
                     <span className="text-sm xs:text-xs sm:text-base">Small</span>
                   </button>
                   <button 
-                    className={`border rounded-full px-4 py-2 xs:px-3 xs:py-1 sm:px-5 sm:py-3 transition-colors ${selectedSize === 'Medium' ? 'bg-black text-white' : 'border-gray-300 hover:border-black hover:bg-black hover:text-white'}`}
+                    className={`border rounded-full px-4 py-2 xs:px-3 xs:py-1 sm:px-5 sm:py-3 transition-colors cursor-pointer ${selectedSize === 'Medium' ? 'bg-black text-white' : 'border-gray-300 hover:border-black hover:bg-black hover:text-white'}`}
                     onClick={() => setSelectedSize('Medium')}
                   >
                     <span className="text-sm xs:text-xs sm:text-base">Medium</span>
                   </button>
                   <button 
-                    className={`border rounded-full px-4 py-2 xs:px-3 xs:py-1 sm:px-5 sm:py-3 transition-colors ${selectedSize === 'Large' ? 'bg-black text-white' : 'border-gray-300 hover:border-black hover:bg-black hover:text-white'}`}
+                    className={`border rounded-full px-4 py-2 xs:px-3 xs:py-1 sm:px-5 sm:py-3 transition-colors cursor-pointer ${selectedSize === 'Large' ? 'bg-black text-white' : 'border-gray-300 hover:border-black hover:bg-black hover:text-white'}`}
                     onClick={() => setSelectedSize('Large')}
                   >
                     <span className="text-sm xs:text-xs sm:text-base">Large</span>
                   </button>
                   <button 
-                    className={`border rounded-full px-4 py-2 xs:px-3 xs:py-1 sm:px-5 sm:py-3 transition-colors ${selectedSize === 'X-Large' ? 'bg-black text-white' : 'border-gray-300 hover:border-black hover:bg-black hover:text-white'}`}
+                    className={`border rounded-full px-4 py-2 xs:px-3 xs:py-1 sm:px-5 sm:py-3 transition-colors cursor-pointer ${selectedSize === 'X-Large' ? 'bg-black text-white' : 'border-gray-300 hover:border-black hover:bg-black hover:text-white'}`}
                     onClick={() => setSelectedSize('X-Large')}
                   >
                     <span className="text-sm xs:text-xs sm:text-base">X-Large</span>
@@ -239,7 +254,10 @@ const ProductDetails = () => {
                     onClick={() => setQuantity(prev => prev + 1)}
                   />
                 </div>
-                <button className="bg-black rounded-full px-8 py-3 xs:px-6 xs:py-2 sm:px-12 sm:py-4 flex-1 sm:flex-initial">
+                <button 
+                  className="bg-black rounded-full px-8 py-3 xs:px-6 xs:py-2 sm:px-12 sm:py-4 w-full sm:w-[400px] cursor-pointer"
+                  onClick={handleAddToCart}
+                >
                   <div className="text-white text-center font-sans font-medium text-base xs:text-sm sm:text-base">Add to Cart</div>
                 </button>
               </div>
