@@ -1,5 +1,6 @@
 import React from 'react';
 import EmailSubscription from '../Components/EmailSubscription';
+import Pagination from '../Components/Pagination';
 
 // Import images from assets folder
 import frame0 from '../assets/frame0.svg';
@@ -19,8 +20,6 @@ import frameUpDown20 from '../assets/frame-9-ud-20.svg';
 import frameUt0 from '../assets/frame-2-ut0.svg';
 import frameAda0 from '../assets/frame-3-ada0.svg';
 import frameEr0 from '../assets/frame-80-er0.svg';
-import arrowLeft from '../assets/arrow-left0.svg';
-import arrowRight from '../assets/arrow-right0.svg';
 import frame100 from '../assets/frame-100.svg';
 import frame101 from '../assets/frame-101.svg';
 import frame102 from '../assets/frame-102.svg';
@@ -41,6 +40,16 @@ import image82 from '../assets/image-82.png';
 import image92 from '../assets/image-92.png';
 
 const Category = () => {
+  // State for pagination
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const totalPages = 10;
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    // Here you would typically fetch new data for the page
+    console.log(`Page changed to: ${page}`);
+  };
+
   return (
     <div className="flex justify-center w-full">
       <div className="bg-[#ffffff] flex flex-col gap-6 items-start justify-start max-w-[1242px] relative" style={{ paddingTop: '48px', paddingBottom: '80px' }}>
@@ -601,76 +610,11 @@ const Category = () => {
 
             {/* Pagination */}
             <div className="flex flex-col gap-5 items-start justify-start self-stretch shrink-0 relative">
-              <div className="border-solid border-[rgba(0,0,0,0.10)] border-t border-r-[0] border-b-[0] border-l-[0] self-stretch shrink-0 h-0 relative" style={{ marginTop: '-1px', transformOrigin: '0 0', transform: 'rotate(0deg) scale(1, 1)' }}></div>
-              <div className="flex flex-row items-center justify-between self-stretch shrink-0 relative">
-                <div className="rounded-lg flex flex-row gap-0 items-start justify-start shrink-0 relative">
-                  <div className="bg-[#ffffff] rounded-lg border-solid border-[rgba(0,0,0,0.10)] border pt-2 pr-3.5 pb-2 pl-3.5 flex flex-row gap-2 items-center justify-center shrink-0 relative overflow-hidden">
-                    <img className="shrink-0 w-5 h-5 relative overflow-visible" src={arrowLeft} alt="previous" />
-                    <div className="text-[#000000] text-left font-['Satoshi-Medium',_sans-serif] text-sm leading-5 font-medium relative">
-                      Previous
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-row gap-0.5 items-start justify-start shrink-0 relative">
-                  <div className="bg-[rgba(0,0,0,0.06)] rounded-lg shrink-0 w-10 h-10 relative overflow-hidden">
-                    <div className="rounded-lg p-3 flex flex-row gap-0 items-center justify-center w-10 h-10 absolute left-0 top-0">
-                      <div className="text-[#000000] text-center font-['Satoshi-Medium',_sans-serif] text-sm leading-5 font-medium relative">
-                        1
-                      </div>
-                    </div>
-                  </div>
-                  <div className="rounded-lg shrink-0 w-10 h-10 relative overflow-hidden">
-                    <div className="rounded-lg p-3 flex flex-row gap-0 items-center justify-center w-10 h-10 absolute left-0 top-0">
-                      <div className="text-[rgba(0,0,0,0.50)] text-center font-['Satoshi-Medium',_sans-serif] text-sm leading-5 font-medium relative">
-                        2
-                      </div>
-                    </div>
-                  </div>
-                  <div className="rounded-lg shrink-0 w-10 h-10 relative overflow-hidden">
-                    <div className="rounded-lg p-3 flex flex-row gap-0 items-center justify-center w-10 h-10 absolute left-0 top-0">
-                      <div className="text-[rgba(0,0,0,0.50)] text-center font-['Satoshi-Medium',_sans-serif] text-sm leading-5 font-medium relative">
-                        3
-                      </div>
-                    </div>
-                  </div>
-                  <div className="rounded-lg shrink-0 w-10 h-10 relative overflow-hidden">
-                    <div className="rounded-lg p-3 flex flex-row gap-0 items-center justify-center w-10 h-10 absolute left-0 top-0">
-                      <div className="text-[rgba(0,0,0,0.50)] text-center font-['Satoshi-Medium',_sans-serif] text-sm leading-5 font-medium relative">
-                        ...
-                      </div>
-                    </div>
-                  </div>
-                  <div className="rounded-lg shrink-0 w-10 h-10 relative overflow-hidden">
-                    <div className="rounded-lg p-3 flex flex-row gap-0 items-center justify-center w-10 h-10 absolute left-0 top-0">
-                      <div className="text-[rgba(0,0,0,0.50)] text-center font-['Satoshi-Medium',_sans-serif] text-sm leading-5 font-medium relative">
-                        8
-                      </div>
-                    </div>
-                  </div>
-                  <div className="rounded-lg shrink-0 w-10 h-10 relative overflow-hidden">
-                    <div className="rounded-lg p-3 flex flex-row gap-0 items-center justify-center w-10 h-10 absolute left-0 top-0">
-                      <div className="text-[rgba(0,0,0,0.50)] text-center font-['Satoshi-Medium',_sans-serif] text-sm leading-5 font-medium relative">
-                        9
-                      </div>
-                    </div>
-                  </div>
-                  <div className="rounded-lg shrink-0 w-10 h-10 relative overflow-hidden">
-                    <div className="rounded-lg p-3 flex flex-row gap-0 items-center justify-center w-10 h-10 absolute left-0 top-0">
-                      <div className="text-[rgba(0,0,0,0.50)] text-center font-['Satoshi-Medium',_sans-serif] text-sm leading-5 font-medium relative">
-                        10
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="rounded-lg flex flex-row gap-0 items-start justify-start shrink-0 relative">
-                  <div className="bg-[#ffffff] rounded-lg border-solid border-[rgba(0,0,0,0.10)] border pt-2 pr-3.5 pb-2 pl-3.5 flex flex-row gap-2 items-center justify-center shrink-0 relative overflow-hidden">
-                    <div className="text-[#000000] text-left font-['Satoshi-Medium',_sans-serif] text-sm leading-5 font-medium relative">
-                      Next
-                    </div>
-                    <img className="shrink-0 w-5 h-5 relative overflow-visible" src={arrowRight} alt="next" />
-                  </div>
-                </div>
-              </div>
+              <Pagination 
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
             </div>
           </div>
         </div>
