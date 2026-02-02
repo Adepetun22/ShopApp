@@ -47,7 +47,6 @@ const colorOptions = [
   { name: 'Purple', code: '#7d06f5' },
   { name: 'Pink', code: '#f506a4' },
   { name: 'White', code: '#ffffff' },
-  { name: 'Black', code: '#000000' },
 ];
 
 // Dress style options
@@ -282,43 +281,76 @@ const Category = () => {
               <img className="flex flex-col gap-2.5 items-center justify-center shrink-0 w-5 h-[18.13px] relative overflow-visible" style={{ aspectRatio: '20/18.13' }} src={frameUt0} alt="expand" />
             </div>
             <div className="flex flex-col gap-4 items-start justify-start self-stretch shrink-0 relative">
-              <div className="flex flex-row gap-y-4 items-center justify-between flex-wrap content-center self-stretch shrink-0 relative">
-                {colorOptions.slice(0, 5).map((color) => {
+              <div className="flex flex-row gap-4 items-center justify-start flex-wrap content-start self-stretch shrink-0 relative">
+                {colorOptions.slice(0, 3).map((color) => {
                   const isSelected = selectedColors.includes(color.name);
                   return (
                     <div
                       key={color.name}
-                      className="shrink-0 w-[37px] h-[37px] static cursor-pointer"
+                      className="relative shrink-0 w-[37px] h-[37px] cursor-pointer"
                       onClick={() => handleColorToggle(color.name)}
                     >
                       <div
-                        className={`rounded-[50%] border-solid border-2 w-[37px] h-[37px] absolute left-0 top-0 transition-all ${
-                          isSelected ? 'border-[#000000] scale-110' : 'border-[rgba(0,0,0,0.20)]'
-                        }`}
-                        style={{ backgroundColor: color.code }}
-                      ></div>
-                    </div>
-                  );
-                })}
-              </div>
-              <div className="flex flex-row gap-y-4 items-center justify-between flex-wrap content-center self-stretch shrink-0 relative">
-                {colorOptions.slice(5, 10).map((color) => {
-                  const isSelected = selectedColors.includes(color.name);
-                  return (
-                    <div
-                      key={color.name}
-                      className="shrink-0 w-[37px] h-[37px] static cursor-pointer"
-                      onClick={() => handleColorToggle(color.name)}
-                    >
-                      <div
-                        className={`rounded-[50%] border-solid border-2 w-[37px] h-[37px] absolute left-0 top-0 transition-all ${
+                        className={`rounded-[50%] border-solid border-2 w-[37px] h-[37px] transition-all ${
                           isSelected ? 'border-[#000000] scale-110' : 'border-[rgba(0,0,0,0.20)]'
                         }`}
                         style={{ backgroundColor: color.code }}
                       ></div>
                       {isSelected && (
                         <img
-                          className="w-4 h-4 absolute left-2.5 top-2.5 overflow-visible pointer-events-none"
+                          className="w-4 h-4 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-visible pointer-events-none"
+                          src={frame7}
+                          alt="check"
+                        />
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="flex flex-row gap-4 items-center justify-start flex-wrap content-start self-stretch shrink-0 relative">
+                {colorOptions.slice(3, 6).map((color) => {
+                  const isSelected = selectedColors.includes(color.name);
+                  return (
+                    <div
+                      key={color.name}
+                      className="relative shrink-0 w-[37px] h-[37px] cursor-pointer"
+                      onClick={() => handleColorToggle(color.name)}
+                    >
+                      <div
+                        className={`rounded-[50%] border-solid border-2 w-[37px] h-[37px] transition-all ${
+                          isSelected ? 'border-[#000000] scale-110' : 'border-[rgba(0,0,0,0.20)]'
+                        }`}
+                        style={{ backgroundColor: color.code }}
+                      ></div>
+                      {isSelected && (
+                        <img
+                          className="w-4 h-4 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-visible pointer-events-none"
+                          src={frame7}
+                          alt="check"
+                        />
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="flex flex-row gap-4 items-center justify-start flex-wrap content-start self-stretch shrink-0 relative">
+                {colorOptions.slice(6, 9).map((color) => {
+                  const isSelected = selectedColors.includes(color.name);
+                  return (
+                    <div
+                      key={color.name}
+                      className="relative shrink-0 w-[37px] h-[37px] cursor-pointer"
+                      onClick={() => handleColorToggle(color.name)}
+                    >
+                      <div
+                        className={`rounded-[50%] border-solid border-2 w-[37px] h-[37px] transition-all ${
+                          isSelected ? 'border-[#000000] scale-110' : 'border-[rgba(0,0,0,0.20)]'
+                        }`}
+                        style={{ backgroundColor: color.code }}
+                      ></div>
+                      {isSelected && (
+                        <img
+                          className="w-4 h-4 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-visible pointer-events-none"
                           src={frame7}
                           alt="check"
                         />
