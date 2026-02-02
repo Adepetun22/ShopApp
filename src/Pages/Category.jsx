@@ -5,18 +5,12 @@ import Pagination from '../Components/Pagination';
 // Import images from assets folder
 import frame0 from '../assets/frame0.svg';
 import frame1 from '../assets/frame1.svg';
-import frame2 from '../assets/frame2.svg';
-import frame3 from '../assets/frame3.svg';
-import frame4 from '../assets/frame4.svg';
-import frame5 from '../assets/frame5.svg';
-import frame6 from '../assets/frame6.svg';
-import frame7 from '../assets/frame7.svg';
-import frame8 from '../assets/frame8.svg';
 import frame12 from '../assets/frame12.svg';
 import frameUpDown20 from '../assets/frame-9-ud-20.svg';
 import frameUt0 from '../assets/frame-2-ut0.svg';
 import frameAda0 from '../assets/frame-3-ada0.svg';
 import frameEr0 from '../assets/frame-80-er0.svg';
+import frame7 from '../assets/frame7.svg';
 import frame100 from '../assets/frame-100.svg';
 import frame101 from '../assets/frame-101.svg';
 import frame102 from '../assets/frame-102.svg';
@@ -73,6 +67,9 @@ const Category = () => {
   const minPrice = 0;
   const maxPrice = 1000;
   const sliderWidth = 247;
+
+  // State for mobile filters
+  const [isMobileFiltersOpen, setIsMobileFiltersOpen] = React.useState(false);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -194,9 +191,35 @@ const Category = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex flex-row gap-5 items-start justify-start self-stretch shrink-0 relative">
+      <div className="flex flex-col md:flex-row gap-5 items-start justify-start self-stretch shrink-0 relative">
+        {/* Mobile Filter Overlay */}
+        {isMobileFiltersOpen && (
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+            onClick={() => setIsMobileFiltersOpen(false)}
+          ></div>
+        )}
+        
         {/* Filters Sidebar */}
-        <div className="rounded-[20px] border-solid border-[rgba(0,0,0,0.10)] border pt-5 pr-6 pb-5 pl-6 flex flex-col gap-6 items-start justify-start shrink-0 w-[295px] max-w-[295px] relative overflow-hidden">
+        <div className={`
+          fixed md:relative top-0 right-0 h-full md:h-auto w-[280px] md:w-[295px] max-w-[295px] 
+          bg-white md:bg-transparent z-50 md:z-auto overflow-y-auto md:overflow-visible
+          transform transition-transform duration-300 ease-in-out
+          ${isMobileFiltersOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'}
+          rounded-l-[20px] md:rounded-[20px] border-solid border-[rgba(0,0,0,0.10)] border pt-5 pr-6 pb-5 pl-6 flex flex-col gap-6 items-start justify-start shrink-0
+        `}>
+          {/* Mobile Filters Header */}
+          <div className="flex md:hidden flex-row items-center justify-between self-stretch shrink-0 relative mb-4">
+            <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative flex items-center justify-start">
+              Filters
+            </div>
+            <button 
+              className="text-2xl font-bold"
+              onClick={() => setIsMobileFiltersOpen(false)}
+            >
+              ×
+            </button>
+          </div>
           {/* Filters Header */}
           <div className="flex flex-row items-center justify-between self-stretch shrink-0 relative">
             <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative flex items-center justify-start">
@@ -209,7 +232,7 @@ const Category = () => {
 
           {/* Categories */}
           <div className="flex flex-col gap-5 items-start justify-start self-stretch shrink-0 relative">
-            {['T-shirts', 'Shorts', 'Shirts', 'Hoodie', 'Jeans'].map((category, index) => (
+            {['T-shirts', 'Shorts', 'Shirts', 'Hoodie', 'Jeans'].map((category) => (
               <div key={category} className="flex flex-row items-center justify-between self-stretch shrink-0 h-[22px] relative">
                 <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-base font-normal relative">
                   {category}
@@ -436,15 +459,22 @@ const Category = () => {
         <div className="flex flex-col gap-4 items-start justify-start flex-1 relative">
           {/* Header */}
           <div className="flex flex-row items-center justify-between self-stretch shrink-0 relative">
-            <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-[32px] font-bold relative flex items-center justify-start">
+            <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-2xl md:text-[32px] font-bold relative flex items-center justify-start">
               Casual
             </div>
             <div className="flex flex-row gap-3 items-center justify-end flex-1 relative">
-              <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-base font-normal relative">
+              {/* Mobile Filter Toggle */}
+              <button
+                className="md:hidden bg-[#000000] text-white rounded-md px-3 py-2 text-sm font-medium"
+                onClick={() => setIsMobileFiltersOpen(!isMobileFiltersOpen)}
+              >
+                Filters
+              </button>
+              <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-sm md:text-base font-normal relative">
                 Showing 1-10 of 100 Products
               </div>
               <div className="flex flex-row gap-1 items-center justify-start shrink-0 relative">
-                <div className="text-left font-['-',_sans-serif] text-base font-normal relative">
+                <div className="text-left font-['-',_sans-serif] text-sm md:text-base font-normal relative">
                   <span>
                     <span className="sort-by-most-popular-span">Sort by:</span>
                     <span className="sort-by-most-popular-span2">{sortBy}</span>
@@ -485,9 +515,9 @@ const Category = () => {
           {/* Products Grid */}
           <div className="flex flex-col gap-[34px] items-start justify-start self-stretch shrink-0 relative">
             {/* Row 1 */}
-            <div className="flex flex-row gap-5 items-start justify-start flex-wrap content-start self-stretch shrink-0 relative">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 self-stretch shrink-0 relative">
               {/* Product 1 */}
-              <div className="flex flex-col gap-4 items-start justify-start shrink-0 w-[295.33px] relative">
+              <div className="flex flex-col gap-4 items-start justify-start w-full relative">
                 <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden">
                   <img className="w-[294px] h-[441px] absolute left-px top-[-71px]" style={{ objectFit: 'cover' }} src={image80} alt="Gradient Graphic T-shirt" />
                 </div>
@@ -511,7 +541,7 @@ const Category = () => {
               </div>
 
               {/* Product 2 */}
-              <div className="flex flex-col gap-[11px] items-start justify-start shrink-0 w-[295.33px] relative">
+              <div className="flex flex-col gap-[11px] items-start justify-start w-full relative">
                 <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden">
                   <img className="w-[296px] h-[444px] absolute left-0 top-[-73px]" style={{ objectFit: 'cover' }} src={image90} alt="Polo with Tipping Details" />
                 </div>
@@ -533,7 +563,7 @@ const Category = () => {
               </div>
 
               {/* Product 3 */}
-              <div className="flex flex-col gap-4 items-start justify-start shrink-0 w-[295.33px] relative">
+              <div className="flex flex-col gap-4 items-start justify-start w-full relative">
                 <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden">
                   <img className="w-[296px] h-[444px] absolute left-0 top-[-73px]" style={{ objectFit: 'cover' }} src={image100} alt="Black Striped T-shirt" />
                 </div>
@@ -568,9 +598,9 @@ const Category = () => {
             </div>
 
             {/* Row 2 */}
-            <div className="flex flex-row gap-5 items-start justify-start flex-wrap content-start self-stretch shrink-0 relative">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 self-stretch shrink-0 relative">
               {/* Product 4 */}
-              <div className="flex flex-col gap-[11px] items-start justify-start shrink-0 w-[295px] relative">
+              <div className="flex flex-col gap-[11px] items-start justify-start w-full relative">
                 <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden">
                   <img className="w-[268px] h-[402px] absolute left-3.5 top-[-51px]" style={{ objectFit: 'cover' }} src={image81} alt="Skinny Fit Jeans" />
                 </div>
@@ -609,7 +639,7 @@ const Category = () => {
               </div>
 
               {/* Product 5 */}
-              <div className="flex flex-col gap-4 items-start justify-start shrink-0 w-[295px] relative">
+              <div className="flex flex-col gap-4 items-start justify-start w-full relative">
                 <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden">
                   <img className="w-[296px] h-[444px] absolute left-0 top-[-73px]" style={{ objectFit: 'cover' }} src={image91} alt="Checkered Shirt" />
                 </div>
@@ -638,7 +668,7 @@ const Category = () => {
               </div>
 
               {/* Product 6 */}
-              <div className="flex flex-col gap-4 items-start justify-start shrink-0 w-[296px] relative">
+              <div className="flex flex-col gap-4 items-start justify-start w-full relative">
                 <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden">
                   <img className="w-[296px] h-[444px] absolute left-0 top-[-73px]" style={{ objectFit: 'cover' }} src={image101} alt="Sleeve Striped T-shirt" />
                 </div>
@@ -680,9 +710,9 @@ const Category = () => {
             </div>
 
             {/* Row 3 */}
-            <div className="flex flex-row gap-5 items-start justify-start flex-wrap content-start self-stretch shrink-0 relative">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 self-stretch shrink-0 relative">
               {/* Product 7 */}
-              <div className="flex flex-col gap-4 items-start justify-start shrink-0 w-[295.32px] relative">
+              <div className="flex flex-col gap-4 items-start justify-start w-full relative">
                 <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden">
                   <img className="w-[296px] h-[444px] absolute left-[-1px] top-[-73px]" style={{ objectFit: 'cover' }} src={image70} alt="Vertical Striped Shirt" />
                 </div>
@@ -723,7 +753,7 @@ const Category = () => {
               </div>
 
               {/* Product 8 */}
-              <div className="flex flex-col gap-4 items-start justify-start shrink-0 w-[295.32px] relative">
+              <div className="flex flex-col gap-4 items-start justify-start w-full relative">
                 <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden">
                   <img className="w-[294px] h-[441px] absolute left-px top-[-71px]" style={{ objectFit: 'cover' }} src={image82} alt="Courage Graphic T-shirt" />
                 </div>
@@ -754,7 +784,7 @@ const Category = () => {
               </div>
 
               {/* Product 9 */}
-              <div className="flex flex-col gap-4 items-start justify-start shrink-0 w-[295.32px] relative">
+              <div className="flex flex-col gap-4 items-start justify-start w-full relative">
                 <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden">
                   <img className="w-[296px] h-[444px] absolute left-0 top-[-73px]" style={{ objectFit: 'cover' }} src={image92} alt="Loose Fit Bermuda Shorts" />
                 </div>
