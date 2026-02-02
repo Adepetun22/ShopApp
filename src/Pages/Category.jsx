@@ -404,29 +404,19 @@ const Category = () => {
               <img className="flex flex-col gap-2.5 items-center justify-center shrink-0 w-5 h-[18.13px] relative overflow-visible" style={{ aspectRatio: '20/18.13' }} src={frameEr0} alt="expand" />
             </div>
             <div className="flex flex-col gap-5 items-start justify-start self-stretch shrink-0 relative">
-              {dressStyleOptions.map((style) => {
-                const isSelected = selectedDressStyles.includes(style);
-                return (
-                  <div
-                    key={style}
-                    className="flex flex-row items-center justify-between self-stretch shrink-0 relative cursor-pointer"
-                    onClick={() => handleDressStyleToggle(style)}
-                  >
-                    <div className={`text-left font-['Satoshi-Regular',_sans-serif] text-base font-normal relative ${
-                      isSelected ? 'text-[#000000] font-bold' : 'text-[rgba(0,0,0,0.60)]'
-                    }`}>
-                      {style}
-                    </div>
-                    <img
-                      className={`shrink-0 w-4 h-4 relative overflow-visible transition-all ${
-                        isSelected ? 'opacity-100' : 'opacity-60'
-                      }`}
-                      src={isSelected ? frame7 : frame8}
-                      alt={isSelected ? 'selected' : 'arrow'}
-                    />
+              {dressStyleOptions.map((style) => (
+                <div key={style} className="flex flex-row items-center justify-between self-stretch shrink-0 h-[22px] relative">
+                  <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-base font-normal relative">
+                    {style}
                   </div>
-                );
-              })}
+                  <input
+                    type="checkbox"
+                    checked={selectedDressStyles.includes(style)}
+                    onChange={() => handleDressStyleToggle(style)}
+                    className="shrink-0 w-4 h-4"
+                  />
+                </div>
+              ))}
             </div>
           </div>
 
