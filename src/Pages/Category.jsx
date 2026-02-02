@@ -44,10 +44,70 @@ const Category = () => {
   const [currentPage, setCurrentPage] = React.useState(1);
   const totalPages = 10;
 
+  // State for sort and filters
+  const [sortBy, setSortBy] = React.useState('Most Popular');
+  const [isSortDropdownOpen, setIsSortDropdownOpen] = React.useState(false);
+  const [selectedCategories, setSelectedCategories] = React.useState([]);
+  const [priceRange, setPriceRange] = React.useState({ min: 50, max: 200 });
+  const [selectedColors, setSelectedColors] = React.useState([]);
+  const [selectedSizes, setSelectedSizes] = React.useState([]);
+  const [selectedDressStyles, setSelectedDressStyles] = React.useState([]);
+
   const handlePageChange = (page) => {
     setCurrentPage(page);
     // Here you would typically fetch new data for the page
     console.log(`Page changed to: ${page}`);
+  };
+
+  const handleSortChange = (option) => {
+    setSortBy(option);
+    setIsSortDropdownOpen(false);
+    console.log(`Sorted by: ${option}`);
+    // Here you would sort the products
+  };
+
+  const handleCategoryToggle = (category) => {
+    setSelectedCategories(prev =>
+      prev.includes(category)
+        ? prev.filter(c => c !== category)
+        : [...prev, category]
+    );
+  };
+
+  const handleColorToggle = (color) => {
+    setSelectedColors(prev =>
+      prev.includes(color)
+        ? prev.filter(c => c !== color)
+        : [...prev, color]
+    );
+  };
+
+  const handleSizeToggle = (size) => {
+    setSelectedSizes(prev =>
+      prev.includes(size)
+        ? prev.filter(s => s !== size)
+        : [...prev, size]
+    );
+  };
+
+  const handleDressStyleToggle = (style) => {
+    setSelectedDressStyles(prev =>
+      prev.includes(style)
+        ? prev.filter(s => s !== style)
+        : [...prev, style]
+    );
+  };
+
+  const handleApplyFilters = () => {
+    console.log('Applied Filters:', {
+      categories: selectedCategories,
+      priceRange,
+      colors: selectedColors,
+      sizes: selectedSizes,
+      dressStyles: selectedDressStyles,
+      sortBy
+    });
+    // Here you would filter and sort the products
   };
 
   return (
@@ -82,36 +142,19 @@ const Category = () => {
 
           {/* Categories */}
           <div className="flex flex-col gap-5 items-start justify-start self-stretch shrink-0 relative">
-            <div className="flex flex-row items-center justify-between self-stretch shrink-0 h-[22px] relative">
-              <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-base font-normal relative">
-                T-shirts
+            {['T-shirts', 'Shorts', 'Shirts', 'Hoodie', 'Jeans'].map((category, index) => (
+              <div key={category} className="flex flex-row items-center justify-between self-stretch shrink-0 h-[22px] relative">
+                <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-base font-normal relative">
+                  {category}
+                </div>
+                <input
+                  type="checkbox"
+                  checked={selectedCategories.includes(category)}
+                  onChange={() => handleCategoryToggle(category)}
+                  className="shrink-0 w-4 h-4"
+                />
               </div>
-              <img className="shrink-0 w-4 h-4 relative overflow-visible" src={frame2} alt="arrow" />
-            </div>
-            <div className="flex flex-row items-center justify-between self-stretch shrink-0 h-[22px] relative">
-              <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-base font-normal relative">
-                Shorts
-              </div>
-              <img className="shrink-0 w-4 h-4 relative overflow-visible" src={frame3} alt="arrow" />
-            </div>
-            <div className="flex flex-row items-center justify-between self-stretch shrink-0 h-[22px] relative">
-              <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-base font-normal relative">
-                Shirts
-              </div>
-              <img className="shrink-0 w-4 h-4 relative overflow-visible" src={frame4} alt="arrow" />
-            </div>
-            <div className="flex flex-row items-center justify-between self-stretch shrink-0 h-[22px] relative">
-              <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-base font-normal relative">
-                Hoodie
-              </div>
-              <img className="shrink-0 w-4 h-4 relative overflow-visible" src={frame5} alt="arrow" />
-            </div>
-            <div className="flex flex-row items-center justify-between self-stretch shrink-0 relative">
-              <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-base font-normal relative">
-                Jeans
-              </div>
-              <img className="shrink-0 w-4 h-4 relative overflow-visible" src={frame6} alt="arrow" />
-            </div>
+            ))}
           </div>
 
           <div className="border-solid border-[rgba(0,0,0,0.10)] border-t border-r-[0] border-b-[0] border-l-[0] self-stretch shrink-0 h-0 relative" style={{ marginTop: '-1px', transformOrigin: '0 0', transform: 'rotate(0deg) scale(1, 1)' }}></div>
@@ -125,18 +168,40 @@ const Category = () => {
               <img className="flex flex-col gap-2.5 items-center justify-center shrink-0 w-5 h-[18.13px] relative overflow-visible" style={{ aspectRatio: '20/18.13' }} src={frameUpDown20} alt="expand" />
             </div>
             <div className="flex flex-col gap-1 items-center justify-start self-stretch shrink-0 relative">
-              <div className="self-stretch shrink-0 h-5 relative">
+              <div 
+                className="self-stretch shrink-0 h-5 relative"
+                ref={(el) => {
+                  if (el) {
+                    el.querySelector('.min-handle')?.addEventListener('mousedown', (e) => startDrag(e, 'min'));
+                    el.querySelector('.min-handle')?.addEventListener('touchstart', (e) => startDrag(e, 'min'));
+                    el.querySelector('.max-handle')?.addEventListener('mousedown', (e) => startDrag(e, 'max'));
+                    el.querySelector('.max-handle')?.addEventListener('touchstart', (e) => startDrag(e, 'max'));
+                  }
+                }}
+              >
                 <div className="bg-[#f0f0f0] rounded-[20px] w-[247px] h-1.5 absolute left-0 top-2"></div>
-                <div className="bg-[#000000] rounded-[20px] w-[150.29px] h-1.5 absolute left-[43.13px] top-2"></div>
-                <div className="bg-[#000000] rounded-[50%] w-5 h-5 absolute left-[41px] top-0"></div>
-                <div className="bg-[#000000] rounded-[50%] w-5 h-5 absolute left-[187px] top-0"></div>
+                <div 
+                  className="bg-[#000000] rounded-[20px] h-1.5 absolute top-2"
+                  style={{
+                    left: `${((priceRange.min - 0) / (1000 - 0)) * 247}px`,
+                    width: `${((priceRange.max - priceRange.min) / (1000 - 0)) * 247}px`
+                  }}
+                ></div>
+                <div
+                  className="min-handle bg-[#000000] rounded-[50%] w-5 h-5 absolute top-0 cursor-pointer transform -translate-x-1/2"
+                  style={{ left: `${((priceRange.min - 0) / (1000 - 0)) * 247}px` }}
+                ></div>
+                <div
+                  className="max-handle bg-[#000000] rounded-[50%] w-5 h-5 absolute top-0 cursor-pointer transform -translate-x-1/2"
+                  style={{ left: `${((priceRange.max - 0) / (1000 - 0)) * 247}px` }}
+                ></div>
               </div>
               <div className="flex flex-row items-center justify-between self-stretch shrink-0 relative">
                 <div className="text-[#000000] text-left font-['Satoshi-Medium',_sans-serif] text-sm font-medium relative">
-                  $50
+                  ${priceRange.min}
                 </div>
                 <div className="text-[#000000] text-center font-['Satoshi-Medium',_sans-serif] text-sm font-medium relative">
-                  $200
+                  ${priceRange.max}
                 </div>
               </div>
             </div>
@@ -186,51 +251,23 @@ const Category = () => {
               <img className="flex flex-col gap-2.5 items-center justify-center shrink-0 w-5 h-[18.13px] relative overflow-visible" style={{ aspectRatio: '20/18.13' }} src={frameAda0} alt="expand" />
             </div>
             <div className="flex flex-row gap-2 items-start justify-start flex-wrap content-start self-stretch shrink-0 relative">
-              <div className="bg-[#f0f0f0] rounded-[62px] pt-2.5 pr-5 pb-2.5 pl-5 flex flex-row gap-3 items-center justify-center shrink-0 relative overflow-hidden">
-                <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative">
-                  XX-Small
+              {[
+                'XX-Small', 'X-Small', 'Small', 'Medium', 'Large', 'X-Large', 'XX-Large', '3X-Large', '4X-Large'
+              ].map((size) => (
+                <div
+                  key={size}
+                  className={`rounded-[62px] pt-2.5 pr-5 pb-2.5 pl-5 flex flex-row gap-3 items-center justify-center shrink-0 relative overflow-hidden cursor-pointer ${
+                    selectedSizes.includes(size) ? 'bg-[#000000]' : 'bg-[#f0f0f0]'
+                  }`}
+                  onClick={() => handleSizeToggle(size)}
+                >
+                  <div className={`text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative ${
+                    selectedSizes.includes(size) ? 'text-[#ffffff] font-medium' : 'text-[rgba(0,0,0,0.60)]'
+                  }`}>
+                    {size}
+                  </div>
                 </div>
-              </div>
-              <div className="bg-[#f0f0f0] rounded-[62px] pt-2.5 pr-5 pb-2.5 pl-5 flex flex-row gap-3 items-center justify-center shrink-0 relative overflow-hidden">
-                <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative">
-                  X-Small
-                </div>
-              </div>
-              <div className="bg-[#f0f0f0] rounded-[62px] pt-2.5 pr-5 pb-2.5 pl-5 flex flex-row gap-3 items-center justify-center shrink-0 relative overflow-hidden">
-                <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative">
-                  Small
-                </div>
-              </div>
-              <div className="bg-[#f0f0f0] rounded-[62px] pt-2.5 pr-5 pb-2.5 pl-5 flex flex-row gap-3 items-center justify-center shrink-0 relative overflow-hidden">
-                <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative">
-                  Medium
-                </div>
-              </div>
-              <div className="bg-[#000000] rounded-[62px] pt-2.5 pr-5 pb-2.5 pl-5 flex flex-row gap-3 items-center justify-center shrink-0 relative overflow-hidden">
-                <div className="text-[#ffffff] text-left font-['Satoshi-Medium',_sans-serif] text-sm font-medium relative">
-                  Large
-                </div>
-              </div>
-              <div className="bg-[#f0f0f0] rounded-[62px] pt-2.5 pr-5 pb-2.5 pl-5 flex flex-row gap-3 items-center justify-center shrink-0 relative overflow-hidden">
-                <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative">
-                  X-Large
-                </div>
-              </div>
-              <div className="bg-[#f0f0f0] rounded-[62px] pt-2.5 pr-5 pb-2.5 pl-5 flex flex-row gap-3 items-center justify-center shrink-0 relative overflow-hidden">
-                <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative">
-                  XX-Large
-                </div>
-              </div>
-              <div className="bg-[#f0f0f0] rounded-[62px] pt-2.5 pr-5 pb-2.5 pl-5 flex flex-row gap-3 items-center justify-center shrink-0 relative overflow-hidden">
-                <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative">
-                  3X-Large
-                </div>
-              </div>
-              <div className="bg-[#f0f0f0] rounded-[62px] pt-2.5 pr-5 pb-2.5 pl-5 flex flex-row gap-3 items-center justify-center shrink-0 relative overflow-hidden">
-                <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative">
-                  4X-Large
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
@@ -295,10 +332,37 @@ const Category = () => {
                 <div className="text-left font-['-',_sans-serif] text-base font-normal relative">
                   <span>
                     <span className="sort-by-most-popular-span">Sort by:</span>
-                    <span className="sort-by-most-popular-span2">Most Popular</span>
+                    <span className="sort-by-most-popular-span2">{sortBy}</span>
                   </span>
                 </div>
-                <img className="shrink-0 w-4 h-4 relative overflow-visible" src={frame12} alt="dropdown" />
+                <img
+                  className="shrink-0 w-4 h-4 relative overflow-visible cursor-pointer"
+                  src={frame12}
+                  alt="dropdown"
+                  onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
+                />
+                {isSortDropdownOpen && (
+                  <div className="absolute top-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg z-10">
+                    <div
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => handleSortChange('Most Popular')}
+                    >
+                      Most Popular
+                    </div>
+                    <div
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => handleSortChange('Price: Low to High')}
+                    >
+                      Price: Low to High
+                    </div>
+                    <div
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => handleSortChange('Price: High to Low')}
+                    >
+                      Price: High to Low
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
