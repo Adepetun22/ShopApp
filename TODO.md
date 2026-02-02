@@ -15,3 +15,8 @@
 - **Dress Style section** now uses checkboxes instead of clickable rows with arrow icons
 - Checkbox style matches the Categories section for consistency
 
+### Bug Fix:
+- **Price slider drag functionality fixed** - Changed `dragType` from `useState` to `useRef` to fix closure issue where event handlers weren't getting the updated value
+- Added `e.stopPropagation()` to prevent event conflicts
+- Fixed min constraint logic for proper slider behavior
+

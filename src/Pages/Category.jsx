@@ -68,8 +68,8 @@ const Category = () => {
   
   // State for price range dragging
   const [isDragging, setIsDragging] = React.useState(false);
-  const [dragType, setDragType] = React.useState(null);
   const sliderRef = React.useRef(null);
+  const dragTypeRef = React.useRef(null);
   const minPrice = 0;
   const maxPrice = 1000;
   const sliderWidth = 247;
@@ -134,12 +134,13 @@ const Category = () => {
   // Price slider drag functions
   const startDrag = (e, type) => {
     e.preventDefault();
+    e.stopPropagation();
+    dragTypeRef.current = type;
     setIsDragging(true);
-    setDragType(type);
   };
 
   const handleDrag = React.useCallback((e) => {
-    if (!isDragging || !sliderRef.current) return;
+    if (!isDragging || !sliderRef.current || !dragTypeRef.current) return;
 
     const rect = sliderRef.current.getBoundingClientRect();
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -148,17 +149,17 @@ const Category = () => {
     const value = Math.round(minPrice + percentage * (maxPrice - minPrice));
 
     setPriceRange(prev => {
-      if (dragType === 'min') {
-        return { ...prev, min: Math.max(value, prev.max - 10) };
+      if (dragTypeRef.current === 'min') {
+        return { ...prev, min: Math.min(value, prev.max - 10) };
       } else {
         return { ...prev, max: Math.max(value, prev.min + 10) };
       }
     });
-  }, [isDragging, dragType]);
+  }, [isDragging]);
 
   const stopDrag = React.useCallback(() => {
     setIsDragging(false);
-    setDragType(null);
+    dragTypeRef.current = null;
   }, []);
 
   React.useEffect(() => {
