@@ -20,3 +20,11 @@
 - Added `e.stopPropagation()` to prevent event conflicts
 - Fixed min constraint logic for proper slider behavior
 
+### New Component:
+- **Filter.jsx** created in `src/Components/` for mobile view responsiveness
+- Reusable component with all filter sections (Categories, Price, Colors, Size, Dress Style)
+- Accepts props for selected values and callback functions
+- Full drag functionality for price range slider
+- Maintains UI consistency with desktop version
+
+
