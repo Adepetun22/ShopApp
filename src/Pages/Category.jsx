@@ -176,7 +176,7 @@ const Category = () => {
 
   return (
     <div className="flex justify-center w-full">
-      <div className="bg-[#ffffff] flex flex-col gap-6 items-start justify-start max-w-[1242px] relative" style={{ paddingTop: '48px', paddingBottom: '80px' }}>
+      <div className="bg-[#ffffff] flex flex-col gap-6 items-start justify-start max-w-[1242px] relative px-4 md:px-8" style={{ paddingTop: '48px', paddingBottom: '80px' }}>
       {/* Breadcrumb */}
       <div className="flex flex-row gap-3 items-center justify-start self-stretch shrink-0 relative">
         <div className="flex flex-row gap-1 items-center justify-start shrink-0 relative">
@@ -515,7 +515,7 @@ const Category = () => {
           {/* Products Grid */}
           <div className="flex flex-col gap-[34px] items-start justify-start self-stretch shrink-0 relative">
             {/* Row 1 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 self-stretch shrink-0 relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center md:justify-items-start self-stretch shrink-0 relative">
               {/* Product 1 */}
               <div className="flex flex-col gap-4 items-start justify-start w-full relative">
                 <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
@@ -598,7 +598,7 @@ const Category = () => {
             </div>
 
             {/* Row 2 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 self-stretch shrink-0 relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center md:justify-items-start self-stretch shrink-0 relative">
               {/* Product 4 */}
               <div className="flex flex-col gap-[11px] items-start justify-start w-full relative">
                 <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
@@ -710,7 +710,7 @@ const Category = () => {
             </div>
 
             {/* Row 3 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 self-stretch shrink-0 relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center md:justify-items-start self-stretch shrink-0 relative">
               {/* Product 7 */}
               <div className="flex flex-col gap-4 items-start justify-start w-full relative">
                 <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
