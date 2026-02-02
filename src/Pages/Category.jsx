@@ -195,7 +195,7 @@ const Category = () => {
         {/* Mobile Filter Overlay */}
         {isMobileFiltersOpen && (
           <div 
-            className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+            className="fixed inset-0 bg-black/50 z-40 md:hidden"
             onClick={() => setIsMobileFiltersOpen(false)}
           ></div>
         )}
@@ -518,8 +518,8 @@ const Category = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 self-stretch shrink-0 relative">
               {/* Product 1 */}
               <div className="flex flex-col gap-4 items-start justify-start w-full relative">
-                <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden">
-                  <img className="w-[294px] h-[441px] absolute left-px top-[-71px]" style={{ objectFit: 'cover' }} src={image80} alt="Gradient Graphic T-shirt" />
+                <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
+                  <img className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" src={image80} alt="Gradient Graphic T-shirt" />
                 </div>
                 <div className="flex flex-col gap-2 items-start justify-start shrink-0 w-[227px] relative">
                   <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
@@ -542,8 +542,8 @@ const Category = () => {
 
               {/* Product 2 */}
               <div className="flex flex-col gap-[11px] items-start justify-start w-full relative">
-                <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden">
-                  <img className="w-[296px] h-[444px] absolute left-0 top-[-73px]" style={{ objectFit: 'cover' }} src={image90} alt="Polo with Tipping Details" />
+                <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
+                  <img className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" src={image90} alt="Polo with Tipping Details" />
                 </div>
                 <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
                   Polo with Tipping Details
@@ -564,8 +564,8 @@ const Category = () => {
 
               {/* Product 3 */}
               <div className="flex flex-col gap-4 items-start justify-start w-full relative">
-                <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden">
-                  <img className="w-[296px] h-[444px] absolute left-0 top-[-73px]" style={{ objectFit: 'cover' }} src={image100} alt="Black Striped T-shirt" />
+                <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
+                  <img className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" src={image100} alt="Black Striped T-shirt" />
                 </div>
                 <div className="flex flex-col gap-2 items-start justify-start self-stretch shrink-0 relative">
                   <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
@@ -601,8 +601,8 @@ const Category = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 self-stretch shrink-0 relative">
               {/* Product 4 */}
               <div className="flex flex-col gap-[11px] items-start justify-start w-full relative">
-                <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden">
-                  <img className="w-[268px] h-[402px] absolute left-3.5 top-[-51px]" style={{ objectFit: 'cover' }} src={image81} alt="Skinny Fit Jeans" />
+                <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
+                  <img className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" src={image81} alt="Skinny Fit Jeans" />
                 </div>
                 <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
                   <span>
@@ -640,8 +640,8 @@ const Category = () => {
 
               {/* Product 5 */}
               <div className="flex flex-col gap-4 items-start justify-start w-full relative">
-                <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden">
-                  <img className="w-[296px] h-[444px] absolute left-0 top-[-73px]" style={{ objectFit: 'cover' }} src={image91} alt="Checkered Shirt" />
+                <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
+                  <img className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" src={image91} alt="Checkered Shirt" />
                 </div>
                 <div className="flex flex-col gap-2 items-start justify-start shrink-0 w-[151px] relative">
                   <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
@@ -669,8 +669,8 @@ const Category = () => {
 
               {/* Product 6 */}
               <div className="flex flex-col gap-4 items-start justify-start w-full relative">
-                <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden">
-                  <img className="w-[296px] h-[444px] absolute left-0 top-[-73px]" style={{ objectFit: 'cover' }} src={image101} alt="Sleeve Striped T-shirt" />
+                <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
+                  <img className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" src={image101} alt="Sleeve Striped T-shirt" />
                 </div>
                 <div className="flex flex-col gap-2 items-start justify-start shrink-0 w-[199px] relative">
                   <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
@@ -713,8 +713,8 @@ const Category = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 self-stretch shrink-0 relative">
               {/* Product 7 */}
               <div className="flex flex-col gap-4 items-start justify-start w-full relative">
-                <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden">
-                  <img className="w-[296px] h-[444px] absolute left-[-1px] top-[-73px]" style={{ objectFit: 'cover' }} src={image70} alt="Vertical Striped Shirt" />
+                <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
+                  <img className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" src={image70} alt="Vertical Striped Shirt" />
                 </div>
                 <div className="flex flex-col gap-2 items-start justify-start self-stretch shrink-0 relative">
                   <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
@@ -754,8 +754,8 @@ const Category = () => {
 
               {/* Product 8 */}
               <div className="flex flex-col gap-4 items-start justify-start w-full relative">
-                <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden">
-                  <img className="w-[294px] h-[441px] absolute left-px top-[-71px]" style={{ objectFit: 'cover' }} src={image82} alt="Courage Graphic T-shirt" />
+                <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
+                  <img className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" src={image82} alt="Courage Graphic T-shirt" />
                 </div>
                 <div className="flex flex-col gap-2 items-start justify-start self-stretch shrink-0 relative">
                   <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
@@ -785,8 +785,8 @@ const Category = () => {
 
               {/* Product 9 */}
               <div className="flex flex-col gap-4 items-start justify-start w-full relative">
-                <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden">
-                  <img className="w-[296px] h-[444px] absolute left-0 top-[-73px]" style={{ objectFit: 'cover' }} src={image92} alt="Loose Fit Bermuda Shorts" />
+                <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
+                  <img className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" src={image92} alt="Loose Fit Bermuda Shorts" />
                 </div>
                 <div className="flex flex-col gap-2 items-start justify-start self-stretch shrink-0 relative">
                   <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
