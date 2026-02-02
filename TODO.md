@@ -11,3 +11,7 @@
 - Row 2: Orange, Blue, Dark Blue  
 - Row 3: Purple, Pink, White
 
+### Additional Changes:
+- **Dress Style section** now uses checkboxes instead of clickable rows with arrow icons
+- Checkbox style matches the Categories section for consistency
+
