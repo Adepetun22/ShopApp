@@ -39,11 +39,6 @@ import CustomerReview from '../Components/CustomerReview';
 import EmailSubscription from '../Components/EmailSubscription';
 
 const HomePage = () => {
-  // Check if we're on localhost:5180
-  const isLocalhost5180 = typeof window !== 'undefined' && 
-    (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && 
-    window.location.port === '5180';
-  
   // Customer testimonials data
   const testimonials = [
     {
@@ -149,7 +144,7 @@ const HomePage = () => {
       <div className="container mx-auto px-4 mb-12 xs:mb-8 sm:mb-16">
         <h2 className="text-2xl xs:text-xl sm:text-2xl md:text-3xl font-bold mb-6 xs:mb-4 sm:mb-8">NEW ARRIVALS</h2>
         
-        <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-2 sm:gap-6 mb-6 xs:mb-4 sm:mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-2 sm:gap-6 mb-6 xs:mb-4 sm:mb-8">
           {/* Product 1 */}
           <div className="w-full">
             <ProductCard 
@@ -206,7 +201,7 @@ const HomePage = () => {
       <div className="container mx-auto px-4 mb-12 xs:mb-8 sm:mb-16">
         <h2 className="text-2xl xs:text-xl sm:text-2xl md:text-3xl font-bold mb-6 xs:mb-4 sm:mb-8">TOP SELLING</h2>
         
-        <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-2 sm:gap-6 mb-6 xs:mb-4 sm:mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-2 sm:gap-6 mb-6 xs:mb-4 sm:mb-8">
           {/* Product 1 */}
           <div className="w-full">
             <ProductCard 
