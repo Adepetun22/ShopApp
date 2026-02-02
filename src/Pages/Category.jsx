@@ -12,9 +12,6 @@ import frame5 from '../assets/frame5.svg';
 import frame6 from '../assets/frame6.svg';
 import frame7 from '../assets/frame7.svg';
 import frame8 from '../assets/frame8.svg';
-import frame9 from '../assets/frame9.svg';
-import frame10 from '../assets/frame10.svg';
-import frame11 from '../assets/frame11.svg';
 import frame12 from '../assets/frame12.svg';
 import frameUpDown20 from '../assets/frame-9-ud-20.svg';
 import frameUt0 from '../assets/frame-2-ut0.svg';
@@ -39,6 +36,23 @@ import image70 from '../assets/image-70.png';
 import image82 from '../assets/image-82.png';
 import image92 from '../assets/image-92.png';
 
+// Color options for the filter
+const colorOptions = [
+  { name: 'Green', code: '#00c12b' },
+  { name: 'Red', code: '#f50606' },
+  { name: 'Yellow', code: '#f5dd06' },
+  { name: 'Orange', code: '#f57906' },
+  { name: 'Blue', code: '#06caf5' },
+  { name: 'Dark Blue', code: '#063af5' },
+  { name: 'Purple', code: '#7d06f5' },
+  { name: 'Pink', code: '#f506a4' },
+  { name: 'White', code: '#ffffff' },
+  { name: 'Black', code: '#000000' },
+];
+
+// Dress style options
+const dressStyleOptions = ['Casual', 'Formal', 'Party', 'Gym'];
+
 const Category = () => {
   // State for pagination
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -52,6 +66,14 @@ const Category = () => {
   const [selectedColors, setSelectedColors] = React.useState([]);
   const [selectedSizes, setSelectedSizes] = React.useState([]);
   const [selectedDressStyles, setSelectedDressStyles] = React.useState([]);
+  
+  // State for price range dragging
+  const [isDragging, setIsDragging] = React.useState(false);
+  const [dragType, setDragType] = React.useState(null);
+  const sliderRef = React.useRef(null);
+  const minPrice = 0;
+  const maxPrice = 1000;
+  const sliderWidth = 247;
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -109,6 +131,51 @@ const Category = () => {
     });
     // Here you would filter and sort the products
   };
+
+  // Price slider drag functions
+  const startDrag = (e, type) => {
+    e.preventDefault();
+    setIsDragging(true);
+    setDragType(type);
+  };
+
+  const handleDrag = React.useCallback((e) => {
+    if (!isDragging || !sliderRef.current) return;
+
+    const rect = sliderRef.current.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const x = clientX - rect.left;
+    const percentage = Math.max(0, Math.min(1, x / sliderWidth));
+    const value = Math.round(minPrice + percentage * (maxPrice - minPrice));
+
+    setPriceRange(prev => {
+      if (dragType === 'min') {
+        return { ...prev, min: Math.max(value, prev.max - 10) };
+      } else {
+        return { ...prev, max: Math.max(value, prev.min + 10) };
+      }
+    });
+  }, [isDragging, dragType]);
+
+  const stopDrag = React.useCallback(() => {
+    setIsDragging(false);
+    setDragType(null);
+  }, []);
+
+  React.useEffect(() => {
+    if (isDragging) {
+      window.addEventListener('mousemove', handleDrag);
+      window.addEventListener('mouseup', stopDrag);
+      window.addEventListener('touchmove', handleDrag);
+      window.addEventListener('touchend', stopDrag);
+    }
+    return () => {
+      window.removeEventListener('mousemove', handleDrag);
+      window.removeEventListener('mouseup', stopDrag);
+      window.removeEventListener('touchmove', handleDrag);
+      window.removeEventListener('touchend', stopDrag);
+    };
+  }, [isDragging, handleDrag, stopDrag]);
 
   return (
     <div className="flex justify-center w-full">
@@ -170,30 +237,27 @@ const Category = () => {
             <div className="flex flex-col gap-1 items-center justify-start self-stretch shrink-0 relative">
               <div 
                 className="self-stretch shrink-0 h-5 relative"
-                ref={(el) => {
-                  if (el) {
-                    el.querySelector('.min-handle')?.addEventListener('mousedown', (e) => startDrag(e, 'min'));
-                    el.querySelector('.min-handle')?.addEventListener('touchstart', (e) => startDrag(e, 'min'));
-                    el.querySelector('.max-handle')?.addEventListener('mousedown', (e) => startDrag(e, 'max'));
-                    el.querySelector('.max-handle')?.addEventListener('touchstart', (e) => startDrag(e, 'max'));
-                  }
-                }}
+                ref={sliderRef}
               >
                 <div className="bg-[#f0f0f0] rounded-[20px] w-[247px] h-1.5 absolute left-0 top-2"></div>
                 <div 
                   className="bg-[#000000] rounded-[20px] h-1.5 absolute top-2"
                   style={{
-                    left: `${((priceRange.min - 0) / (1000 - 0)) * 247}px`,
-                    width: `${((priceRange.max - priceRange.min) / (1000 - 0)) * 247}px`
+                    left: `${((priceRange.min - minPrice) / (maxPrice - minPrice)) * sliderWidth}px`,
+                    width: `${((priceRange.max - priceRange.min) / (maxPrice - minPrice)) * sliderWidth}px`
                   }}
                 ></div>
                 <div
-                  className="min-handle bg-[#000000] rounded-[50%] w-5 h-5 absolute top-0 cursor-pointer transform -translate-x-1/2"
-                  style={{ left: `${((priceRange.min - 0) / (1000 - 0)) * 247}px` }}
+                  className="bg-[#000000] rounded-[50%] w-5 h-5 absolute top-0 cursor-pointer transform -translate-x-1/2 hover:scale-110 transition-transform"
+                  style={{ left: `${((priceRange.min - minPrice) / (maxPrice - minPrice)) * sliderWidth}px` }}
+                  onMouseDown={(e) => startDrag(e, 'min')}
+                  onTouchStart={(e) => startDrag(e, 'min')}
                 ></div>
                 <div
-                  className="max-handle bg-[#000000] rounded-[50%] w-5 h-5 absolute top-0 cursor-pointer transform -translate-x-1/2"
-                  style={{ left: `${((priceRange.max - 0) / (1000 - 0)) * 247}px` }}
+                  className="bg-[#000000] rounded-[50%] w-5 h-5 absolute top-0 cursor-pointer transform -translate-x-1/2 hover:scale-110 transition-transform"
+                  style={{ left: `${((priceRange.max - minPrice) / (maxPrice - minPrice)) * sliderWidth}px` }}
+                  onMouseDown={(e) => startDrag(e, 'max')}
+                  onTouchStart={(e) => startDrag(e, 'max')}
                 ></div>
               </div>
               <div className="flex flex-row items-center justify-between self-stretch shrink-0 relative">
@@ -219,23 +283,49 @@ const Category = () => {
             </div>
             <div className="flex flex-col gap-4 items-start justify-start self-stretch shrink-0 relative">
               <div className="flex flex-row gap-y-4 items-center justify-between flex-wrap content-center self-stretch shrink-0 relative">
-                <div className="shrink-0 w-[37px] h-[37px] static">
-                  <div className="bg-[#00c12b] rounded-[50%] border-solid border-[rgba(0,0,0,0.20)] border-2 w-[37px] h-[37px] absolute left-0 top-0"></div>
-                </div>
-                <div className="bg-[#f50606] rounded-[50%] border-solid border-[rgba(0,0,0,0.20)] border shrink-0 w-[37px] h-[37px] relative"></div>
-                <div className="bg-[#f5dd06] rounded-[50%] border-solid border-[rgba(0,0,0,0.20)] border shrink-0 w-[37px] h-[37px] relative"></div>
-                <div className="bg-[#f57906] rounded-[50%] border-solid border-[rgba(0,0,0,0.20)] border shrink-0 w-[37px] h-[37px] relative"></div>
-                <div className="bg-[#06caf5] rounded-[50%] border-solid border-[rgba(0,0,0,0.20)] border shrink-0 w-[37px] h-[37px] relative"></div>
+                {colorOptions.slice(0, 5).map((color) => {
+                  const isSelected = selectedColors.includes(color.name);
+                  return (
+                    <div
+                      key={color.name}
+                      className="shrink-0 w-[37px] h-[37px] static cursor-pointer"
+                      onClick={() => handleColorToggle(color.name)}
+                    >
+                      <div
+                        className={`rounded-[50%] border-solid border-2 w-[37px] h-[37px] absolute left-0 top-0 transition-all ${
+                          isSelected ? 'border-[#000000] scale-110' : 'border-[rgba(0,0,0,0.20)]'
+                        }`}
+                        style={{ backgroundColor: color.code }}
+                      ></div>
+                    </div>
+                  );
+                })}
               </div>
               <div className="flex flex-row gap-y-4 items-center justify-between flex-wrap content-center self-stretch shrink-0 relative">
-                <div className="shrink-0 w-[37px] h-[37px] static">
-                  <div className="bg-[#063af5] rounded-[50%] border-solid border-[rgba(0,0,0,0.20)] border-2 w-[37px] h-[37px] absolute left-0 top-0"></div>
-                  <img className="w-4 h-4 absolute left-2.5 top-2.5 overflow-visible" src={frame7} alt="check" />
-                </div>
-                <div className="bg-[#7d06f5] rounded-[50%] border-solid border-[rgba(0,0,0,0.20)] border shrink-0 w-[37px] h-[37px] relative"></div>
-                <div className="bg-[#f506a4] rounded-[50%] border-solid border-[rgba(0,0,0,0.20)] border shrink-0 w-[37px] h-[37px] relative"></div>
-                <div className="bg-[#ffffff] rounded-[50%] border-solid border-[rgba(0,0,0,0.20)] border shrink-0 w-[37px] h-[37px] relative"></div>
-                <div className="bg-[#000000] rounded-[50%] shrink-0 w-[37px] h-[37px] relative"></div>
+                {colorOptions.slice(5, 10).map((color) => {
+                  const isSelected = selectedColors.includes(color.name);
+                  return (
+                    <div
+                      key={color.name}
+                      className="shrink-0 w-[37px] h-[37px] static cursor-pointer"
+                      onClick={() => handleColorToggle(color.name)}
+                    >
+                      <div
+                        className={`rounded-[50%] border-solid border-2 w-[37px] h-[37px] absolute left-0 top-0 transition-all ${
+                          isSelected ? 'border-[#000000] scale-110' : 'border-[rgba(0,0,0,0.20)]'
+                        }`}
+                        style={{ backgroundColor: color.code }}
+                      ></div>
+                      {isSelected && (
+                        <img
+                          className="w-4 h-4 absolute left-2.5 top-2.5 overflow-visible pointer-events-none"
+                          src={frame7}
+                          alt="check"
+                        />
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -282,35 +372,37 @@ const Category = () => {
               <img className="flex flex-col gap-2.5 items-center justify-center shrink-0 w-5 h-[18.13px] relative overflow-visible" style={{ aspectRatio: '20/18.13' }} src={frameEr0} alt="expand" />
             </div>
             <div className="flex flex-col gap-5 items-start justify-start self-stretch shrink-0 relative">
-              <div className="flex flex-row items-center justify-between self-stretch shrink-0 relative">
-                <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-base font-normal relative">
-                  Casual
-                </div>
-                <img className="shrink-0 w-4 h-4 relative overflow-visible" src={frame8} alt="arrow" />
-              </div>
-              <div className="flex flex-row items-center justify-between self-stretch shrink-0 relative">
-                <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-base font-normal relative">
-                  Formal
-                </div>
-                <img className="shrink-0 w-4 h-4 relative overflow-visible" src={frame9} alt="arrow" />
-              </div>
-              <div className="flex flex-row items-center justify-between self-stretch shrink-0 relative">
-                <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-base font-normal relative">
-                  Party
-                </div>
-                <img className="shrink-0 w-4 h-4 relative overflow-visible" src={frame10} alt="arrow" />
-              </div>
-              <div className="flex flex-row items-center justify-between self-stretch shrink-0 relative">
-                <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-base font-normal relative">
-                  Gym
-                </div>
-                <img className="shrink-0 w-4 h-4 relative overflow-visible" src={frame11} alt="arrow" />
-              </div>
+              {dressStyleOptions.map((style) => {
+                const isSelected = selectedDressStyles.includes(style);
+                return (
+                  <div
+                    key={style}
+                    className="flex flex-row items-center justify-between self-stretch shrink-0 relative cursor-pointer"
+                    onClick={() => handleDressStyleToggle(style)}
+                  >
+                    <div className={`text-left font-['Satoshi-Regular',_sans-serif] text-base font-normal relative ${
+                      isSelected ? 'text-[#000000] font-bold' : 'text-[rgba(0,0,0,0.60)]'
+                    }`}>
+                      {style}
+                    </div>
+                    <img
+                      className={`shrink-0 w-4 h-4 relative overflow-visible transition-all ${
+                        isSelected ? 'opacity-100' : 'opacity-60'
+                      }`}
+                      src={isSelected ? frame7 : frame8}
+                      alt={isSelected ? 'selected' : 'arrow'}
+                    />
+                  </div>
+                );
+              })}
             </div>
           </div>
 
           {/* Apply Filter Button */}
-          <div className="bg-[#000000] rounded-[62px] pt-4 pr-[54px] pb-4 pl-[54px] flex flex-row gap-3 items-center justify-center self-stretch shrink-0 h-12 relative overflow-hidden">
+          <div
+            className="bg-[#000000] rounded-[62px] pt-4 pr-[54px] pb-4 pl-[54px] flex flex-row gap-3 items-center justify-center self-stretch shrink-0 h-12 relative overflow-hidden cursor-pointer hover:bg-[#333333] transition-colors"
+            onClick={handleApplyFilters}
+          >
             <div className="text-[#ffffff] text-left font-['Satoshi-Medium',_sans-serif] text-sm font-medium relative">
               Apply Filter
             </div>
