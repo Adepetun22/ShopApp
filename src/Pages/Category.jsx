@@ -202,11 +202,11 @@ const Category = () => {
         
         {/* Filters Sidebar */}
         <div className={`
-          fixed md:relative top-0 right-0 h-full md:h-auto w-[280px] md:w-[295px] max-w-[295px] 
+          fixed md:relative top-0 right-0 h-full md:h-auto w-[280px] md:w-[295px] max-w-[295px]
           bg-white md:bg-transparent z-50 md:z-auto overflow-y-auto md:overflow-visible
           transform transition-transform duration-300 ease-in-out
           ${isMobileFiltersOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'}
-          rounded-l-[20px] md:rounded-[20px] border-solid border-[rgba(0,0,0,0.10)] border pt-5 pr-6 pb-5 pl-6 flex flex-col gap-6 items-start justify-start shrink-0
+          rounded-l-[20px] md:rounded-[20px] border-solid border-[rgba(0,0,0,0.10)] border pt-5 pr-6 pb-5 pl-6 flex flex-col gap-6 items-center justify-center md:items-start md:justify-start shrink-0
         `}>
           {/* Mobile Filters Header */}
           <div className="flex md:hidden flex-row items-center justify-between self-stretch shrink-0 relative mb-4">
@@ -456,9 +456,9 @@ const Category = () => {
         </div>
 
         {/* Products Section */}
-        <div className="flex flex-col gap-4 items-start justify-start flex-1 relative">
+        <div className="flex flex-col gap-4 items-center justify-center md:items-start md:justify-start flex-1 relative">
           {/* Header */}
-          <div className="flex flex-row items-center justify-between self-stretch shrink-0 relative">
+          <div className="flex flex-row items-center justify-center md:justify-between self-stretch shrink-0 relative">
             <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-2xl md:text-[32px] font-bold relative flex items-center justify-start">
               Casual
             </div>
