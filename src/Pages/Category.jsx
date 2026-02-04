@@ -233,7 +233,7 @@ React.useEffect(() => {
             </button>
           </div>
           {/* Filters Header */}
-          <div className="flex flex-row items-center justify-between self-stretch shrink-0 relative">
+          <div className="hidden md:flex flex-row items-center justify-between self-stretch shrink-0 relative">
             <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative flex items-center justify-start">
               Filters
             </div>
