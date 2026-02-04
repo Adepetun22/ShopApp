@@ -159,7 +159,7 @@ const Category = () => {
     dragTypeRef.current = null;
   }, []);
 
-  React.useEffect(() => {
+React.useEffect(() => {
     if (isDragging) {
       window.addEventListener('mousemove', handleDrag);
       window.addEventListener('mouseup', stopDrag);
@@ -174,9 +174,21 @@ const Category = () => {
     };
   }, [isDragging, handleDrag, stopDrag]);
 
+  // Prevent body scrolling when mobile filter is open
+  React.useEffect(() => {
+    if (isMobileFiltersOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileFiltersOpen]);
+
   return (
     <div className="flex justify-center w-full">
-      <div className="bg-[#ffffff] flex flex-col gap-6 items-center md:items-start justify-start max-w-[1242px] relative px-4 md:px-8" style={{ paddingTop: '48px', paddingBottom: '80px' }}>
+      <div className="bg-[#ffffff] flex flex-col gap-6 items-center md:items-start justify-start max-w-[1242px] relative px-4 md:px-8" style={{ paddingTop: '48px' }}>
       {/* Breadcrumb */}
       <div className="flex flex-row gap-3 items-center justify-start self-stretch shrink-0 relative">
         <div className="flex flex-row gap-1 items-center justify-start shrink-0 relative">
@@ -202,7 +214,7 @@ const Category = () => {
         
         {/* Filters Sidebar */}
         <div className={`
-          fixed md:relative top-0 right-0 h-full md:h-auto w-[280px] md:w-[295px] max-w-[295px]
+          fixed md:relative top-0 right-0 h-dvh md:h-auto w-[280px] md:w-[295px] max-w-[295px]
           bg-white md:bg-transparent z-50 md:z-auto overflow-y-auto md:overflow-visible
           transform transition-transform duration-300 ease-in-out
           ${isMobileFiltersOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'}

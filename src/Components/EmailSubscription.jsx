@@ -12,7 +12,7 @@ const EmailSubscription = () => {
   };
 
   return (
-    <div className="flex justify-center w-full">
+    <div className="flex justify-center w-full pb-8 sm:pb-10 md:pb-12">
       <div className="bg-black rounded-2xl py-6 xs:py-4 sm:py-9 px-8 xs:px-4 sm:px-16 flex flex-col xs:flex-col sm:flex-row flex-wrap content-center items-center justify-between shrink-0 relative overflow-hidden max-w-[1242px] w-full">
         <div className="text-white text-left text-2xl xs:text-xl sm:text-[2.5rem] leading-8 xs:leading-6 sm:leading-11.25 font-normal relative flex-1 min-w-60 xs:min-w-48 sm:min-w-72.5 mb-6 sm:mb-0">
           STAY UPTO DATE ABOUT OUR LATEST OFFERS
