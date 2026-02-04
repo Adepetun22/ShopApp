@@ -176,7 +176,7 @@ const Category = () => {
 
   return (
     <div className="flex justify-center w-full">
-      <div className="bg-[#ffffff] flex flex-col gap-6 items-start justify-start max-w-[1242px] relative px-4 md:px-8" style={{ paddingTop: '48px', paddingBottom: '80px' }}>
+      <div className="bg-[#ffffff] flex flex-col gap-6 items-center md:items-start justify-start max-w-[1242px] relative px-4 md:px-8" style={{ paddingTop: '48px', paddingBottom: '80px' }}>
       {/* Breadcrumb */}
       <div className="flex flex-row gap-3 items-center justify-start self-stretch shrink-0 relative">
         <div className="flex flex-row gap-1 items-center justify-start shrink-0 relative">
@@ -513,7 +513,7 @@ const Category = () => {
           </div>
 
           {/* Products Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center md:justify-items-start self-stretch shrink-0 relative">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center md:justify-items-stretch w-fit">
             {/* Product 1 */}
             <div className="flex flex-col gap-4 items-start justify-start w-full relative">
               <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
