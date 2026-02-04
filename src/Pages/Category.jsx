@@ -174,18 +174,6 @@ React.useEffect(() => {
     };
   }, [isDragging, handleDrag, stopDrag]);
 
-  // Prevent body scrolling when mobile filter is open
-  React.useEffect(() => {
-    if (isMobileFiltersOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isMobileFiltersOpen]);
-
   return (
     <div className="flex justify-center w-full">
       <div className="bg-[#ffffff] flex flex-col gap-6 items-center md:items-start justify-start max-w-[1242px] relative px-4 md:px-8" style={{ paddingTop: '48px' }}>
