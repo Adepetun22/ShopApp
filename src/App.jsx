@@ -5,6 +5,10 @@ import ProductDetails from './Pages/ProductDetails';
 import Category from './Pages/Category';
 import Signup from './Pages/Signup';
 import Login from './Pages/Login';
+import Cart from './Pages/Cart';
+import Checkout from './Pages/Checkout';
+import OrderSuccess from './Pages/OrderSuccess';
+import Profile from './Pages/Profile';
 import DesktopNav from './Components/Navigation/DesktopNav';
 import FooterComponent from './Components/Footer/FooterComponent';
 import { CartProvider } from './CartContext';
@@ -22,6 +26,10 @@ function App() {
             <Route path="/Category" element={<Category />} />
             <Route path="/Signup" element={<Signup />} />
             <Route path="/Login" element={<Login />} />
+            <Route path="/Cart" element={<Cart />} />
+            <Route path="/Checkout" element={<Checkout />} />
+            <Route path="/OrderSuccess" element={<OrderSuccess />} />
+            <Route path="/Profile" element={<Profile />} />
           </Routes>
           <FooterComponent />
         </Router>
