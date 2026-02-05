@@ -66,8 +66,8 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         className="border-solid border-[rgba(0,0,0,0.10)] border-t border-r-[0] border-b-[0] border-l-[0] self-stretch shrink-0 h-0 relative" 
         style={{ marginTop: '-1px', transformOrigin: '0px 0px', transform: 'rotate(0deg) scale(1, 1)' }}
       ></div>
-      <div className="flex flex-row items-center justify-between self-stretch shrink-0 relative">
-        <div className="rounded-lg flex flex-row gap-0 items-start justify-start shrink-0 relative">
+      <div className="flex flex-row items-center justify-center md:justify-between self-stretch shrink-0 relative gap-2 flex-wrap">
+        <div className="rounded-lg flex flex-row gap-0 items-start justify-start shrink-0 relative order-1 md:order-none">
           <button 
             onClick={handlePrevious}
             disabled={currentPage === 1}
@@ -78,13 +78,13 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
               alt="previous" 
               src="data:image/svg+xml,%3csvg%20width='20'%20height='20'%20viewBox='0%200%2020%2020'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M15.8333%209.99984H4.16663M4.16663%209.99984L9.99996%2015.8332M4.16663%209.99984L9.99996%204.1665'%20stroke='black'%20stroke-width='1.67'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3c/svg%3e" 
             />
-            <div className="text-[#000000] text-left font-['Satoshi-Medium',_sans-serif] text-sm leading-5 font-medium relative">
+            <div className="text-[#000000] text-left font-['Satoshi-Medium',_sans-serif] text-sm leading-5 font-medium relative hidden sm:block">
               Previous
             </div>
           </button>
         </div>
         
-        <div className="flex flex-row gap-0.5 items-start justify-start shrink-0 relative">
+        <div className="flex flex-row gap-0.5 items-start justify-start shrink-0 relative order-2 md:order-none">
           {getPageNumbers().map((page, index) => (
             <div key={index} className="relative">
               {page === '...' ? (
@@ -121,13 +121,13 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           ))}
         </div>
         
-        <div className="rounded-lg flex flex-row gap-0 items-start justify-start shrink-0 relative">
+        <div className="rounded-lg flex flex-row gap-0 items-start justify-start shrink-0 relative order-3 md:order-none">
           <button 
             onClick={handleNext}
             disabled={currentPage === totalPages}
             className={`bg-[#ffffff] rounded-lg border-solid border-[rgba(0,0,0,0.10)] border pt-2 pr-3.5 pb-2 pl-3.5 flex flex-row gap-2 items-center justify-center shrink-0 relative overflow-hidden cursor-pointer ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50'}`}
           >
-            <div className="text-[#000000] text-left font-['Satoshi-Medium',_sans-serif] text-sm leading-5 font-medium relative">
+            <div className="text-[#000000] text-left font-['Satoshi-Medium',_sans-serif] text-sm leading-5 font-medium relative hidden sm:block">
               Next
             </div>
             <img 

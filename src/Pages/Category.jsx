@@ -176,7 +176,7 @@ React.useEffect(() => {
 
   return (
     <div className="flex justify-center w-full">
-      <div className="bg-[#ffffff] flex flex-col gap-6 items-center md:items-start justify-start max-w-[1242px] relative px-4 md:px-8" style={{ paddingTop: '48px' }}>
+      <div className="bg-[#ffffff] flex flex-col gap-6 items-stretch md:items-start justify-start w-full max-w-[1242px] relative px-4 md:px-8" style={{ paddingTop: '48px' }}>
       {/* Breadcrumb */}
       <div className="flex flex-row gap-3 items-center justify-start self-stretch shrink-0 relative">
         <div className="flex flex-row gap-1 items-center justify-start shrink-0 relative">
@@ -191,7 +191,7 @@ React.useEffect(() => {
       </div>
 
       {/* Main Content */}
-      <div className="flex flex-col md:flex-row gap-5 items-start justify-start self-stretch shrink-0 relative">
+      <div className="flex flex-col md:flex-row gap-5 items-start justify-start self-stretch shrink-0 relative" style={{ overflowX: 'hidden' }}>
         {/* Mobile Filter Overlay */}
         {isMobileFiltersOpen && (
           <div 
@@ -262,7 +262,7 @@ React.useEffect(() => {
                 className="self-stretch shrink-0 h-5 relative"
                 ref={sliderRef}
               >
-                <div className="bg-[#f0f0f0] rounded-[20px] w-[247px] h-1.5 absolute left-0 top-2"></div>
+                <div className="bg-[#f0f0f0] rounded-[20px] w-full h-1.5 absolute left-0 top-2"></div>
                 <div 
                   className="bg-[#000000] rounded-[20px] h-1.5 absolute top-2"
                   style={{
