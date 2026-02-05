@@ -470,7 +470,7 @@ React.useEffect(() => {
               >
                 Filters
               </button>
-              <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-sm md:text-base font-normal relative">
+              <div className="text-[rgba(0,0,0,0.60)] text-left font-['Satoshi-Regular',_sans-serif] text-sm md:text-base font-normal relative hidden md:block">
                 Showing 1-10 of 100 Products
               </div>
               <div className="flex flex-row gap-1 items-center justify-start shrink-0 relative">
