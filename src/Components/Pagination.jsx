@@ -22,38 +22,40 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   // Generate page numbers to display
   const getPageNumbers = () => {
     const pages = [];
-    const maxVisiblePages = 5;
+    const isMobile = window.innerWidth < 640; // sm breakpoint
+    const maxVisiblePages = isMobile ? 3 : 5;
     
     if (totalPages <= maxVisiblePages) {
       // Show all pages
       for (let i = 1; i <= totalPages; i++) {
         pages.push(i);
       }
-    } else {
-      // Show first page
-      pages.push(1);
-      
-      if (currentPage > 3) {
-        pages.push('...');
+    } else if (isMobile) {
+      // Mobile: Show current page and adjacent pages (max 3)
+      if (currentPage === 1) {
+        pages.push(1, 2, 3);
+      } else if (currentPage === totalPages) {
+        pages.push(totalPages - 2, totalPages - 1, totalPages);
+      } else {
+        pages.push(currentPage - 1, currentPage, currentPage + 1);
       }
-      
-      // Show pages around current page
-      const start = Math.max(2, currentPage - 1);
-      const end = Math.min(totalPages - 1, currentPage + 1);
-      
-      for (let i = start; i <= end; i++) {
-        if (!pages.includes(i)) {
+    } else {
+      // Desktop/Tablet: Show exactly 5 pages around current page
+      if (currentPage <= 3) {
+        // Show first 5 pages
+        for (let i = 1; i <= 5; i++) {
           pages.push(i);
         }
-      }
-      
-      if (currentPage < totalPages - 2) {
-        pages.push('...');
-      }
-      
-      // Show last page
-      if (!pages.includes(totalPages)) {
-        pages.push(totalPages);
+      } else if (currentPage >= totalPages - 2) {
+        // Show last 5 pages
+        for (let i = totalPages - 4; i <= totalPages; i++) {
+          pages.push(i);
+        }
+      } else {
+        // Show 5 pages centered around current page
+        for (let i = currentPage - 2; i <= currentPage + 2; i++) {
+          pages.push(i);
+        }
       }
     }
     
