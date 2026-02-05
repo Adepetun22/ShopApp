@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import hamburgerIcon from '../../assets/harmburger0.svg';
-import searchIcon from '../../assets/search-780.svg';
 import cartIcon from '../../assets/cart0.svg';
 import profileIcon from '../../assets/profile0.svg';
 import frameIcon from '../../assets/frame0.svg';
+import arrowDownIcon from '../../assets/Frame054rt.png';
 import { useCart } from '../../CartContext';
 
 const MobileNav = () => {
   const [showSearch, setShowSearch] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
   const { cartCount } = useCart();
   
   console.log('MobileNav rendered');
@@ -17,6 +18,10 @@ const MobileNav = () => {
 
   // Search icon as data URL (the lighter one with 24x22 dimensions and 0.4 fill-opacity)
   const searchIconLight = "data:image/svg+xml,%3csvg%20width='24'%20height='22'%20viewBox='0%200%2024%2022'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M21.7959%2018.5204L17.3437%2014.4375C18.6787%2012.8429%2019.3019%2010.8426%2019.087%208.84223C18.8722%206.84191%2017.8353%204.9914%2016.1867%203.66609C14.5382%202.34078%2012.4014%201.63991%2010.2098%201.70566C8.01829%201.7714%205.93607%202.59884%204.38558%204.02013C2.83509%205.44141%201.93243%207.35011%201.8607%209.35903C1.78898%2011.368%202.55356%2013.3267%203.99936%2014.8378C5.44515%2016.349%207.46389%2017.2995%209.64606%2017.4964C11.8282%2017.6934%2014.0104%2017.1221%2015.75%2015.8984L20.2059%2019.9839C20.3106%2020.0798%2020.4348%2020.1559%2020.5715%2020.2078C20.7083%2020.2598%2020.8548%2020.2865%2021.0028%2020.2865C21.1508%2020.2865%2021.2973%2020.2598%2021.4341%2020.2078C21.5708%2020.1559%2021.695%2020.0798%2021.7997%2019.9839C21.9043%2019.888%2021.9873%2019.7741%2022.044%2019.6488C22.1006%2019.5234%2022.1298%2019.3891%2022.1298%2019.2534C22.1298%2019.1178%2022.1006%2018.9834%2022.044%2018.8581C21.9873%2018.7328%2021.9043%2018.6189%2021.7997%2018.523L21.7959%2018.5204ZM4.12499%209.625C4.12499%208.46922%204.49888%207.33939%205.19938%206.37839C5.89987%205.41739%206.89551%204.66838%208.06039%204.22608C9.22527%203.78378%2010.5071%203.66806%2011.7437%203.89354C12.9803%204.11902%2014.1162%204.67559%2015.0078%205.49285C15.8994%206.31011%2016.5065%207.35137%2016.7525%208.48494C16.9985%209.61852%2016.8722%2010.7935%2016.3897%2011.8613C15.9072%2012.9291%2015.0901%2013.8418%2014.0418%2014.4839C12.9934%2015.126%2011.7608%2015.4688%2010.5%2015.4688C8.80977%2015.4672%207.18927%2014.851%205.99411%2013.7554C4.79894%2012.6598%204.12673%2011.1744%204.12499%209.625Z'%20fill='black'%20fill-opacity='0.4'/%3e%3c/svg%3e";
+
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
 
   return (
     <div className="sticky top-0 z-50">
@@ -34,7 +39,12 @@ const MobileNav = () => {
       <div className="flex flex-col gap-2 items-center justify-center w-full px-8 py-1 bg-yellow-100 md:bg-red-100">
       <div className="w-full flex flex-row items-start justify-between py-1">
         <div className="flex flex-row gap-4 items-center justify-start">
-          <img className="w-6 h-6" src={hamburgerIcon} alt="Menu" />
+          <img 
+            className="w-6 h-6 cursor-pointer" 
+            src={hamburgerIcon} 
+            alt="Menu" 
+            onClick={toggleMenu}
+          />
           <div className="text-black text-[25px] font-bold font-integralcf leading-6 flex items-center justify-start">
             SHOP.CO
           </div>
@@ -72,6 +82,38 @@ const MobileNav = () => {
               placeholder="Search for products..." 
               className="bg-transparent border-none outline-none text-black text-opacity-40 text-sm font-normal font-satoshi flex-1 w-full"
             />
+          </div>
+        )}
+      </div>
+      
+      {/* Mobile Menu */}
+      <div 
+        className={`overflow-hidden transition-all duration-300 ease-in-out w-full ${
+          showMenu 
+            ? 'max-h-96 opacity-100 mt-2' 
+            : 'max-h-0 opacity-0 mt-0'
+        }`}
+      >
+        {showMenu && (
+          <div className="bg-white border border-gray-200 rounded-lg p-4 w-full">
+            <div className="flex flex-col gap-4">
+              {/* Shop */}
+              <div className="flex items-center cursor-pointer">
+                <span className="text-sm xs:text-xs sm:text-sm text-black">Shop</span>
+                <img alt="" className="ml-1 w-4 h-4" src={arrowDownIcon} />
+              </div>
+              {/* On Sale */}
+              <span className="text-sm xs:text-xs sm:text-sm text-black cursor-pointer">On Sale</span>
+              {/* New Arrivals */}
+              <span className="text-sm xs:text-xs sm:text-sm text-black cursor-pointer">New Arrivals</span>
+              {/* Brands */}
+              <span className="text-sm xs:text-xs sm:text-sm text-black cursor-pointer">Brands</span>
+              {/* Profile */}
+              <div className="flex items-center cursor-pointer pt-2 border-t border-gray-200">
+                <img className="w-6 h-6" src={profileIcon} alt="Profile" />
+                <span className="text-sm xs:text-xs sm:text-sm text-black ml-2">Profile</span>
+              </div>
+            </div>
           </div>
         )}
       </div>
