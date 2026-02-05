@@ -8,21 +8,24 @@ import Login from './Pages/Login';
 import DesktopNav from './Components/Navigation/DesktopNav';
 import FooterComponent from './Components/Footer/FooterComponent';
 import { CartProvider } from './CartContext';
+import { SearchProvider } from './SearchContext';
 
 function App() {
   return (
     <CartProvider>
-      <Router>
-        <DesktopNav />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/ProductDetails" element={<ProductDetails />} />
-          <Route path="/Category" element={<Category />} />
-          <Route path="/Signup" element={<Signup />} />
-          <Route path="/Login" element={<Login />} />
-        </Routes>
-        <FooterComponent />
-      </Router>
+      <SearchProvider>
+        <Router>
+          <DesktopNav />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/ProductDetails" element={<ProductDetails />} />
+            <Route path="/Category" element={<Category />} />
+            <Route path="/Signup" element={<Signup />} />
+            <Route path="/Login" element={<Login />} />
+          </Routes>
+          <FooterComponent />
+        </Router>
+      </SearchProvider>
     </CartProvider>
   );
 }

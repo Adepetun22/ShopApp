@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSearch } from '../SearchContext';
 import EmailSubscription from '../Components/EmailSubscription';
 import Pagination from '../Components/Pagination';
 
@@ -168,6 +169,7 @@ const products = [
 const dressStyleOptions = ['Casual', 'Formal', 'Party', 'Gym'];
 
 const Category = () => {
+  const { searchQuery, isSearchActive } = useSearch();
   // State for pagination
   const [currentPage, setCurrentPage] = React.useState(1);
   const totalPages = 10;
@@ -195,6 +197,14 @@ const Category = () => {
   // Filter and sort products based on selected filters and sort option
   const filteredProducts = React.useMemo(() => {
     let filtered = products.filter(product => {
+      // Search filter
+      if (isSearchActive && searchQuery.trim()) {
+        const searchLower = searchQuery.toLowerCase();
+        if (!product.name.toLowerCase().includes(searchLower)) {
+          return false;
+        }
+      }
+      
       // Category filter
       if (selectedCategories.length > 0 && !selectedCategories.includes(product.category)) {
         return false;
@@ -233,7 +243,7 @@ const Category = () => {
     }
 
     return filtered;
-  }, [selectedCategories, priceRange, selectedColors, selectedSizes, selectedDressStyles, sortBy]);
+  }, [selectedCategories, priceRange, selectedColors, selectedSizes, selectedDressStyles, sortBy, searchQuery, isSearchActive]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -624,7 +634,7 @@ React.useEffect(() => {
           {/* Header */}
           <div className="flex flex-row items-center justify-center md:justify-between self-stretch shrink-0 relative">
             <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-2xl md:text-[32px] font-bold relative flex items-center justify-start">
-              Casual
+              {isSearchActive ? `Search Results for "${searchQuery}"` : 'Casual'}
             </div>
             <div className="flex flex-row gap-3 items-center justify-end flex-1 relative">
               {/* Mobile Filter Toggle */}

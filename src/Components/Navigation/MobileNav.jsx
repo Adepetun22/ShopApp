@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSearch } from '../../SearchContext';
 import hamburgerIcon from '../../assets/harmburger0.svg';
 import cartIcon from '../../assets/cart0.svg';
 import frameIcon from '../../assets/frame0.svg';
@@ -8,9 +10,19 @@ import { useCart } from '../../CartContext';
 const MobileNav = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
   const { cartCount } = useCart();
+  const { handleSearch } = useSearch();
+  const navigate = useNavigate();
   
   console.log('MobileNav rendered');
+
+  const handleSearchSubmit = (e) => {
+    if (e.key === 'Enter' || e.type === 'click') {
+      handleSearch(searchInput);
+      navigate('/category');
+    }
+  };
 
   // Search icon as data URL (the solid black one with 24x24 dimensions)
   const searchIconSolid = "data:image/svg+xml,%3csvg%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M21.7959%2020.2041L17.3437%2015.75C18.6787%2014.0104%2019.3019%2011.8282%2019.087%209.64606C18.8722%207.46389%2017.8353%205.44515%2016.1867%203.99936C14.5382%202.55356%2012.4014%201.78898%2010.2098%201.8607C8.01829%201.93243%205.93607%202.83509%204.38558%204.38558C2.83509%205.93607%201.93243%208.01829%201.8607%2010.2098C1.78898%2012.4014%202.55356%2014.5382%203.99936%2016.1867C5.44515%2017.8353%207.46389%2018.8722%209.64606%2019.087C11.8282%2019.3019%2014.0104%2018.6787%2015.75%2017.3437L20.2059%2021.8006C20.3106%2021.9053%2020.4348%2021.9883%2020.5715%2022.0449C20.7083%2022.1015%2020.8548%2022.1307%2021.0028%2022.1307C21.1508%2022.1307%2021.2973%2022.1015%2021.4341%2022.0449C21.5708%2021.9883%2021.695%2021.9053%2021.7997%2021.8006C21.9043%2021.696%2021.9873%2021.5717%2022.044%2021.435C22.1006%2021.2983%2022.1298%2021.1517%2022.1298%2021.0037C22.1298%2020.8557%2022.1006%2020.7092%2022.044%2020.5725C21.9873%2020.4357%2021.9043%2020.3115%2021.7997%2020.2069L21.7959%2020.2041ZM4.12499%2010.5C4.12499%209.23914%204.49888%208.0066%205.19938%206.95823C5.89987%205.90987%206.89551%205.09277%208.06039%204.61026C9.22527%204.12775%2010.5071%204.00151%2011.7437%204.24749C12.9803%204.49347%2014.1162%205.10063%2015.0078%205.99219C15.8994%206.88375%2016.5065%208.01966%2016.7525%209.25629C16.9985%2010.4929%2016.8722%2011.7747%2016.3897%2012.9396C15.9072%2014.1045%2015.0901%2015.1001%2014.0418%2015.8006C12.9934%2016.5011%2011.7608%2016.875%2010.5%2016.875C8.80977%2016.8733%207.18927%2016.201%205.99411%2015.0059C4.79894%2013.8107%204.12673%2012.1902%204.12499%2010.5Z'%20fill='black'/%3e%3c/svg%3e";
@@ -79,6 +91,9 @@ const MobileNav = () => {
               type="text" 
               placeholder="Search for products..." 
               className="bg-transparent border-none outline-none text-black text-opacity-40 text-sm font-normal font-satoshi flex-1 w-full"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              onKeyPress={handleSearchSubmit}
             />
           </div>
         )}

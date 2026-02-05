@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSearch } from '../../SearchContext';
 import MobileNav from './MobileNav';
 import hamburgerIcon from '../../assets/harmburger0.svg';
 import searchIcon from '../../assets/search-780.svg';
@@ -9,9 +11,19 @@ import frame054rt from '../../assets/Frame054rt.png';
 import { useCart } from '../../CartContext';
 
 const DesktopNav = () => {
+  const [searchInput, setSearchInput] = useState('');
   const { cartCount } = useCart();
+  const { handleSearch } = useSearch();
+  const navigate = useNavigate();
   
   console.log('DesktopNav rendered');
+  
+  const handleSearchSubmit = (e) => {
+    if (e.key === 'Enter' || e.type === 'click') {
+      handleSearch(searchInput);
+      navigate('/category');
+    }
+  };
   
   return (
     <div className="sticky top-0 z-50">
@@ -54,13 +66,17 @@ const DesktopNav = () => {
             <div className="hidden md:flex items-center bg-gray-100 rounded-full px-3 xs:px-2 sm:px-4 py-1 xs:py-0.5 sm:py-2 w-full max-w-[400px] mx-2 xs:mx-1 sm:mx-4">
               <img 
                 alt="" 
-                className="mr-2 w-6 h-6" 
+                className="mr-2 w-6 h-6 cursor-pointer" 
                 src={searchIcon}
+                onClick={handleSearchSubmit}
               />
               <input 
                 placeholder="Search for products..." 
                 className="bg-transparent border-none outline-none w-full text-gray-500 text-sm xs:text-xs sm:text-sm" 
                 type="text" 
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                onKeyPress={handleSearchSubmit}
               />
             </div>
             <div className="flex items-center space-x-3 xs:space-x-2 sm:space-x-4">
