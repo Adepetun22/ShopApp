@@ -192,9 +192,9 @@ const Category = () => {
   // State for mobile filters
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = React.useState(false);
 
-  // Filter products based on selected filters
+  // Filter and sort products based on selected filters and sort option
   const filteredProducts = React.useMemo(() => {
-    return products.filter(product => {
+    let filtered = products.filter(product => {
       // Category filter
       if (selectedCategories.length > 0 && !selectedCategories.includes(product.category)) {
         return false;
@@ -222,7 +222,18 @@ const Category = () => {
       
       return true;
     });
-  }, [selectedCategories, priceRange, selectedColors, selectedSizes, selectedDressStyles]);
+
+    // Sort products
+    if (sortBy === 'Price: Low to High') {
+      filtered.sort((a, b) => a.price - b.price);
+    } else if (sortBy === 'Price: High to Low') {
+      filtered.sort((a, b) => b.price - a.price);
+    } else if (sortBy === 'Most Popular') {
+      filtered.sort((a, b) => b.rating - a.rating);
+    }
+
+    return filtered;
+  }, [selectedCategories, priceRange, selectedColors, selectedSizes, selectedDressStyles, sortBy]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
