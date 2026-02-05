@@ -197,12 +197,17 @@ const Category = () => {
   // Filter and sort products based on selected filters and sort option
   const filteredProducts = React.useMemo(() => {
     let filtered = products.filter(product => {
-      // Search filter
+      // Search filter - only apply if there's an active search query
       if (isSearchActive && searchQuery.trim()) {
         const searchLower = searchQuery.toLowerCase();
         if (!product.name.toLowerCase().includes(searchLower)) {
           return false;
         }
+      }
+      
+      // Skip other filters if search is active but empty (show all products)
+      if (isSearchActive && !searchQuery.trim()) {
+        return true;
       }
       
       // Category filter
@@ -634,7 +639,7 @@ React.useEffect(() => {
           {/* Header */}
           <div className="flex flex-row items-center justify-center md:justify-between self-stretch shrink-0 relative">
             <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-2xl md:text-[32px] font-bold relative flex items-center justify-start">
-              {isSearchActive ? `Search Results for "${searchQuery}"` : 'Casual'}
+              {isSearchActive && searchQuery.trim() ? `Search Results for "${searchQuery}"` : 'Casual'}
             </div>
             <div className="flex flex-row gap-3 items-center justify-end flex-1 relative">
               {/* Mobile Filter Toggle */}
