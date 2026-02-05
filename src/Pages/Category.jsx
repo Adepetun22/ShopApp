@@ -202,19 +202,19 @@ React.useEffect(() => {
         
         {/* Filters Sidebar */}
         <div className={`
-          fixed md:relative top-0 right-0 h-dvh md:h-auto w-[280px] md:w-[295px] max-w-[295px]
+          fixed md:relative top-0 right-0 h-[100dvh] md:h-auto w-[280px] md:w-[295px] max-w-[295px]
           bg-white md:bg-transparent z-50 md:z-auto overflow-y-auto md:overflow-visible
           transform transition-transform duration-300 ease-in-out
           ${isMobileFiltersOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'}
           rounded-l-[20px] md:rounded-[20px] border-solid border-[rgba(0,0,0,0.10)] border pt-5 pr-6 pb-5 pl-6 flex flex-col gap-6 items-center justify-center md:items-start md:justify-start shrink-0
         `}>
           {/* Mobile Filters Header */}
-          <div className="flex md:hidden flex-row items-center justify-between self-stretch shrink-0 relative mb-4">
+          <div className="flex md:hidden flex-row items-center justify-between self-stretch shrink-0 relative mb-4 w-full">
             <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative flex items-center justify-start">
               Filters
             </div>
             <button 
-              className="text-2xl font-bold"
+              className="text-2xl font-bold p-2 -m-2"
               onClick={() => setIsMobileFiltersOpen(false)}
             >
               ×
@@ -456,7 +456,7 @@ React.useEffect(() => {
         </div>
 
         {/* Products Section */}
-        <div className="flex flex-col h-full gap-4 items-center md:items-stretch justify-start flex-1 relative w-full">
+        <div className="flex flex-col h-full gap-4 items-stretch justify-start flex-1 relative w-full">
           {/* Header */}
           <div className="flex flex-row items-center justify-center md:justify-between self-stretch shrink-0 relative">
             <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-2xl md:text-[32px] font-bold relative flex items-center justify-start">
@@ -513,13 +513,13 @@ React.useEffect(() => {
           </div>
 
           {/* Products Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center sm:justify-items-stretch">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-stretch">
             {/* Product 1 */}
             <div className="flex flex-col gap-4 items-start justify-start w-full relative">
               <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
                 <img className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" src={image80} alt="Gradient Graphic T-shirt" />
               </div>
-              <div className="flex flex-col gap-2 items-start justify-start shrink-0 w-[227px] relative">
+              <div className="flex flex-col gap-2 items-start justify-start self-stretch shrink-0 relative">
                 <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
                   Gradient Graphic T-shirt
                 </div>
@@ -638,7 +638,7 @@ React.useEffect(() => {
               <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
                 <img className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" src={image91} alt="Checkered Shirt" />
               </div>
-              <div className="flex flex-col gap-2 items-start justify-start shrink-0 w-[151px] relative">
+              <div className="flex flex-col gap-2 items-start justify-start self-stretch shrink-0 relative">
                 <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
                   <span>
                     <span className="checkered-shirt-span">C</span>
@@ -667,7 +667,7 @@ React.useEffect(() => {
               <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
                 <img className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" src={image101} alt="Sleeve Striped T-shirt" />
               </div>
-              <div className="flex flex-col gap-2 items-start justify-start shrink-0 w-[199px] relative">
+              <div className="flex flex-col gap-2 items-start justify-start self-stretch shrink-0 relative">
                 <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
                   <span>
                     <span className="sleeve-striped-t-shirt-span">S</span>
@@ -719,7 +719,7 @@ React.useEffect(() => {
                     <span className="vertical-striped-shirt-span2">HIRT</span>
                   </span>
                 </div>
-                <div className="flex flex-row gap-[13px] items-center justify-start shrink-0 w-[160.87px] relative">
+                <div className="flex flex-row gap-[13px] items-center justify-start shrink-0 relative">
                   <img className="flex flex-row gap-[5.31px] items-start justify-start shrink-0 h-[auto] relative overflow-visible" src={frame106} alt="rating" />
                   <div className="text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative">
                     <span>
@@ -729,13 +729,13 @@ React.useEffect(() => {
                   </div>
                 </div>
                 <div className="flex flex-row gap-[11px] items-center justify-start self-stretch shrink-0 relative">
-                  <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-2xl font-bold relative w-[53.06px] flex items-center justify-start">
+                  <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-2xl font-bold relative flex items-center justify-start">
                     $212
                   </div>
-                  <div className="text-[rgba(0,0,0,0.40)] text-left font-['Satoshi-Bold',_sans-serif] text-2xl font-bold relative w-[56.06px] flex items-center justify-start" style={{ textDecoration: 'line-through' }}>
+                  <div className="text-[rgba(0,0,0,0.40)] text-left font-['Satoshi-Bold',_sans-serif] text-2xl font-bold relative flex items-center justify-start" style={{ textDecoration: 'line-through' }}>
                     $232
                   </div>
-                  <div className="bg-[rgba(255,51,51,0.10)] rounded-[62px] pt-1.5 pr-3.5 pb-1.5 pl-3.5 flex flex-row gap-3 items-center justify-center shrink-0 w-[58.06px] relative overflow-hidden">
+                  <div className="bg-[rgba(255,51,51,0.10)] rounded-[62px] pt-1.5 pr-3.5 pb-1.5 pl-3.5 flex flex-row gap-3 items-center justify-center shrink-0 relative overflow-hidden">
                     <div className="text-[#ff3333] text-left font-['Satoshi-Medium',_sans-serif] text-xs font-medium relative">
                       -20%
                     </div>
@@ -760,7 +760,7 @@ React.useEffect(() => {
                     <span className="courage-graphic-t-shirt-span2">SHIRT</span>
                   </span>
                 </div>
-                <div className="flex flex-row gap-[13px] items-center justify-start shrink-0 w-[138.04px] relative">
+                <div className="flex flex-row gap-[13px] items-center justify-start shrink-0 relative">
                   <img className="flex flex-row gap-[5.31px] items-start justify-start shrink-0 h-[auto] relative overflow-visible" src={frame107} alt="rating" />
                   <div className="text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative">
                     <span>
@@ -793,7 +793,7 @@ React.useEffect(() => {
                     <span className="loose-fit-bermuda-shorts-span2">HORTS</span>
                   </span>
                 </div>
-                <div className="flex flex-row gap-[13px] items-center justify-start shrink-0 w-[113.22px] relative">
+                <div className="flex flex-row gap-[13px] items-center justify-start shrink-0 relative">
                   <img className="flex flex-row gap-[5.31px] items-start justify-start shrink-0 h-[auto] relative overflow-visible" src={frame108} alt="rating" />
                   <div className="text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative">
                     <span>
