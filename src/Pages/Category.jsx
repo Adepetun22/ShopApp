@@ -43,6 +43,127 @@ const colorOptions = [
   { name: 'White', code: '#ffffff' },
 ];
 
+// Product data
+const products = [
+  {
+    id: 1,
+    name: 'Gradient Graphic T-shirt',
+    price: 145,
+    originalPrice: null,
+    discount: null,
+    rating: 3.5,
+    image: image80,
+    category: 'T-shirts',
+    colors: ['Green', 'Blue'],
+    sizes: ['Small', 'Medium', 'Large'],
+    style: 'Casual'
+  },
+  {
+    id: 2,
+    name: 'Polo with Tipping Details',
+    price: 180,
+    originalPrice: null,
+    discount: null,
+    rating: 4.5,
+    image: image90,
+    category: 'Shirts',
+    colors: ['White', 'Blue'],
+    sizes: ['Medium', 'Large', 'X-Large'],
+    style: 'Casual'
+  },
+  {
+    id: 3,
+    name: 'Black Striped T-shirt',
+    price: 120,
+    originalPrice: 150,
+    discount: 30,
+    rating: 5.0,
+    image: image100,
+    category: 'T-shirts',
+    colors: ['Black', 'White'],
+    sizes: ['Small', 'Medium', 'Large'],
+    style: 'Casual'
+  },
+  {
+    id: 4,
+    name: 'Skinny Fit Jeans',
+    price: 240,
+    originalPrice: 260,
+    discount: 20,
+    rating: 3.5,
+    image: image81,
+    category: 'Jeans',
+    colors: ['Blue', 'Black'],
+    sizes: ['Medium', 'Large', 'X-Large'],
+    style: 'Casual'
+  },
+  {
+    id: 5,
+    name: 'Checkered Shirt',
+    price: 180,
+    originalPrice: null,
+    discount: null,
+    rating: 4.5,
+    image: image91,
+    category: 'Shirts',
+    colors: ['Red', 'Blue'],
+    sizes: ['Small', 'Medium', 'Large'],
+    style: 'Formal'
+  },
+  {
+    id: 6,
+    name: 'Sleeve Striped T-shirt',
+    price: 130,
+    originalPrice: 160,
+    discount: 30,
+    rating: 4.5,
+    image: image101,
+    category: 'T-shirts',
+    colors: ['Orange', 'White'],
+    sizes: ['Small', 'Medium'],
+    style: 'Casual'
+  },
+  {
+    id: 7,
+    name: 'Vertical Striped Shirt',
+    price: 212,
+    originalPrice: 232,
+    discount: 20,
+    rating: 5.0,
+    image: image70,
+    category: 'Shirts',
+    colors: ['Blue', 'White'],
+    sizes: ['Medium', 'Large', 'X-Large'],
+    style: 'Formal'
+  },
+  {
+    id: 8,
+    name: 'Courage Graphic T-shirt',
+    price: 145,
+    originalPrice: null,
+    discount: null,
+    rating: 4.0,
+    image: image82,
+    category: 'T-shirts',
+    colors: ['Yellow', 'Green'],
+    sizes: ['Small', 'Medium', 'Large'],
+    style: 'Casual'
+  },
+  {
+    id: 9,
+    name: 'Loose Fit Bermuda Shorts',
+    price: 80,
+    originalPrice: null,
+    discount: null,
+    rating: 3.0,
+    image: image92,
+    category: 'Shorts',
+    colors: ['Purple', 'Pink'],
+    sizes: ['Medium', 'Large'],
+    style: 'Casual'
+  }
+];
+
 // Dress style options
 const dressStyleOptions = ['Casual', 'Formal', 'Party', 'Gym'];
 
@@ -70,6 +191,38 @@ const Category = () => {
 
   // State for mobile filters
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = React.useState(false);
+
+  // Filter products based on selected filters
+  const filteredProducts = React.useMemo(() => {
+    return products.filter(product => {
+      // Category filter
+      if (selectedCategories.length > 0 && !selectedCategories.includes(product.category)) {
+        return false;
+      }
+      
+      // Price filter
+      if (product.price < priceRange.min || product.price > priceRange.max) {
+        return false;
+      }
+      
+      // Color filter
+      if (selectedColors.length > 0 && !product.colors.some(color => selectedColors.includes(color))) {
+        return false;
+      }
+      
+      // Size filter
+      if (selectedSizes.length > 0 && !product.sizes.some(size => selectedSizes.includes(size))) {
+        return false;
+      }
+      
+      // Style filter
+      if (selectedDressStyles.length > 0 && !selectedDressStyles.includes(product.style)) {
+        return false;
+      }
+      
+      return true;
+    });
+  }, [selectedCategories, priceRange, selectedColors, selectedSizes, selectedDressStyles]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -514,299 +667,52 @@ React.useEffect(() => {
 
           {/* Products Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-stretch">
-            {/* Product 1 */}
-            <div className="flex flex-col gap-4 items-start justify-start w-full relative">
-              <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
-                <img className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" src={image80} alt="Gradient Graphic T-shirt" />
-              </div>
-              <div className="flex flex-col gap-2 items-start justify-start self-stretch shrink-0 relative">
-                <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
-                  Gradient Graphic T-shirt
+            {filteredProducts.map((product) => (
+              <div key={product.id} className="flex flex-col gap-4 items-start justify-start w-full relative">
+                <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
+                  <img 
+                    className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" 
+                    src={product.image} 
+                    alt={product.name} 
+                  />
                 </div>
-                <div className="flex flex-row gap-[13px] items-center justify-start shrink-0 relative">
-                  <img className="flex flex-row gap-[5.31px] items-start justify-start shrink-0 h-[auto] relative overflow-visible" src={frame100} alt="rating" />
-                  <div className="text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative">
-                    <span>
-                      <span className="_3-5-5-span">3.5/</span>
-                      <span className="_3-5-5-span2">5</span>
-                    </span>
+                <div className="flex flex-col gap-2 items-start justify-start self-stretch shrink-0 relative">
+                  <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
+                    {product.name}
                   </div>
-                </div>
-                <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-2xl font-bold relative self-stretch flex items-center justify-start">
-                  $145
-                </div>
-              </div>
-            </div>
-
-            {/* Product 2 */}
-            <div className="flex flex-col gap-[11px] items-start justify-start w-full relative">
-              <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
-                <img className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" src={image90} alt="Polo with Tipping Details" />
-              </div>
-              <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
-                Polo with Tipping Details
-              </div>
-              <div className="flex flex-row gap-[13px] items-center justify-start shrink-0 relative">
-                <img className="flex flex-row gap-[5.31px] items-start justify-start shrink-0 h-[auto] relative overflow-visible" src={frame101} alt="rating" />
-                <div className="text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative">
-                  <span>
-                    <span className="_4-5-5-span">4.5/</span>
-                    <span className="_4-5-5-span2">5</span>
-                  </span>
-                </div>
-              </div>
-              <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-2xl font-bold relative flex items-center justify-start">
-                $180
-              </div>
-            </div>
-
-            {/* Product 3 */}
-            <div className="flex flex-col gap-4 items-start justify-start w-full relative">
-              <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
-                <img className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" src={image100} alt="Black Striped T-shirt" />
-              </div>
-              <div className="flex flex-col gap-2 items-start justify-start self-stretch shrink-0 relative">
-                <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
-                  Black Striped T-shirt
-                </div>
-                <div className="flex flex-row gap-[13px] items-center justify-start shrink-0 relative">
-                  <img className="flex flex-row gap-[5.31px] items-start justify-start shrink-0 h-[auto] relative overflow-visible" src={frame102} alt="rating" />
-                  <div className="text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative">
-                    <span>
-                      <span className="_5-0-5-span">5.0/</span>
-                      <span className="_5-0-5-span2">5</span>
-                    </span>
-                  </div>
-                </div>
-                <div className="flex flex-row gap-2.5 items-center justify-start self-stretch shrink-0 relative">
-                  <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-2xl font-bold relative flex items-center justify-start">
-                    $120
-                  </div>
-                  <div className="text-[rgba(0,0,0,0.40)] text-left font-['Satoshi-Bold',_sans-serif] text-2xl font-bold relative flex items-center justify-start" style={{ textDecoration: 'line-through' }}>
-                    $150
-                  </div>
-                  <div className="bg-[rgba(255,51,51,0.10)] rounded-[62px] pt-1.5 pr-3.5 pb-1.5 pl-3.5 flex flex-row gap-3 items-center justify-center shrink-0 w-[58px] relative overflow-hidden">
-                    <div className="text-[#ff3333] text-left font-['Satoshi-Medium',_sans-serif] text-xs font-medium relative">
-                      -30%
+                  <div className="flex flex-row gap-[13px] items-center justify-start shrink-0 relative">
+                    <div className="flex flex-row gap-[5.31px] items-start justify-start shrink-0 h-[auto] relative overflow-visible">
+                      {/* Rating stars */}
+                      {[...Array(5)].map((_, i) => (
+                        <div key={i} className={`w-4 h-4 ${i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300'}`}>
+                          ★
+                        </div>
+                      ))}
+                    </div>
+                    <div className="text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative">
+                      {product.rating}/5
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Product 4 */}
-            <div className="flex flex-col gap-[11px] items-start justify-start w-full relative">
-              <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
-                <img className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" src={image81} alt="Skinny Fit Jeans" />
-              </div>
-              <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
-                <span>
-                  <span className="skinny-fit-jeans-span">S</span>
-                  <span className="skinny-fit-jeans-span2">KINNY</span>
-                  <span className="skinny-fit-jeans-span">F</span>
-                  <span className="skinny-fit-jeans-span2">IT</span>
-                  <span className="skinny-fit-jeans-span">J</span>
-                  <span className="skinny-fit-jeans-span2">EANS</span>
-                </span>
-              </div>
-              <div className="flex flex-row gap-[13px] items-center justify-start self-stretch shrink-0 relative">
-                <img className="flex flex-row gap-[5.31px] items-start justify-start shrink-0 h-[auto] relative overflow-visible" src={frame103} alt="rating" />
-                <div className="text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative">
-                  <span>
-                    <span className="_3-5-5-span">3.5/</span>
-                    <span className="_3-5-5-span2">5</span>
-                  </span>
-                </div>
-              </div>
-              <div className="flex flex-row gap-2.5 items-center justify-start self-stretch shrink-0 relative">
-                <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-2xl font-bold relative flex items-center justify-start">
-                  $240
-                </div>
-                <div className="text-[rgba(0,0,0,0.40)] text-left font-['Satoshi-Bold',_sans-serif] text-2xl font-bold relative flex items-center justify-start" style={{ textDecoration: 'line-through' }}>
-                  $260
-                </div>
-                <div className="bg-[rgba(255,51,51,0.10)] rounded-[62px] pt-1.5 pr-3.5 pb-1.5 pl-3.5 flex flex-row gap-3 items-center justify-center shrink-0 w-[58px] relative overflow-hidden">
-                  <div className="text-[#ff3333] text-left font-['Satoshi-Medium',_sans-serif] text-xs font-medium relative">
-                    -20%
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Product 5 */}
-            <div className="flex flex-col gap-4 items-start justify-start w-full relative">
-              <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
-                <img className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" src={image91} alt="Checkered Shirt" />
-              </div>
-              <div className="flex flex-col gap-2 items-start justify-start self-stretch shrink-0 relative">
-                <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
-                  <span>
-                    <span className="checkered-shirt-span">C</span>
-                    <span className="checkered-shirt-span2">HECKERED</span>
-                    <span className="checkered-shirt-span">S</span>
-                    <span className="checkered-shirt-span2">HIRT</span>
-                  </span>
-                </div>
-                <div className="flex flex-row gap-[13px] items-center justify-start self-stretch shrink-0 relative">
-                  <img className="flex flex-row gap-[5.31px] items-start justify-start shrink-0 h-[auto] relative overflow-visible" src={frame104} alt="rating" />
-                  <div className="text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative">
-                    <span>
-                      <span className="_4-5-5-span">4.5/</span>
-                      <span className="_4-5-5-span2">5</span>
-                    </span>
-                  </div>
-                </div>
-                <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-2xl font-bold relative self-stretch flex items-center justify-start">
-                  $180
-                </div>
-              </div>
-            </div>
-
-            {/* Product 6 */}
-            <div className="flex flex-col gap-4 items-start justify-start w-full relative">
-              <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
-                <img className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" src={image101} alt="Sleeve Striped T-shirt" />
-              </div>
-              <div className="flex flex-col gap-2 items-start justify-start self-stretch shrink-0 relative">
-                <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
-                  <span>
-                    <span className="sleeve-striped-t-shirt-span">S</span>
-                    <span className="sleeve-striped-t-shirt-span2">LEEVE</span>
-                    <span className="sleeve-striped-t-shirt-span">S</span>
-                    <span className="sleeve-striped-t-shirt-span2">TRIPED</span>
-                    <span className="sleeve-striped-t-shirt-span">T-</span>
-                    <span className="sleeve-striped-t-shirt-span2">SHIRT</span>
-                  </span>
-                </div>
-                <div className="flex flex-row gap-[13px] items-center justify-start shrink-0 relative">
-                  <img className="flex flex-row gap-[5.31px] items-start justify-start shrink-0 h-[auto] relative overflow-visible" src={frame105} alt="rating" />
-                  <div className="text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative">
-                    <span>
-                      <span className="_4-5-5-span">4.5/</span>
-                      <span className="_4-5-5-span2">5</span>
-                    </span>
-                  </div>
-                </div>
-                <div className="flex flex-row gap-2.5 items-center justify-start shrink-0 relative">
-                  <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-2xl font-bold relative flex items-center justify-start">
-                    $130
-                  </div>
-                  <div className="text-[rgba(0,0,0,0.40)] text-left font-['Satoshi-Bold',_sans-serif] text-2xl font-bold relative flex items-center justify-start" style={{ textDecoration: 'line-through' }}>
-                    $160
-                  </div>
-                  <div className="bg-[rgba(255,51,51,0.10)] rounded-[62px] pt-1.5 pr-3.5 pb-1.5 pl-3.5 flex flex-row gap-3 items-center justify-center shrink-0 w-[58px] relative overflow-hidden">
-                    <div className="text-[#ff3333] text-left font-['Satoshi-Medium',_sans-serif] text-xs font-medium relative">
-                      -30%
+                  <div className="flex flex-row gap-2.5 items-center justify-start self-stretch shrink-0 relative">
+                    <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-2xl font-bold relative flex items-center justify-start">
+                      ${product.price}
                     </div>
+                    {product.originalPrice && (
+                      <>
+                        <div className="text-[rgba(0,0,0,0.40)] text-left font-['Satoshi-Bold',_sans-serif] text-2xl font-bold relative flex items-center justify-start" style={{ textDecoration: 'line-through' }}>
+                          ${product.originalPrice}
+                        </div>
+                        <div className="bg-[rgba(255,51,51,0.10)] rounded-[62px] pt-1.5 pr-3.5 pb-1.5 pl-3.5 flex flex-row gap-3 items-center justify-center shrink-0 w-[58px] relative overflow-hidden">
+                          <div className="text-[#ff3333] text-left font-['Satoshi-Medium',_sans-serif] text-xs font-medium relative">
+                            -{product.discount}%
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* Product 7 */}
-            <div className="flex flex-col gap-4 items-start justify-start w-full relative">
-              <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
-                <img className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" src={image70} alt="Vertical Striped Shirt" />
-              </div>
-              <div className="flex flex-col gap-2 items-start justify-start self-stretch shrink-0 relative">
-                <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
-                  <span>
-                    <span className="vertical-striped-shirt-span">V</span>
-                    <span className="vertical-striped-shirt-span2">ERTICAL</span>
-                    <span className="vertical-striped-shirt-span">S</span>
-                    <span className="vertical-striped-shirt-span2">TRIPED</span>
-                    <span className="vertical-striped-shirt-span">S</span>
-                    <span className="vertical-striped-shirt-span2">HIRT</span>
-                  </span>
-                </div>
-                <div className="flex flex-row gap-[13px] items-center justify-start shrink-0 relative">
-                  <img className="flex flex-row gap-[5.31px] items-start justify-start shrink-0 h-[auto] relative overflow-visible" src={frame106} alt="rating" />
-                  <div className="text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative">
-                    <span>
-                      <span className="_5-0-5-span">5.0/</span>
-                      <span className="_5-0-5-span2">5</span>
-                    </span>
-                  </div>
-                </div>
-                <div className="flex flex-row gap-[11px] items-center justify-start self-stretch shrink-0 relative">
-                  <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-2xl font-bold relative flex items-center justify-start">
-                    $212
-                  </div>
-                  <div className="text-[rgba(0,0,0,0.40)] text-left font-['Satoshi-Bold',_sans-serif] text-2xl font-bold relative flex items-center justify-start" style={{ textDecoration: 'line-through' }}>
-                    $232
-                  </div>
-                  <div className="bg-[rgba(255,51,51,0.10)] rounded-[62px] pt-1.5 pr-3.5 pb-1.5 pl-3.5 flex flex-row gap-3 items-center justify-center shrink-0 relative overflow-hidden">
-                    <div className="text-[#ff3333] text-left font-['Satoshi-Medium',_sans-serif] text-xs font-medium relative">
-                      -20%
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Product 8 */}
-            <div className="flex flex-col gap-4 items-start justify-start w-full relative">
-              <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
-                <img className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" src={image82} alt="Courage Graphic T-shirt" />
-              </div>
-              <div className="flex flex-col gap-2 items-start justify-start self-stretch shrink-0 relative">
-                <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
-                  <span>
-                    <span className="courage-graphic-t-shirt-span">C</span>
-                    <span className="courage-graphic-t-shirt-span2">OURAGE</span>
-                    <span className="courage-graphic-t-shirt-span">G</span>
-                    <span className="courage-graphic-t-shirt-span2">RAPHIC</span>
-                    <span className="courage-graphic-t-shirt-span">T-</span>
-                    <span className="courage-graphic-t-shirt-span2">SHIRT</span>
-                  </span>
-                </div>
-                <div className="flex flex-row gap-[13px] items-center justify-start shrink-0 relative">
-                  <img className="flex flex-row gap-[5.31px] items-start justify-start shrink-0 h-[auto] relative overflow-visible" src={frame107} alt="rating" />
-                  <div className="text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative">
-                    <span>
-                      <span className="_4-0-5-span">4.0/</span>
-                      <span className="_4-0-5-span2">5</span>
-                    </span>
-                  </div>
-                </div>
-                <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-2xl font-bold relative self-stretch flex items-center justify-start">
-                  $145
-                </div>
-              </div>
-            </div>
-
-            {/* Product 9 */}
-            <div className="flex flex-col gap-4 items-start justify-start w-full relative">
-              <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
-                <img className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" src={image92} alt="Loose Fit Bermuda Shorts" />
-              </div>
-              <div className="flex flex-col gap-2 items-start justify-start self-stretch shrink-0 relative">
-                <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
-                  <span>
-                    <span className="loose-fit-bermuda-shorts-span">L</span>
-                    <span className="loose-fit-bermuda-shorts-span2">OOSE</span>
-                    <span className="loose-fit-bermuda-shorts-span">F</span>
-                    <span className="loose-fit-bermuda-shorts-span2">IT</span>
-                    <span className="loose-fit-bermuda-shorts-span">B</span>
-                    <span className="loose-fit-bermuda-shorts-span2">ERMUDA</span>
-                    <span className="loose-fit-bermuda-shorts-span">S</span>
-                    <span className="loose-fit-bermuda-shorts-span2">HORTS</span>
-                  </span>
-                </div>
-                <div className="flex flex-row gap-[13px] items-center justify-start shrink-0 relative">
-                  <img className="flex flex-row gap-[5.31px] items-start justify-start shrink-0 h-[auto] relative overflow-visible" src={frame108} alt="rating" />
-                  <div className="text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative">
-                    <span>
-                      <span className="_3-0-5-span">3.0/</span>
-                      <span className="_3-0-5-span2">5</span>
-                    </span>
-                  </div>
-                </div>
-                <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-2xl font-bold relative self-stretch flex items-center justify-start">
-                  $80
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
           
           {/* Pagination */}
