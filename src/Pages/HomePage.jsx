@@ -92,11 +92,11 @@ const HomePage = () => {
               Browse through our diverse range of meticulously crafted garments, 
               designed to bring out your individuality and style.
             </p>
-            <div className="flex flex-wrap gap-4 mb-8">
-              <a href="/product-details" className="bg-black text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-800 transition duration-300">
+<div className="flex flex-wrap gap-4 mb-8">
+              <button className="bg-black text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-800 transition duration-300 cursor-pointer">
                 View Product Details
-              </a>
-              <button className="border border-black px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-100 transition duration-300">
+              </button>
+              <button className="border border-black px-6 py-3 rounded-full text-sm font-medium hover:bg-black hover:text-white transition duration-300 cursor-pointer">
                 Shop Now
               </button>
             </div>
