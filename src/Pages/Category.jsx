@@ -456,7 +456,7 @@ React.useEffect(() => {
         </div>
 
         {/* Products Section */}
-        <div className="flex flex-col gap-4 items-center justify-center md:items-start md:justify-start flex-1 relative">
+        <div className="flex flex-col h-full gap-4 items-center md:items-stretch justify-start flex-1 relative w-full">
           {/* Header */}
           <div className="flex flex-row items-center justify-center md:justify-between self-stretch shrink-0 relative">
             <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-2xl md:text-[32px] font-bold relative flex items-center justify-start">
@@ -513,7 +513,7 @@ React.useEffect(() => {
           </div>
 
           {/* Products Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center md:justify-items-stretch w-fit">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center md:justify-items-stretch">
             {/* Product 1 */}
             <div className="flex flex-col gap-4 items-start justify-start w-full relative">
               <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
@@ -807,16 +807,14 @@ React.useEffect(() => {
                 </div>
               </div>
             </div>
-
-            {/* Pagination */}
-            <div className="flex flex-col gap-5 items-start justify-start self-stretch shrink-0 relative">
-              <Pagination 
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
-              />
-            </div>
           </div>
+          
+          {/* Pagination */}
+          <Pagination 
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
         </div>
       </div>
       
