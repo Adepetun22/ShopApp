@@ -36,11 +36,6 @@ const ProductDetails = () => {
   const [selectedColor, setSelectedColor] = useState('gray'); // Default to gray color
   const [activeTab, setActiveTab] = useState('product-details'); // Default to product details tab
   
-  // Check if we're on localhost:5187
-  const isLocalhost5187 = typeof window !== 'undefined' && 
-    (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && 
-    window.location.port === '5187';
-  
   // Customer testimonials data for product reviews
   const testimonials = [
     {
@@ -133,7 +128,7 @@ const ProductDetails = () => {
           <div className="w-full lg:w-1/2">
             <div className="flex flex-col gap-6 xs:gap-4 sm:gap-6">
               <div className="flex flex-col gap-4 xs:gap-3">
-                <h1 className="text-black text-left font-sans font-bold text-[50px] xs:text-[40px] sm:text-[50px] md:text-[55px] lg:text-[60px] mb-4 xs:mb-2 sm:mb-4">One Life Graphic T-shirt</h1>
+                <h1 className="text-black text-left font-sans font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 xs:mb-2 sm:mb-4 leading-tight">One Life Graphic T-shirt</h1>
                 
                 <div className="flex flex-row gap-2 items-center justify-start">
                   <img className="w-auto h-5" src={frame101} alt="Rating stars" />
