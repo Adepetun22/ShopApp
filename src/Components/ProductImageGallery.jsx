@@ -9,7 +9,7 @@ const ProductImageGallery = ({
   return (
     <div className="flex flex-col md:flex-row gap-4 xs:gap-2 sm:gap-4 items-center justify-start w-full">
       {/* Desktop view - thumbnails on the left */}
-      <div className="hidden md:flex md:flex-col md:gap-4 md:items-start md:justify-start md:w-40 lg:w-48">
+      <div className="hidden md:flex md:flex-col md:gap-4 md:items-start md:justify-start md:w-40 lg:w-48 flex-shrink-0">
         {images.map((image, index) => (
           <img 
             key={index}
@@ -21,8 +21,10 @@ const ProductImageGallery = ({
         ))}
       </div>
       
-      {/* Main image */}
-      <img className={mainImageClassName} src={selectedImage} alt="" />
+      {/* Main image - takes remaining space */}
+      <div className="flex-1 w-full min-w-0">
+        <img className={mainImageClassName} src={selectedImage} alt="" />
+      </div>
       
       {/* Mobile view - thumbnails below the main image and centered */}
       <div className="flex md:hidden flex-row gap-4 xs:gap-2 sm:gap-4 items-center justify-center w-full mt-4 overflow-x-auto">

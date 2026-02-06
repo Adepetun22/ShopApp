@@ -126,11 +126,11 @@ const ProductDetails = () => {
 
           {/* Product Info */}
           <div className="w-full lg:w-1/2">
-            <div className="flex flex-col gap-6 xs:gap-4 sm:gap-6">
-              <div className="flex flex-col gap-4 xs:gap-3">
+            <div className="flex flex-col gap-6 xs:gap-4 sm:gap-6 items-center lg:items-start">
+              <div className="flex flex-col gap-4 xs:gap-3 items-center lg:items-start text-center lg:text-left">
                 <h1 className="text-black text-center lg:text-left font-sans font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 xs:mb-2 sm:mb-4 leading-tight">One Life Graphic T-shirt</h1>
                 
-                <div className="flex flex-row gap-2 items-center justify-start">
+                <div className="flex flex-row gap-2 items-center justify-center lg:justify-start">
                   <img className="w-auto h-5" src={frame101} alt="Rating stars" />
                   <div className="flex items-center">
                     <span className="text-black text-sm xs:text-xs sm:text-sm">4.5/</span>
@@ -138,7 +138,7 @@ const ProductDetails = () => {
                   </div>
                 </div>
                 
-                <div className="flex flex-row items-center justify-start gap-4">
+                <div className="flex flex-row items-center justify-center lg:justify-start gap-4">
                   <div className="flex flex-row items-center justify-start gap-2">
                     <div className="text-black font-bold text-xl xs:text-lg sm:text-xl">$260</div>
                     <div className="text-gray-600 text-base xs:text-sm sm:text-base line-through">$300</div>
@@ -148,16 +148,16 @@ const ProductDetails = () => {
                   </div>
                 </div>
                 
-                <div className="text-gray-600 text-sm xs:text-xs sm:text-base">
+                <div className="text-gray-600 text-sm xs:text-xs sm:text-base max-w-md">
                   This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.
                 </div>
               </div>
               
               <hr className="border-t border-gray-300 w-full" />
               
-              <div className="flex flex-col gap-4 w-full">
-                <div className="text-[#969494] text-left font-sans font-medium text-base xs:text-sm">Select Colors</div>
-                <div className="flex flex-row gap-3 items-center justify-start">
+              <div className="flex flex-col gap-4 w-full items-center lg:items-start">
+                <div className="text-[#969494] text-center lg:text-left font-sans font-medium text-base xs:text-sm">Select Colors</div>
+                <div className="flex flex-row gap-3 items-center justify-center lg:justify-start">
                   <div 
                     className="relative cursor-pointer"
                     onClick={() => setSelectedColor('gray')}
@@ -200,9 +200,9 @@ const ProductDetails = () => {
               
               <hr className="border-t border-gray-300 w-full" />
               
-              <div className="flex flex-col gap-4 xs:gap-3 w-full">
-                <div className="text-[#969494] text-left font-sans font-medium text-base xs:text-sm">Choose Size</div>
-                <div className="flex flex-row gap-3 items-center justify-start flex-wrap pb-6">
+              <div className="flex flex-col gap-4 xs:gap-3 w-full items-center lg:items-start">
+                <div className="text-[#969494] text-center lg:text-left font-sans font-medium text-base xs:text-sm">Choose Size</div>
+                <div className="flex flex-row gap-3 items-center justify-center lg:justify-start flex-wrap pb-6">
                   <button 
                     className={`border rounded-full px-4 py-2 xs:px-3 xs:py-1 sm:px-5 sm:py-3 transition-colors cursor-pointer ${selectedSize === 'Small' ? 'bg-black text-white' : 'border-gray-300 hover:border-black hover:bg-black hover:text-white'}`}
                     onClick={() => setSelectedSize('Small')}
@@ -234,7 +234,7 @@ const ProductDetails = () => {
             <hr className="border-t border-gray-300 w-full" />
             
             <div className="pt-6">
-              <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between w-full">
+              <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-center lg:justify-start w-full">
                 <div className="flex flex-row items-center justify-between border border-gray-300 rounded-full p-3 xs:p-2 sm:p-3 min-w-[100px] xs:min-w-[80px] sm:min-w-[120px]">
                   <img 
                     className="w-5 h-5 xs:w-4 xs:h-4 sm:w-5 sm:h-5 cursor-pointer" 
@@ -263,7 +263,7 @@ const ProductDetails = () => {
         
         {/* Tabs Section */}
         <div className="container mx-auto px-4 py-8 xs:py-6 sm:py-8">
-          <div className="flex flex-row gap-6 xs:gap-4 sm:gap-8 items-center justify-start overflow-x-auto">
+          <div className="flex flex-row gap-6 xs:gap-4 sm:gap-8 items-center justify-center lg:justify-start overflow-x-auto">
             <button 
               className={`pb-2 whitespace-nowrap cursor-pointer ${activeTab === 'product-details' ? 'border-b-2 border-black' : ''}`}
               onClick={() => setActiveTab('product-details')}
