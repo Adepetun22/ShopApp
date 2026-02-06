@@ -12,6 +12,19 @@ export const useCart = () => {
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+  const [alert, setAlert] = useState({
+    open: false,
+    severity: 'success',
+    message: ''
+  });
+
+  const showAlert = (severity, message) => {
+    setAlert({ open: true, severity, message });
+  };
+
+  const hideAlert = () => {
+    setAlert(prev => ({ ...prev, open: false }));
+  };
 
   const addToCart = (product, quantity = 1) => {
     setCartItems(prevItems => {
@@ -26,12 +39,26 @@ export const CartProvider = ({ children }) => {
         return [...prevItems, { ...product, quantity }];
       }
     });
+    showAlert('success', `${product.name || 'Item'} added to cart!`);
+  };
+
+  const removeFromCart = (productId) => {
+    setCartItems(prevItems => prevItems.filter(item => item.id !== productId));
+    showAlert('warning', 'Item removed from cart!');
   };
 
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, cartCount }}>
+    <CartContext.Provider value={{ 
+      cartItems, 
+      addToCart, 
+      removeFromCart, 
+      cartCount,
+      alert,
+      showAlert,
+      hideAlert
+    }}>
       {children}
     </CartContext.Provider>
   );

@@ -4,6 +4,7 @@ import DesktopNav from './Components/Navigation/DesktopNav';
 import FooterComponent from './Components/Footer/FooterComponent';
 import { CartProvider } from './CartContext';
 import { SearchProvider } from './SearchContext';
+import AlertWrapper from './Components/Alert/AlertWrapper';
 
 // Lazy load page components for code splitting
 // This significantly reduces initial bundle size and improves page load time
@@ -27,6 +28,7 @@ const LoadingSpinner = () => (
 function App() {
   return (
     <CartProvider>
+      <AlertWrapper />
       <SearchProvider>
         <Router>
           <DesktopNav />
