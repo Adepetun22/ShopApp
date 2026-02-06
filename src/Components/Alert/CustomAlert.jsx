@@ -14,13 +14,28 @@ const CustomAlert = ({
       open={open} 
       autoHideDuration={autoHideDuration} 
       onClose={onClose}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      TransitionComponent="slide"
+      transitionDuration={300}
     >
       <Alert 
         onClose={onClose} 
         severity={severity} 
         variant="filled"
-        sx={{ width: '100%' }}
+        sx={{ 
+          width: '100%',
+          animation: 'slideDown 0.3s ease-out',
+          '@keyframes slideDown': {
+            '0%': {
+              transform: 'translateY(-100%)',
+              opacity: 0
+            },
+            '100%': {
+              transform: 'translateY(0)',
+              opacity: 1
+            }
+          }
+        }}
       >
         {message}
       </Alert>
