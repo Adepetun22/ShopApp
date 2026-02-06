@@ -60,9 +60,9 @@ const Profile = () => {
                     {userData.firstName[0]}{userData.lastName[0]}
                   </span>
                 </div>
-                <div>
+                <div className="min-w-0 flex-1">
                   <p className="font-medium">{userData.firstName} {userData.lastName}</p>
-                  <p className="text-sm text-gray-500">{userData.email}</p>
+                  <p className="text-sm text-gray-500 break-all">{userData.email}</p>
                 </div>
               </div>
 
