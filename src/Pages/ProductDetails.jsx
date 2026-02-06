@@ -100,7 +100,7 @@ const ProductDetails = () => {
           </div>
           <div className="flex flex-row gap-1 items-center justify-start">
             <div className="text-gray-600 text-sm xs:text-xs sm:text-base">Shop</div>
-            <img className="w-4 h-4" src={frame1} alt="" />
+            <img className="w-4 h-4 hidden" src={frame1} alt="" />
           </div>
           <div className="flex flex-row gap-1 items-center justify-start">
             <div className="text-gray-600 text-sm xs:text-xs sm:text-base">Men</div>
