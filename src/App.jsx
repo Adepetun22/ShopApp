@@ -4,6 +4,7 @@ import DesktopNav from './Components/Navigation/DesktopNav';
 import FooterComponent from './Components/Footer/FooterComponent';
 import { CartProvider } from './CartContext';
 import { SearchProvider } from './SearchContext';
+import { AuthProvider } from './AuthContext';
 import AlertWrapper from './Components/Alert/AlertWrapper';
 
 // Lazy load page components for code splitting
@@ -27,28 +28,30 @@ const LoadingSpinner = () => (
 
 function App() {
   return (
-    <CartProvider>
-      <AlertWrapper />
-      <SearchProvider>
-        <Router>
-          <DesktopNav />
-          <Suspense fallback={<LoadingSpinner />}>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/ProductDetails" element={<ProductDetails />} />
-              <Route path="/Category" element={<Category />} />
-              <Route path="/Signup" element={<Signup />} />
-              <Route path="/Login" element={<Login />} />
-              <Route path="/Cart" element={<Cart />} />
-              <Route path="/Checkout" element={<Checkout />} />
-              <Route path="/OrderSuccess" element={<OrderSuccess />} />
-              <Route path="/Profile" element={<Profile />} />
-            </Routes>
-          </Suspense>
-          <FooterComponent />
-        </Router>
-      </SearchProvider>
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <AlertWrapper />
+        <SearchProvider>
+          <Router>
+            <DesktopNav />
+            <Suspense fallback={<LoadingSpinner />}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/ProductDetails" element={<ProductDetails />} />
+                <Route path="/Category" element={<Category />} />
+                <Route path="/Signup" element={<Signup />} />
+                <Route path="/Login" element={<Login />} />
+                <Route path="/Cart" element={<Cart />} />
+                <Route path="/Checkout" element={<Checkout />} />
+                <Route path="/OrderSuccess" element={<OrderSuccess />} />
+                <Route path="/Profile" element={<Profile />} />
+              </Routes>
+            </Suspense>
+            <FooterComponent />
+          </Router>
+        </SearchProvider>
+      </CartProvider>
+    </AuthProvider>
   );
 }
 

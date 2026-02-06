@@ -1,6 +1,7 @@
 import React, { useState, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSearch } from '../../SearchContext';
+import { useAuth } from '../../AuthContext';
 import MobileNav from './MobileNav';
 import hamburgerIcon from '../../assets/harmburger0.svg';
 import searchIcon from '../../assets/search-780.svg';
@@ -15,6 +16,7 @@ const DesktopNav = memo(function DesktopNav() {
   const [searchInput, setSearchInput] = useState('');
   const { cartCount } = useCart();
   const { handleSearch } = useSearch();
+  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
   
   const handleSearchSubmit = (e) => {
@@ -24,18 +26,30 @@ const DesktopNav = memo(function DesktopNav() {
     }
   };
   
+  const handleLoginClick = () => {
+    navigate('/login');
+  };
+  
   return (
     <div className="sticky top-0 z-50">
       {/* Top notification bar - hidden on mobile since MobileNav has its own */}
-      <div className="bg-black py-2 px-4 hidden md:block">
-        <div className="container mx-auto flex flex-wrap justify-between items-center">
-          <div className="text-white text-sm xs:text-xs sm:text-sm">
-            <span className="font-normal">Sign up and get 20% off to your first order. </span>
-            <span className="font-medium underline cursor-pointer">Sign Up Now</span>
+      {/* Hidden when user is logged in */}
+      {!isAuthenticated && (
+        <div className="bg-black py-2 px-4 hidden md:block">
+          <div className="container mx-auto flex flex-wrap justify-between items-center">
+            <div className="text-white text-sm xs:text-xs sm:text-sm">
+              <span className="font-normal">Sign up and get 20% off to your first order. </span>
+              <span 
+                className="font-medium underline cursor-pointer"
+                onClick={handleLoginClick}
+              >
+                Login Now
+              </span>
+            </div>
+            <img src={frameIcon} alt="Close" className="w-5 h-5" />
           </div>
-          <img src={frameIcon} alt="Close" className="w-5 h-5" />
         </div>
-      </div>
+      )}
       
       {/* Show MobileNav on tablet and mobile views (md and below) */}
       <div className="md:hidden">

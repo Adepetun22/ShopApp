@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
 import frame0 from '../assets/frame0.svg';
 import OrderCard from '../components/OrderCard';
 import Addresses from '../Components/Addresses';
@@ -21,26 +22,36 @@ const sampleOrders = [
 ];
 
 const Profile = () => {
+  const { user, loading: authLoading, logout } = useAuth();
   const [activeTab, setActiveTab] = useState('orders');
   const [isEditing, setIsEditing] = useState(false);
-  const [userData, setUserData] = useState({
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@example.com',
-    phone: '+1 234 567 8900'
-  });
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setUserData({
-      ...userData,
-      [e.target.name]: e.target.value
-    });
-  };
+  // Show loading state while auth is initializing
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading profile...</p>
+        </div>
+      </div>
+    );
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsEditing(false);
-  };
+  // Redirect to login if not authenticated
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold mb-4">Please log in to view your profile</h2>
+          <Link to="/login" className="bg-black text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800">
+            Log In
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -57,12 +68,12 @@ const Profile = () => {
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-white text-xl font-bold">
-                    {userData.firstName[0]}{userData.lastName[0]}
+                    {user.firstName?.[0] || ''}{user.lastName?.[0] || ''}
                   </span>
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="font-medium">{userData.firstName} {userData.lastName}</p>
-                  <p className="text-sm text-gray-500 break-all">{userData.email}</p>
+                  <p className="font-medium">{user.firstName} {user.lastName}</p>
+                  <p className="text-sm text-gray-500 break-all">{user.email}</p>
                 </div>
               </div>
 
@@ -99,6 +110,15 @@ const Profile = () => {
                 >
                   Wishlist
                 </button>
+                <button
+                  onClick={() => {
+                    logout();
+                    navigate('/login');
+                  }}
+                  className="w-full text-left px-4 py-2 rounded-lg transition-colors cursor-pointer hover:bg-gray-200 text-red-600"
+                >
+                  Log Out
+                </button>
               </nav>
             </div>
           </div>
@@ -122,82 +142,10 @@ const Profile = () => {
             )}
 
             {activeTab === 'profile' && (
-              <div>
-                <div className="flex justify-between items-center mb-6">
-                  <h1 className="text-2xl font-bold">Profile Settings</h1>
-                  <button
-                    onClick={() => setIsEditing(!isEditing)}
-                    className="bg-black text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-800 transition duration-300 cursor-pointer"
-                  >
-                    {isEditing ? 'Cancel' : 'Edit Profile'}
-                  </button>
-                </div>
-                <form onSubmit={handleSubmit} className="bg-gray-50 rounded-xl p-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-                      <input
-                        type="text"
-                        name="firstName"
-                        value={userData.firstName}
-                        onChange={handleChange}
-                        disabled={!isEditing}
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent disabled:bg-gray-100"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-                      <input
-                        type="text"
-                        name="lastName"
-                        value={userData.lastName}
-                        onChange={handleChange}
-                        disabled={!isEditing}
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent disabled:bg-gray-100"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={userData.email}
-                        onChange={handleChange}
-                        disabled={!isEditing}
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent disabled:bg-gray-100"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Phone</label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={userData.phone}
-                        onChange={handleChange}
-                        disabled={!isEditing}
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent disabled:bg-gray-100"
-                      />
-                    </div>
-                  </div>
-                  {isEditing && (
-                    <div className="mt-6">
-                      <button
-                        type="submit"
-                        className="bg-black text-white px-8 py-3 rounded-full font-medium hover:bg-gray-800 transition duration-300 cursor-pointer"
-                      >
-                        Save Changes
-                      </button>
-                    </div>
-                  )}
-                </form>
-              </div>
+              <ProfileSettings user={user} isEditing={isEditing} setIsEditing={setIsEditing} />
             )}
 
-{activeTab === 'addresses' && (
+            {activeTab === 'addresses' && (
               <Addresses />
             )}
 
@@ -207,6 +155,83 @@ const Profile = () => {
           </div>
         </div>
       </div>
+    </div>
+  );
+};
+
+// Profile settings sub-component
+const ProfileSettings = ({ user, isEditing, setIsEditing }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsEditing(false);
+    // TODO: API call to update user profile
+  };
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">Profile Settings</h1>
+        <button
+          onClick={() => setIsEditing(!isEditing)}
+          className="bg-black text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-800 transition duration-300 cursor-pointer"
+        >
+          {isEditing ? 'Cancel' : 'Edit Profile'}
+        </button>
+      </div>
+      <form onSubmit={handleSubmit} className="bg-gray-50 rounded-xl p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+            <input
+              type="text"
+              name="firstName"
+              defaultValue={user.firstName}
+              disabled={!isEditing}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent disabled:bg-gray-100"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+            <input
+              type="text"
+              name="lastName"
+              defaultValue={user.lastName}
+              disabled={!isEditing}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent disabled:bg-gray-100"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+            <input
+              type="email"
+              name="email"
+              defaultValue={user.email}
+              disabled={!isEditing}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent disabled:bg-gray-100"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+            <input
+              type="tel"
+              name="phone"
+              defaultValue={user.phone || ''}
+              disabled={!isEditing}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent disabled:bg-gray-100"
+            />
+          </div>
+        </div>
+        {isEditing && (
+          <div className="mt-6">
+            <button
+              type="submit"
+              className="bg-black text-white px-8 py-3 rounded-full font-medium hover:bg-gray-800 transition duration-300 cursor-pointer"
+            >
+              Save Changes
+            </button>
+          </div>
+        )}
+      </form>
     </div>
   );
 };
