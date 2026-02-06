@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import logoTwitter from '../../assets/logo-twitter-20.svg';
 import logoFb from '../../assets/logo-fb-simple-20.svg';
 import logoInstagram from '../../assets/logo-instagram-10.svg';
@@ -9,7 +9,8 @@ import badge2 from '../../assets/badge2.svg';
 import badge3 from '../../assets/badge3.svg';
 import badge4 from '../../assets/badge4.svg';
 
-const Footer = () => {
+// Memoized Footer component to prevent unnecessary re-renders
+const Footer = memo(function Footer() {
   return (
     <div className="bg-gray-100 pt-8 xs:pt-6 sm:pt-12 pb-6 xs:pb-4 sm:pb-8">
       <div className="container mx-auto px-4">
@@ -21,10 +22,10 @@ const Footer = () => {
               From women to men.
             </p>
             <div className="flex space-x-2 xs:space-x-1 sm:space-x-4">
-              <img alt="Twitter" className="w-5 xs:w-4 sm:w-6 h-5 xs:h-4 sm:h-6" src={logoTwitter} />
-              <img alt="Facebook" className="w-5 xs:w-4 sm:w-6 h-5 xs:h-4 sm:h-6" src={logoFb} />
-              <img alt="Instagram" className="w-5 xs:w-4 sm:w-6 h-5 xs:h-4 sm:h-6" src={logoInstagram} />
-              <img alt="GitHub" className="w-5 xs:w-4 sm:w-6 h-5 xs:h-4 sm:h-6" src={logoGithub} />
+              <img alt="Twitter" className="w-5 xs:w-4 sm:w-6 h-5 xs:h-4 sm:h-6" src={logoTwitter} loading="lazy" decoding="async" />
+              <img alt="Facebook" className="w-5 xs:w-4 sm:w-6 h-5 xs:h-4 sm:h-6" src={logoFb} loading="lazy" decoding="async" />
+              <img alt="Instagram" className="w-5 xs:w-4 sm:w-6 h-5 xs:h-4 sm:h-6" src={logoInstagram} loading="lazy" decoding="async" />
+              <img alt="GitHub" className="w-5 xs:w-4 sm:w-6 h-5 xs:h-4 sm:h-6" src={logoGithub} loading="lazy" decoding="async" />
             </div>
           </div>
           
@@ -65,17 +66,17 @@ const Footer = () => {
               Shop.co © 2000-2023, All Rights Reserved
             </div>
             <div className="flex space-x-1 xs:space-x-0.5 sm:space-x-2">
-              <img alt="Badge" className="w-6 xs:w-4 sm:w-8 h-6 xs:h-4 sm:h-8" src={badge0} />
-              <img alt="Badge" className="w-6 xs:w-4 sm:w-8 h-6 xs:h-4 sm:h-8" src={badge1} />
-              <img alt="Badge" className="w-6 xs:w-4 sm:w-8 h-6 xs:h-4 sm:h-8" src={badge2} />
-              <img alt="Badge" className="w-6 xs:w-4 sm:w-8 h-6 xs:h-4 sm:h-8" src={badge3} />
-              <img alt="Badge" className="w-6 xs:w-4 sm:w-8 h-6 xs:h-4 sm:h-8" src={badge4} />
+              <img alt="Badge" className="w-6 xs:w-4 sm:w-8 h-6 xs:h-4 sm:h-8" src={badge0} loading="lazy" decoding="async" />
+              <img alt="Badge" className="w-6 xs:w-4 sm:w-8 h-6 xs:h-4 sm:h-8" src={badge1} loading="lazy" decoding="async" />
+              <img alt="Badge" className="w-6 xs:w-4 sm:w-8 h-6 xs:h-4 sm:h-8" src={badge2} loading="lazy" decoding="async" />
+              <img alt="Badge" className="w-6 xs:w-4 sm:w-8 h-6 xs:h-4 sm:h-8" src={badge3} loading="lazy" decoding="async" />
+              <img alt="Badge" className="w-6 xs:w-4 sm:w-8 h-6 xs:h-4 sm:h-8" src={badge4} loading="lazy" decoding="async" />
             </div>
           </div>
         </div>
       </div>
     </div>
   );
-};
+});
 
 export default Footer;

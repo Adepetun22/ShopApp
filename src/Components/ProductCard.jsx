@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 // Create a star rating component outside of the ProductCard component
 const StarRating = () => (
@@ -11,11 +11,18 @@ const StarRating = () => (
   </svg>
 );
 
-const ProductCard = ({ image, title, rating, price, originalPrice, discount }) => {
+// Memoized ProductCard component to prevent unnecessary re-renders
+const ProductCard = memo(function ProductCard({ image, title, rating, price, originalPrice, discount }) {
   return (
     <div className="flex flex-col gap-3 xs:gap-2 sm:gap-4 items-start justify-start shrink-0 w-full relative">
       <div className="bg-[#f0eeed] rounded-xl xs:rounded-lg sm:rounded-2xl flex flex-row items-center justify-center self-stretch shrink-0 relative overflow-hidden w-full h-[298px]">
-        <img src={image} alt={title} className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" />
+        <img 
+          src={image} 
+          alt={title} 
+          className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" 
+          loading="lazy" 
+          decoding="async"
+        />
       </div>
       <div className="flex flex-col gap-1.5 xs:gap-1 sm:gap-2 items-start justify-start self-stretch shrink-0 relative w-full">
         <h3 className="text-black text-left font-bold text-base xs:text-sm sm:text-[1.25rem] relative self-stretch flex items-center justify-start">
@@ -52,6 +59,6 @@ const ProductCard = ({ image, title, rating, price, originalPrice, discount }) =
       </div>
     </div>
   );
-};
+});
 
 export default ProductCard;

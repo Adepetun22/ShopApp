@@ -120,22 +120,28 @@ const HomePage = () => {
           </div>
           
           <div className="md:w-1/2">
-            <img src={backgroundImage} alt="Fashion models" className="w-full" />
+            <img 
+              src={backgroundImage} 
+              alt="Fashion models" 
+              className="w-full" 
+              loading="lazy" 
+              decoding="async"
+            />
           </div>
         </div>
       </div>
 
       {/* Brand Logos */}
-      <div className="bg-black py-6 xs:py-4 sm:py-8 mb-12 xs:mb-8 sm:mb-16">
+        <div className="bg-black py-6 xs:py-4 sm:py-8 mb-12 xs:mb-8 sm:mb-16">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-around items-center">
-            <img src={versaceLogo} alt="Versace" className="mx-2 xs:mx-1 sm:mx-4 my-2 w-20 xs:w-16 sm:w-24 md:w-28" />
-            <img src={zaraLogo} alt="Zara" className="mx-2 xs:mx-1 sm:mx-4 my-2 w-16 xs:w-12 sm:w-20 md:w-24" />
-            <img src={gucciLogo} alt="Gucci" className="mx-2 xs:mx-1 sm:mx-4 my-2 w-20 xs:w-16 sm:w-24 md:w-28" />
+            <img src={versaceLogo} alt="Versace" className="mx-2 xs:mx-1 sm:mx-4 my-2 w-20 xs:w-16 sm:w-24 md:w-28" loading="lazy" decoding="async" />
+            <img src={zaraLogo} alt="Zara" className="mx-2 xs:mx-1 sm:mx-4 my-2 w-16 xs:w-12 sm:w-20 md:w-24" loading="lazy" decoding="async" />
+            <img src={gucciLogo} alt="Gucci" className="mx-2 xs:mx-1 sm:mx-4 my-2 w-20 xs:w-16 sm:w-24 md:w-28" loading="lazy" decoding="async" />
             <div className="mx-2 xs:mx-1 sm:mx-4 my-2">
-              <img src={group0} alt="Prada" className="mx-2 xs:mx-1 sm:mx-4 my-2 w-24 xs:w-20 sm:w-28 md:w-32" />
+              <img src={group0} alt="Prada" className="mx-2 xs:mx-1 sm:mx-4 my-2 w-24 xs:w-20 sm:w-28 md:w-32" loading="lazy" decoding="async" />
             </div>
-            <img src={calvinKleinLogo} alt="Calvin Klein" className="mx-2 xs:mx-1 sm:mx-4 my-2 w-20 xs:w-16 sm:w-24 md:w-28" />
+            <img src={calvinKleinLogo} alt="Calvin Klein" className="mx-2 xs:mx-1 sm:mx-4 my-2 w-20 xs:w-16 sm:w-24 md:w-28" loading="lazy" decoding="async" />
           </div>
         </div>
       </div>
@@ -260,13 +266,13 @@ const HomePage = () => {
           <div className="flex flex-wrap justify-center gap-4 xs:gap-2 sm:gap-8 w-full">
             {/* Casual Card */}
             <div className="bg-white rounded-2xl overflow-hidden h-[200px] xs:h-[150px] sm:h-[289px] min-w-[150px] xs:min-w-[120px] sm:min-w-[200px] max-w-[300px] xs:max-w-[200px] sm:max-w-[407px] flex-1 relative">
-              <img src={image112} alt="Casual" className="w-full h-full object-cover" />
+              <img src={image112} alt="Casual" className="w-full h-full object-cover" loading="lazy" decoding="async" />
               <div className="absolute top-[1rem] xs:top-[0.75rem] sm:top-[1.5625rem] left-[1.5rem] xs:left-[1rem] sm:left-[2.25rem] text-xl xs:text-lg sm:text-2xl font-bold">Casual</div>
             </div>
             
             {/* Formal Card */}
             <div className="bg-white rounded-2xl overflow-hidden h-[200px] xs:h-[150px] sm:h-[289px] min-w-[150px] xs:min-w-[120px] sm:min-w-[200px] flex-1 relative">
-              <img src={image13} alt="Formal" className="w-full h-full object-cover" />
+              <img src={image13} alt="Formal" className="w-full h-full object-cover" loading="lazy" decoding="async" />
               <div className="absolute top-[1rem] xs:top-[0.75rem] sm:top-[1.5625rem] left-[1.5rem] xs:left-[1rem] sm:left-[2.25rem] text-xl xs:text-lg sm:text-2xl font-bold">Formal</div>
             </div>
           </div>
@@ -274,13 +280,13 @@ const HomePage = () => {
           <div className="flex flex-wrap justify-center gap-4 xs:gap-2 sm:gap-8 w-full mt-4 xs:mt-2 sm:mt-8">
             {/* Party Card */}
             <div className="bg-white rounded-2xl overflow-hidden h-[200px] xs:h-[150px] sm:h-[289px] min-w-[150px] xs:min-w-[120px] sm:min-w-[200px] flex-1 relative">
-              <img src={image122} alt="Party" className="w-full h-full object-cover" />
+              <img src={image122} alt="Party" className="w-full h-full object-cover" loading="lazy" decoding="async" />
               <div className="absolute top-[1rem] xs:top-[0.75rem] sm:top-[1.5625rem] left-[1.5rem] xs:left-[1rem] sm:left-[2.25rem] text-xl xs:text-lg sm:text-2xl font-bold">Party</div>
             </div>
             
             {/* Gym Card */}
             <div className="bg-white rounded-2xl overflow-hidden h-[200px] xs:h-[150px] sm:h-[289px] min-w-[150px] xs:min-w-[120px] sm:min-w-[200px] max-w-[300px] xs:max-w-[200px] sm:max-w-[407px] flex-1 relative">
-              <img src={image14} alt="Gym" className="w-full h-full object-cover" />
+              <img src={image14} alt="Gym" className="w-full h-full object-cover" loading="lazy" decoding="async" />
               <div className="absolute top-[1rem] xs:top-[0.75rem] sm:top-[1.5625rem] left-[1.5rem] xs:left-[1rem] sm:left-[2.25rem] text-xl xs:text-lg sm:text-2xl font-bold">Gym</div>
             </div>
           </div>
