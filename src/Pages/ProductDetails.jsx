@@ -112,7 +112,7 @@ const ProductDetails = () => {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8 xs:py-6 sm:py-10 md:py-12">
-        <div className="flex flex-col lg:flex-row gap-8 xs:gap-6 sm:gap-8 items-start justify-start">
+        <div className="flex flex-col lg:flex-row gap-8 xs:gap-6 sm:gap-8 items-start lg:items-start justify-start">
           {/* Image Gallery */}
           <div className="w-full lg:w-1/2">
             <ProductImageGallery 
@@ -263,7 +263,7 @@ const ProductDetails = () => {
         
         {/* Tabs Section */}
         <div className="container mx-auto px-4 py-8 xs:py-6 sm:py-8">
-          <div className="flex flex-row gap-6 xs:gap-4 sm:gap-8 items-center justify-center lg:justify-start overflow-x-auto">
+          <div className="flex flex-row gap-6 xs:gap-4 sm:gap-8 items-center justify-center md:justify-start overflow-x-auto">
             <button 
               className={`pb-2 whitespace-nowrap cursor-pointer ${activeTab === 'product-details' ? 'border-b-2 border-black' : ''}`}
               onClick={() => setActiveTab('product-details')}
