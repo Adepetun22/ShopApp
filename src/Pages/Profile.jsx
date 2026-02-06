@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import frame0 from '../assets/frame0.svg';
 import OrderCard from '../components/OrderCard';
 import Addresses from '../Components/Addresses';
+import Wishlist from '../Components/Wishlist';
 
 const sampleOrders = [
   {
@@ -196,15 +197,12 @@ const Profile = () => {
               </div>
             )}
 
-            {activeTab === 'addresses' && (
+{activeTab === 'addresses' && (
               <Addresses />
             )}
 
             {activeTab === 'wishlist' && (
-              <div>
-                <h1 className="text-2xl font-bold mb-6">My Wishlist</h1>
-                <p className="text-gray-500">Your wishlist is empty.</p>
-              </div>
+              <Wishlist />
             )}
           </div>
         </div>
