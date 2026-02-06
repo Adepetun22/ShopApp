@@ -1,26 +1,92 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
+import CustomAlert from '../Components/Alert/CustomAlert';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
+    phone: '',
     password: '',
     confirmPassword: ''
   });
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const { register, authAlert, hideAuthAlert } = useAuth();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+    setError('');
   };
 
-  const handleSubmit = (e) => {
+  // Email validation
+  const isValidEmail = (email) => {
+    const emailRegex = /^\S+@\S+\.\S+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle signup logic here
-    console.log('Signup form submitted:', formData);
+    setLoading(true);
+    setError('');
+
+    // Validate email format
+    if (!isValidEmail(formData.email)) {
+      setError('Please enter a valid email address');
+      setLoading(false);
+      return;
+    }
+
+    // Validate passwords match
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      setLoading(false);
+      return;
+    }
+
+    // Validate password length
+    if (formData.password.length < 6) {
+      setError('Password must be at least 6 characters');
+      setLoading(false);
+      return;
+    }
+
+    // Validate names
+    if (!formData.firstName.trim()) {
+      setError('Please enter your first name');
+      setLoading(false);
+      return;
+    }
+
+    if (!formData.lastName.trim()) {
+      setError('Please enter your last name');
+      setLoading(false);
+      return;
+    }
+
+    const result = await register(
+      formData.firstName,
+      formData.lastName,
+      formData.phone,
+      formData.email,
+      formData.password
+    );
+
+    if (result.success) {
+      // Show success message then redirect to login
+      setTimeout(() => {
+        navigate('/login');
+      }, 1500);
+    } else {
+      setError(result.message);
+    }
+    setLoading(false);
   };
 
   return (
@@ -30,6 +96,12 @@ const Signup = () => {
         <div className="max-w-md mx-auto">
           <h1 className="text-3xl font-bold mb-2 text-center">Create Account</h1>
           <p className="text-gray-600 text-center mb-8">Join Shop.co today</p>
+
+          {error && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+              {error}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div className="flex flex-row gap-4">
@@ -73,6 +145,18 @@ const Signup = () => {
             </div>
 
             <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Phone (Optional)</label>
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                placeholder="Enter your phone number"
+              />
+            </div>
+
+            <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
               <input
                 type="password"
@@ -80,7 +164,7 @@ const Signup = () => {
                 value={formData.password}
                 onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
-                placeholder="Create a password"
+                placeholder="Create a password (min 6 characters)"
                 required
               />
             </div>
@@ -100,9 +184,10 @@ const Signup = () => {
 
             <button
               type="submit"
-              className="w-full bg-black text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-800 transition duration-300 cursor-pointer mt-4"
+              disabled={loading}
+              className="w-full bg-black text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-800 transition duration-300 cursor-pointer mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Create Account
+              {loading ? 'Creating Account...' : 'Create Account'}
             </button>
           </form>
 
@@ -114,6 +199,15 @@ const Signup = () => {
           </p>
         </div>
       </div>
+
+      {/* Auth Alert */}
+      <CustomAlert
+        open={authAlert.open}
+        onClose={hideAuthAlert}
+        severity={authAlert.severity}
+        message={authAlert.message}
+        autoHideDuration={5000}
+      />
     </div>
   );
 };

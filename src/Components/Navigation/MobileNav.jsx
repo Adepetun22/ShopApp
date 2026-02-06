@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSearch } from '../../SearchContext';
+import { useAuth } from '../../AuthContext';
 import hamburgerIcon from '../../assets/harmburger0.svg';
 import cartIcon from '../../assets/cart0.svg';
 import frameIcon from '../../assets/frame0.svg';
@@ -13,6 +14,7 @@ const MobileNav = () => {
   const [searchInput, setSearchInput] = useState('');
   const { cartCount } = useCart();
   const { handleSearch } = useSearch();
+  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
   
   console.log('MobileNav rendered');
@@ -22,6 +24,10 @@ const MobileNav = () => {
       handleSearch(searchInput);
       navigate('/category');
     }
+  };
+
+  const handleLoginClick = () => {
+    navigate('/login');
   };
 
   // Search icon as data URL (the solid black one with 24x24 dimensions)
@@ -36,16 +42,23 @@ const MobileNav = () => {
 
   return (
     <div className="sticky top-0 z-50">
-      {/* Top notification bar */}
-      <div className="bg-black py-2 px-4">
-        <div className="container mx-auto flex flex-wrap justify-between items-center">
-          <div className="text-white text-sm xs:text-xs sm:text-sm">
-            <span className="font-normal">Sign up and get 20% off to your first order. </span>
-            <span className="font-medium underline cursor-pointer">Sign Up Now</span>
+      {/* Top notification bar - hidden when user is logged in */}
+      {!isAuthenticated && (
+        <div className="bg-black py-2 px-4">
+          <div className="container mx-auto flex flex-wrap justify-between items-center">
+            <div className="text-white text-sm xs:text-xs sm:text-sm">
+              <span className="font-normal">Sign up and get 20% off to your first order. </span>
+              <span 
+                className="font-medium underline cursor-pointer"
+                onClick={handleLoginClick}
+              >
+                Login Now
+              </span>
+            </div>
+            <img src={frameIcon} alt="Close" className="w-5 h-5" />
           </div>
-          <img src={frameIcon} alt="Close" className="w-5 h-5" />
         </div>
-      </div>
+      )}
       
       <div className="flex flex-col gap-2 items-center justify-center w-full px-8 py-1 bg-yellow-100 md:bg-red-100">
       <div className="w-full flex flex-row items-start justify-between py-1">
