@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import frame0 from '../assets/frame0.svg';
 import OrderCard from '../components/OrderCard';
+import Addresses from '../Components/Addresses';
 
 const sampleOrders = [
   {
@@ -53,7 +54,7 @@ const Profile = () => {
           <div className="lg:w-64">
             <div className="bg-gray-50 rounded-xl p-6">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center">
+                <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-white text-xl font-bold">
                     {userData.firstName[0]}{userData.lastName[0]}
                   </span>
@@ -140,6 +141,7 @@ const Profile = () => {
                         value={userData.firstName}
                         onChange={handleChange}
                         disabled={!isEditing}
+                        required
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent disabled:bg-gray-100"
                       />
                     </div>
@@ -151,6 +153,7 @@ const Profile = () => {
                         value={userData.lastName}
                         onChange={handleChange}
                         disabled={!isEditing}
+                        required
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent disabled:bg-gray-100"
                       />
                     </div>
@@ -162,6 +165,7 @@ const Profile = () => {
                         value={userData.email}
                         onChange={handleChange}
                         disabled={!isEditing}
+                        required
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent disabled:bg-gray-100"
                       />
                     </div>
@@ -173,6 +177,7 @@ const Profile = () => {
                         value={userData.phone}
                         onChange={handleChange}
                         disabled={!isEditing}
+                        required
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent disabled:bg-gray-100"
                       />
                     </div>
@@ -192,10 +197,7 @@ const Profile = () => {
             )}
 
             {activeTab === 'addresses' && (
-              <div>
-                <h1 className="text-2xl font-bold mb-6">My Addresses</h1>
-                <p className="text-gray-500">No saved addresses yet.</p>
-              </div>
+              <Addresses />
             )}
 
             {activeTab === 'wishlist' && (
