@@ -128,7 +128,7 @@ const ProductDetails = () => {
           <div className="w-full lg:w-1/2">
             <div className="flex flex-col gap-6 xs:gap-4 sm:gap-6">
               <div className="flex flex-col gap-4 xs:gap-3">
-                <h1 className="text-black text-left font-sans font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 xs:mb-2 sm:mb-4 leading-tight">One Life Graphic T-shirt</h1>
+                <h1 className="text-black text-center lg:text-left font-sans font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 xs:mb-2 sm:mb-4 leading-tight">One Life Graphic T-shirt</h1>
                 
                 <div className="flex flex-row gap-2 items-center justify-start">
                   <img className="w-auto h-5" src={frame101} alt="Rating stars" />
