@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSearch } from '../../SearchContext';
 import MobileNav from './MobileNav';
@@ -10,13 +10,12 @@ import frameIcon from '../../assets/frame0.svg';
 import frame054rt from '../../assets/Frame054rt.png';
 import { useCart } from '../../CartContext';
 
-const DesktopNav = () => {
+// Memoized DesktopNav component to prevent unnecessary re-renders
+const DesktopNav = memo(function DesktopNav() {
   const [searchInput, setSearchInput] = useState('');
   const { cartCount } = useCart();
   const { handleSearch } = useSearch();
   const navigate = useNavigate();
-  
-  console.log('DesktopNav rendered');
   
   const handleSearchSubmit = (e) => {
     if (e.key === 'Enter' || e.type === 'click') {
@@ -103,6 +102,6 @@ const DesktopNav = () => {
       </div>
     </div>
   );
-};
+});
 
 export default DesktopNav;

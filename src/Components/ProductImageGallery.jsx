@@ -2,21 +2,18 @@ import React, { useState } from 'react';
 
 const ProductImageGallery = ({ 
   images, 
-  mainImageClassName = "bg-gradient-to-l from-[#f0eeed] to-[#f0eeed] rounded-[1.25rem] flex-1 h-[33.125rem] relative object-cover aspect-[444/530]",
-  thumbnailClassName = "rounded-[1.25rem] border border-solid self-stretch flex-shrink-0 h-[10.4375rem] relative object-cover aspect-[152/167] cursor-pointer",
-  selectedThumbnailClassName = "border-black",
-  unselectedThumbnailClassName = "border-transparent"
+  mainImageClassName = "bg-gradient-to-l from-[#f0eeed] to-[#f0eeed] rounded-[1.25rem] flex-1 h-[33.125rem] relative object-cover aspect-[444/530]"
 }) => {
   const [selectedImage, setSelectedImage] = useState(images[0]);
   
   return (
     <div className="flex flex-col md:flex-row gap-4 xs:gap-2 sm:gap-4 items-center justify-start w-full">
       {/* Desktop view - thumbnails on the left */}
-      <div className="hidden md:flex md:flex-col md:gap-4 md:items-start md:justify-start md:w-24">
+      <div className="hidden md:flex md:flex-col md:gap-4 md:items-start md:justify-start md:w-40 lg:w-48">
         {images.map((image, index) => (
           <img 
             key={index}
-            className={`${thumbnailClassName} ${selectedImage === image ? selectedThumbnailClassName : unselectedThumbnailClassName}`} 
+            className={`rounded-xl border border-solid h-28 lg:h-32 object-cover cursor-pointer ${selectedImage === image ? 'border-black' : 'border-transparent'} w-full`} 
             src={image} 
             alt="" 
             onClick={() => setSelectedImage(image)}
