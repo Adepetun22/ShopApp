@@ -1,5 +1,5 @@
 import React, { useState, memo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useSearch } from '../../SearchContext';
 import { useAuth } from '../../AuthContext';
 import MobileNav from './MobileNav';
@@ -105,11 +105,13 @@ const DesktopNav = memo(function DesktopNav() {
                   </span>
                 )}
               </div>
-              <img 
-                alt="Profile" 
-                className="w-5.5 h-5.5 xs:w-5.5 xs:h-5.5 cursor-pointer" 
-                src={profileIcon}
-              />
+              <Link to="/profile" className="relative">
+                <img 
+                  alt="Profile" 
+                  className="w-5.5 h-5.5 xs:w-5.5 xs:h-5.5 cursor-pointer" 
+                  src={profileIcon}
+                />
+              </Link>
             </div>
           </div>
         </div>
