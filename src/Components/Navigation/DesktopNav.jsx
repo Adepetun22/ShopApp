@@ -93,7 +93,7 @@ const DesktopNav = memo(function DesktopNav() {
               />
             </div>
             <div className="flex items-center space-x-3 xs:space-x-2 sm:space-x-4">
-              <div className="relative">
+              <Link to="/cart" className="relative">
                 <img 
                   alt="Cart" 
                   className="w-5.5 h-5.5 xs:w-5.5 xs:h-5.5 cursor-pointer" 
@@ -104,7 +104,7 @@ const DesktopNav = memo(function DesktopNav() {
                     {cartCount}
                   </span>
                 )}
-              </div>
+              </Link>
               <Link to="/profile" className="relative">
                 <img 
                   alt="Profile" 

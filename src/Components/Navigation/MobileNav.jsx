@@ -80,14 +80,14 @@ const MobileNav = () => {
             alt="Search" 
             onClick={() => setShowSearch(!showSearch)}
           />
-          <div className="relative">
+          <Link to="/cart" className="relative">
             <img className="w-6 h-6" src={cartIcon} alt="Cart" />
             {cartCount > 0 && (
               <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
                 {cartCount}
               </span>
             )}
-          </div>
+          </Link>
         </div>
       </div>
       <div 
