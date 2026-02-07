@@ -1,4 +1,6 @@
 import React, { memo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { encodeId } from '../utils/hashIds';
 
 // Create a star rating component outside of the ProductCard component
 const StarRating = () => (
@@ -12,9 +14,23 @@ const StarRating = () => (
 );
 
 // Memoized ProductCard component to prevent unnecessary re-renders
-const ProductCard = memo(function ProductCard({ image, title, rating, price, originalPrice, discount }) {
+const ProductCard = memo(function ProductCard({ id, image, title, rating, price, originalPrice, discount, onClick }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
+    } else if (id) {
+      const encodedProductId = encodeId(id);
+      navigate(`/ProductDetails?id=${encodedProductId}`);
+    }
+  };
+
   return (
-    <div className="flex flex-col gap-3 xs:gap-2 sm:gap-4 items-start justify-start shrink-0 w-full relative">
+    <div 
+      className="flex flex-col gap-3 xs:gap-2 sm:gap-4 items-start justify-start shrink-0 w-full relative cursor-pointer"
+      onClick={handleClick}
+    >
       <div className="bg-[#f0eeed] rounded-xl xs:rounded-lg sm:rounded-2xl flex flex-row items-center justify-center self-stretch shrink-0 relative overflow-hidden w-full h-[298px]">
         <img 
           src={image} 

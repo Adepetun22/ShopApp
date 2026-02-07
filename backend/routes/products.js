@@ -1,8 +1,12 @@
 import express from 'express';
 import Product from '../models/Product.js';
 import { protect, admin, optionalAuth } from '../middleware/auth.js';
+import Hashids from 'hashids';
 
 const router = express.Router();
+
+// Configure Hashids for decoding (must match frontend)
+const hashids = new Hashids('shop-app-product-ids', 8);
 
 // @route   GET /api/products
 // @desc    Get all products with filtering, sorting, pagination
@@ -139,12 +143,26 @@ router.get('/brands', async (req, res, next) => {
 });
 
 // @route   GET /api/products/:id
-// @desc    Get single product
+// @desc    Get single product (by MongoDB ObjectId or externalId)
 // @access  Public
 router.get('/:id', optionalAuth, async (req, res, next) => {
   try {
-    const product = await Product.findById(req.params.id)
-      .populate('reviews.user', 'name avatar');
+    let product;
+    
+    // Check if it's a valid MongoDB ObjectId
+    if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+      // Look up by MongoDB ObjectId
+      product = await Product.findById(req.params.id)
+        .populate('reviews.user', 'name avatar');
+    } else {
+      // Decode the encoded ID using hashids
+      const decoded = hashids.decode(req.params.id);
+      if (decoded.length > 0) {
+        const externalId = decoded[0];
+        product = await Product.findOne({ externalId })
+          .populate('reviews.user', 'name avatar');
+      }
+    }
 
     if (!product) {
       return res.status(404).json({
