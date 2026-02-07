@@ -102,6 +102,12 @@ const productSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  // External ID for frontend (used with hashids encoding)
+  externalId: {
+    type: Number,
+    unique: true,
+    sparse: true
+  },
   createdAt: {
     type: Date,
     default: Date.now

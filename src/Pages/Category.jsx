@@ -2,6 +2,7 @@ import React from 'react';
 import { useSearch } from '../SearchContext';
 import EmailSubscription from '../Components/EmailSubscription';
 import Pagination from '../Components/Pagination';
+import ProductCard from '../Components/ProductCard';
 
 // Import images from assets folder
 import frame0 from '../assets/frame0.svg';
@@ -694,52 +695,23 @@ React.useEffect(() => {
           {/* Products Grid */}
           {filteredProducts.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-stretch">
-              {filteredProducts.map((product) => (
-                <div key={product.id} className="flex flex-col gap-4 items-start justify-start w-full relative">
-                  <div className="bg-[#f0eeed] rounded-[20px] self-stretch shrink-0 h-[298px] relative overflow-hidden flex items-center justify-center">
-                    <img 
-                      className="w-full h-full object-cover md:object-contain md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[296px] md:max-h-[444px]" 
-                      src={product.image} 
-                      alt={product.name} 
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2 items-start justify-start self-stretch shrink-0 relative">
-                    <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-xl font-bold relative self-stretch flex items-center justify-start">
-                      {product.name}
-                    </div>
-                    <div className="flex flex-row gap-[13px] items-center justify-start shrink-0 relative">
-                      <div className="flex flex-row gap-[5.31px] items-start justify-start shrink-0 h-[auto] relative overflow-visible">
-                        {/* Rating stars */}
-                        {[...Array(5)].map((_, i) => (
-                          <div key={i} className={`w-4 h-4 ${i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300'}`}>
-                            ★
-                          </div>
-                        ))}
-                      </div>
-                      <div className="text-left font-['Satoshi-Regular',_sans-serif] text-sm font-normal relative">
-                        {product.rating}/5
-                      </div>
-                    </div>
-                    <div className="flex flex-row gap-2.5 items-center justify-start self-stretch shrink-0 relative">
-                      <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-2xl font-bold relative flex items-center justify-start">
-                        ${product.price}
-                      </div>
-                      {product.originalPrice && (
-                        <>
-                          <div className="text-[rgba(0,0,0,0.40)] text-left font-['Satoshi-Bold',_sans-serif] text-2xl font-bold relative flex items-center justify-start" style={{ textDecoration: 'line-through' }}>
-                            ${product.originalPrice}
-                          </div>
-                          <div className="bg-[rgba(255,51,51,0.10)] rounded-[62px] pt-1.5 pr-3.5 pb-1.5 pl-3.5 flex flex-row gap-3 items-center justify-center shrink-0 w-[58px] relative overflow-hidden">
-                            <div className="text-[#ff3333] text-left font-['Satoshi-Medium',_sans-serif] text-xs font-medium relative">
-                              -{product.discount}%
-                            </div>
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              ))}
+              {filteredProducts.map((product) => {
+                const discount = product.originalPrice && product.price < product.originalPrice
+                  ? `-${Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%`
+                  : null;
+                return (
+                  <ProductCard
+                    key={product.id}
+                    id={product.id}
+                    image={product.image}
+                    title={product.name}
+                    rating={`${product.rating}/5`}
+                    price={`$${product.price}`}
+                    originalPrice={product.originalPrice ? `$${product.originalPrice}` : null}
+                    discount={discount}
+                  />
+                );
+              })}
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-16 px-4 text-center">

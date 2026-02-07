@@ -154,6 +154,7 @@ const HomePage = () => {
           {/* Product 1 */}
           <div className="w-full">
             <ProductCard 
+              id={1}
               image={image7}
               title="T-SHIRT WITH TAPE DETAILS"
               rating="4.5/5"
@@ -164,6 +165,7 @@ const HomePage = () => {
           {/* Product 2 */}
           <div className="w-full">
             <ProductCard 
+              id={2}
               image={image82}
               title="SKINNY FIT JEANS"
               rating="4.5/5"
@@ -176,6 +178,7 @@ const HomePage = () => {
           {/* Product 3 */}
           <div className="w-full">
             <ProductCard 
+              id={3}
               image={image9}
               title="CHECKERED SHIRT"
               rating="4.5/5"
@@ -186,6 +189,7 @@ const HomePage = () => {
           {/* Product 4 */}
           <div className="w-full">
             <ProductCard 
+              id={4}
               image={image11}
               title="SLEEVES STRIPED T-SHIRT"
               rating="4.5/5"
@@ -211,6 +215,7 @@ const HomePage = () => {
           {/* Product 1 */}
           <div className="w-full">
             <ProductCard 
+              id={5}
               image={image86}
               title="VERTICAL STRIPED SHIRT"
               rating="5.0/5"
@@ -223,6 +228,7 @@ const HomePage = () => {
           {/* Product 2 */}
           <div className="w-full">
             <ProductCard 
+              id={6}
               image={image92}
               title="COURAGE GRAPHIC T-SHIRT"
               rating="4.5/5"
@@ -233,6 +239,7 @@ const HomePage = () => {
           {/* Product 3 */}
           <div className="w-full">
             <ProductCard 
+              id={7}
               image={image12}
               title="FADED SKINNY JEANS"
               rating="4.5/5"
@@ -243,6 +250,7 @@ const HomePage = () => {
           {/* Product 4 */}
           <div className="w-full">
             <ProductCard 
+              id={8}
               image={image10}
               title="LOOSE FIT BERMUDA SHORTS"
               rating="4.5/5"

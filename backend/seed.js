@@ -23,7 +23,8 @@ const products = [
     rating: { average: 4.5, count: 120 },
     features: ['100% Cotton', 'Machine Washable', 'Breathable'],
     isFeatured: true,
-    isOnSale: true
+    isOnSale: true,
+    externalId: 1
   },
   {
     name: 'Designer Jeans',
@@ -39,7 +40,8 @@ const products = [
     rating: { average: 4.7, count: 85 },
     features: ['Premium Denim', 'Classic Fit', 'Durable'],
     isFeatured: true,
-    isOnSale: false
+    isOnSale: false,
+    externalId: 2
   },
   {
     name: 'Leather Handbag',
@@ -55,7 +57,8 @@ const products = [
     rating: { average: 4.8, count: 45 },
     features: ['Genuine Leather', 'Multiple Compartments', 'Adjustable Strap'],
     isFeatured: true,
-    isOnSale: true
+    isOnSale: true,
+    externalId: 3
   },
   {
     name: 'Running Sneakers',
@@ -71,7 +74,8 @@ const products = [
     rating: { average: 4.6, count: 200 },
     features: ['Lightweight', 'Cushioned Sole', 'Breathable Mesh'],
     isFeatured: true,
-    isOnSale: false
+    isOnSale: false,
+    externalId: 4
   },
   {
     name: 'Silk Scarf',
@@ -86,7 +90,8 @@ const products = [
     rating: { average: 4.4, count: 30 },
     features: ['100% Silk', 'Hand Rolled Edges', 'Dry Clean Only'],
     isFeatured: false,
-    isOnSale: false
+    isOnSale: false,
+    externalId: 5
   },
   {
     name: 'Classic Watch',
@@ -102,7 +107,8 @@ const products = [
     rating: { average: 4.9, count: 60 },
     features: ['Swiss Movement', 'Leather Strap', 'Water Resistant'],
     isFeatured: true,
-    isOnSale: true
+    isOnSale: true,
+    externalId: 6
   },
   {
     name: 'Summer Dress',
@@ -118,7 +124,8 @@ const products = [
     rating: { average: 4.3, count: 75 },
     features: ['Light Fabric', 'Breathable', 'Machine Washable'],
     isFeatured: false,
-    isOnSale: false
+    isOnSale: false,
+    externalId: 7
   },
   {
     name: 'Wireless Headphones',
@@ -133,7 +140,8 @@ const products = [
     rating: { average: 4.8, count: 150 },
     features: ['Noise Cancellation', '30hr Battery', 'Bluetooth 5.0'],
     isFeatured: true,
-    isOnSale: false
+    isOnSale: false,
+    externalId: 8
   }
 ];
 
@@ -150,7 +158,8 @@ const seedDatabase = async () => {
 
     // Create sample admin user
     const admin = await User.create({
-      name: 'Admin User',
+      firstName: 'Admin',
+      lastName: 'User',
       email: 'admin@shopapp.com',
       password: 'admin123',
       role: 'admin'
@@ -159,7 +168,8 @@ const seedDatabase = async () => {
 
     // Create sample regular user
     const user = await User.create({
-      name: 'John Doe',
+      firstName: 'John',
+      lastName: 'Doe',
       email: 'john@example.com',
       password: 'user123'
     });
