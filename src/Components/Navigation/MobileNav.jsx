@@ -5,7 +5,6 @@ import { useAuth } from '../../AuthContext';
 import hamburgerIcon from '../../assets/harmburger0.svg';
 import cartIcon from '../../assets/cart0.svg';
 import frameIcon from '../../assets/frame0.svg';
-import arrowDownIcon from '../../assets/Frame054rt.png';
 import { useCart } from '../../CartContext';
 
 const MobileNav = () => {
@@ -123,11 +122,6 @@ const MobileNav = () => {
         {showMenu && (
           <div className="bg-white border border-gray-200 rounded-lg p-4 w-full">
             <div className="flex flex-col gap-4">
-              {/* Shop */}
-              <div className="flex items-center cursor-pointer">
-                <span className="text-sm xs:text-xs sm:text-sm text-black">Shop</span>
-                <img alt="" className="ml-1 w-4 h-4" src={arrowDownIcon} />
-              </div>
               {/* On Sale */}
               <span className="text-sm xs:text-xs sm:text-sm text-black cursor-pointer">On Sale</span>
               {/* New Arrivals */}
