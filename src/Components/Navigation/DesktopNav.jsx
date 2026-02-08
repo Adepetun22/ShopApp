@@ -59,11 +59,13 @@ const DesktopNav = memo(function DesktopNav() {
         <div className="py-4 xs:py-3 sm:py-5 px-4 border-b">
           <div className="container mx-auto flex flex-row items-center justify-between flex-wrap">
             <div className="flex items-center space-x-6 xs:space-x-4 sm:space-x-6 md:space-x-10 w-auto">
-              <div className="text-2xl xs:text-xl sm:text-3xl font-extrabold">SHOP.CO</div>
+              <Link to="/" className="text-2xl xs:text-xl sm:text-3xl font-extrabold hover:text-gray-700 transition-colors cursor-pointer">
+                SHOP.CO
+              </Link>
               <div className="hidden md:flex space-x-4 xs:space-x-2 sm:space-x-4 md:space-x-6 w-auto">
-                <span className="text-sm xs:text-xs sm:text-sm">On Sale</span>
-                <span className="text-sm xs:text-xs sm:text-sm">New Arrivals</span>
-                <span className="text-sm xs:text-xs sm:text-sm">Brands</span>
+                <Link to="/category?category=On Sale" className="text-sm xs:text-xs sm:text-sm hover:text-gray-600 transition-colors cursor-pointer">On Sale</Link>
+                <Link to="/category?category=New Arrivals" className="text-sm xs:text-xs sm:text-sm hover:text-gray-600 transition-colors cursor-pointer">New Arrivals</Link>
+                <Link to="/category?category=Brands" className="text-sm xs:text-xs sm:text-sm hover:text-gray-600 transition-colors cursor-pointer">Brands</Link>
               </div>
             </div>
             <div className="hidden md:flex items-center bg-gray-100 rounded-full px-3 xs:px-2 sm:px-4 py-1 xs:py-0.5 sm:py-2 w-full max-w-[400px] mx-2 xs:mx-1 sm:mx-4">

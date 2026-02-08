@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useSearch } from '../SearchContext';
 import EmailSubscription from '../Components/EmailSubscription';
 import Pagination from '../Components/Pagination';
@@ -295,6 +296,11 @@ const dressStyleOptions = ['Casual', 'Formal', 'Party', 'Gym'];
 
 const Category = () => {
   const { searchQuery, isSearchActive } = useSearch();
+  const [searchParams] = useSearchParams();
+  
+  // Get category from URL params
+  const categoryFromUrl = searchParams.get('category');
+  
   // State for pagination
   const [currentPage, setCurrentPage] = React.useState(1);
   const totalPages = 10;
@@ -490,7 +496,7 @@ React.useEffect(() => {
           <img className="shrink-0 w-4 h-4 relative overflow-visible" src={frame0} alt="arrow" />
         </div>
         <div className="text-[#000000] text-left font-['Satoshi-Regular',_sans-serif] text-base font-normal relative">
-          Casual
+          {categoryFromUrl || 'Casual'}
         </div>
       </div>
 
@@ -764,7 +770,7 @@ React.useEffect(() => {
           {/* Header */}
           <div className="flex flex-row items-center justify-center md:justify-between self-stretch shrink-0 relative">
             <div className="text-[#000000] text-left font-['Satoshi-Bold',_sans-serif] text-2xl md:text-[32px] font-bold relative flex items-center justify-start">
-              {isSearchActive && searchQuery.trim() ? `Search Results for "${searchQuery}"` : 'Casual'}
+              {isSearchActive && searchQuery.trim() ? `Search Results for "${searchQuery}"` : (categoryFromUrl || 'Casual')}
             </div>
             <div className="flex flex-row gap-3 items-center justify-end flex-1 relative">
               {/* Mobile Filter Toggle */}

@@ -68,9 +68,9 @@ const MobileNav = () => {
             alt="Menu" 
             onClick={toggleMenu}
           />
-          <div className="text-black text-[25px] font-bold font-integralcf leading-6 flex items-center justify-start">
+          <Link to="/" className="text-black text-[25px] font-bold font-integralcf leading-6 flex items-center justify-start hover:text-gray-700 transition-colors cursor-pointer">
             SHOP.CO
-          </div>
+          </Link>
         </div>
         <div className="flex flex-row gap-3 items-start justify-start">
           <img 
@@ -123,11 +123,11 @@ const MobileNav = () => {
           <div className="bg-white border border-gray-200 rounded-lg p-4 w-full">
             <div className="flex flex-col gap-4">
               {/* On Sale */}
-              <span className="text-sm xs:text-xs sm:text-sm text-black cursor-pointer">On Sale</span>
+              <Link to="/category?category=On Sale" className="text-sm xs:text-xs sm:text-sm text-black cursor-pointer hover:text-gray-600 transition-colors">On Sale</Link>
               {/* New Arrivals */}
-              <span className="text-sm xs:text-xs sm:text-sm text-black cursor-pointer">New Arrivals</span>
+              <Link to="/category?category=New Arrivals" className="text-sm xs:text-xs sm:text-sm text-black cursor-pointer hover:text-gray-600 transition-colors">New Arrivals</Link>
               {/* Brands */}
-              <span className="text-sm xs:text-xs sm:text-sm text-black cursor-pointer">Brands</span>
+              <Link to="/category?category=Brands" className="text-sm xs:text-xs sm:text-sm text-black cursor-pointer hover:text-gray-600 transition-colors">Brands</Link>
               {/* Profile */}
               <Link to="/profile" className="flex items-center cursor-pointer pt-2 border-t border-gray-200">
                 <img 
