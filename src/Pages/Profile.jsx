@@ -1,31 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import frame0 from '../assets/frame0.svg';
 import OrderCard from '../components/OrderCard';
 import Addresses from '../Components/Addresses';
-import Wishlist from '../Components/Wishlist';
-
-const sampleOrders = [
-  {
-    id: 'ORD-12345678',
-    date: '2024-01-15',
-    status: 'Delivered',
-    total: 299.99
-  },
-  {
-    id: 'ORD-87654321',
-    date: '2024-01-10',
-    status: 'Shipped',
-    total: 145.00
-  }
-];
 
 const Profile = () => {
   const { user, loading: authLoading, logout } = useAuth();
   const [activeTab, setActiveTab] = useState('orders');
   const [isEditing, setIsEditing] = useState(false);
+  const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
+
+  // Load orders from localStorage
+  useEffect(() => {
+    const loadOrders = () => {
+      const storedOrders = localStorage.getItem('userOrders');
+      if (storedOrders) {
+        const allOrders = JSON.parse(storedOrders);
+        // Filter orders for current user or show all for demo
+        const userOrders = allOrders.filter(order => 
+          order.userId === user?.email || order.userId === 'guest'
+        );
+        setOrders(userOrders.reverse()); // Show newest first
+      }
+    };
+
+    if (user) {
+      loadOrders();
+    }
+  }, [user]);
 
   // Show loading state while auth is initializing
   if (authLoading) {
@@ -103,14 +107,6 @@ const Profile = () => {
                   Addresses
                 </button>
                 <button
-                  onClick={() => setActiveTab('wishlist')}
-                  className={`w-full text-left px-4 py-2 rounded-lg transition-colors cursor-pointer ${
-                    activeTab === 'wishlist' ? 'bg-black text-white' : 'hover:bg-gray-200'
-                  }`}
-                >
-                  Wishlist
-                </button>
-                <button
                   onClick={() => {
                     logout();
                     navigate('/login');
@@ -127,17 +123,31 @@ const Profile = () => {
             {activeTab === 'orders' && (
               <div>
                 <h1 className="text-2xl font-bold mb-6">My Orders</h1>
-                <div className="space-y-4">
-                  {sampleOrders.map((order) => (
-                    <OrderCard
-                      key={order.id}
-                      orderId={order.id}
-                      date={order.date}
-                      status={order.status}
-                      total={order.total.toFixed(2)}
-                    />
-                  ))}
-                </div>
+                {orders.length > 0 ? (
+                  <div className="space-y-4">
+                    {orders.map((order) => (
+                      <OrderCard
+                        key={order.id}
+                        orderId={order.id}
+                        date={order.date}
+                        status={order.status}
+                        total={order.total.toFixed(2)}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-12">
+                    <div className="text-6xl mb-4">📦</div>
+                    <h2 className="text-xl font-bold mb-2">No Orders Yet</h2>
+                    <p className="text-gray-600 mb-6">You haven't placed any orders yet.</p>
+                    <Link
+                      to="/"
+                      className="bg-black text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 inline-block"
+                    >
+                      Start Shopping
+                    </Link>
+                  </div>
+                )}
               </div>
             )}
 

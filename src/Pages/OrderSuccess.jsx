@@ -2,11 +2,60 @@
 
 
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useCart } from '../CartContext';
+import { useAuth } from '../AuthContext';
 
 const OrderSuccess = () => {
-  const orderNumber = 'ORD-12345678';
+  const { cartItems, clearCart } = useCart();
+  const { user } = useAuth();
+  const [orderNumber, setOrderNumber] = useState('');
+
+  useEffect(() => {
+    // Generate order number
+    const generateOrderNumber = () => {
+      const prefix = 'ORD';
+      const timestamp = Date.now().toString(36).toUpperCase();
+      const random = Math.random().toString(36).substring(2, 6).toUpperCase();
+      return `${prefix}-${timestamp}${random}`;
+    };
+
+    // Create order record
+    const createOrder = () => {
+      if (cartItems.length === 0) return;
+
+      const newOrderNumber = generateOrderNumber();
+      setOrderNumber(newOrderNumber);
+
+      const orderRecord = {
+        id: newOrderNumber,
+        date: new Date().toISOString().split('T')[0],
+        status: 'Processing',
+        items: cartItems.map(item => ({
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+          image: item.image,
+          selectedSize: item.selectedSize,
+          selectedColor: item.selectedColor
+        })),
+        total: cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+        userId: user?.email || 'guest'
+      };
+
+      // Save to localStorage (simulating backend)
+      const existingOrders = JSON.parse(localStorage.getItem('userOrders') || '[]');
+      existingOrders.push(orderRecord);
+      localStorage.setItem('userOrders', JSON.stringify(existingOrders));
+
+      // Clear the cart after saving order
+      clearCart();
+    };
+
+    createOrder();
+  }, [cartItems, user, clearCart]);
 
   return (
     <div className="min-h-screen bg-white">
