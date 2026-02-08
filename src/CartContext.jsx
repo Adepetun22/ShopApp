@@ -57,6 +57,20 @@ export const CartProvider = ({ children }) => {
     showAlert('warning', 'Item removed from cart!');
   };
 
+  const updateQuantity = (productId, newQuantity) => {
+    if (newQuantity < 1) {
+      removeFromCart(productId);
+    } else {
+      setCartItems(prevItems =>
+        prevItems.map(item =>
+          item.id === productId
+            ? { ...item, quantity: newQuantity }
+            : item
+        )
+      );
+    }
+  };
+
   const clearCart = () => {
     setCartItems([]);
   };
@@ -68,6 +82,7 @@ export const CartProvider = ({ children }) => {
       cartItems, 
       addToCart, 
       removeFromCart, 
+      updateQuantity,
       clearCart,
       cartCount,
       alert,

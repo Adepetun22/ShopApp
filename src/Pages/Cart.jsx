@@ -5,10 +5,9 @@ import { useCart } from '../CartContext';
 import frame0 from '../assets/frame0.svg';
 import frame4 from '../assets/frame4.svg';
 import frame5 from '../assets/frame5.svg';
-import trashIcon from '../assets/frame8.svg';
 
 const Cart = () => {
-  const { cartItems, setCartItems } = useCart();
+  const { cartItems, updateQuantity, removeFromCart } = useCart();
   const navigate = useNavigate();
   const [isRemoving, setIsRemoving] = useState(null);
 
@@ -20,21 +19,17 @@ const Cart = () => {
   const total = subtotal + shipping;
 
   const handleQuantityChange = (id, delta) => {
-    setCartItems(prevItems =>
-      prevItems.map(item => {
-        if (item.id === id) {
-          const newQuantity = Math.max(1, item.quantity + delta);
-          return { ...item, quantity: newQuantity };
-        }
-        return item;
-      })
-    );
+    const item = cartItems.find(item => item.id === id);
+    if (item) {
+      const newQuantity = Math.max(1, item.quantity + delta);
+      updateQuantity(id, newQuantity);
+    }
   };
 
   const handleRemoveItem = (id) => {
     setIsRemoving(id);
     setTimeout(() => {
-      setCartItems(prevItems => prevItems.filter(item => item.id !== id));
+      removeFromCart(id);
       setIsRemoving(null);
     }, 300);
   };
@@ -107,27 +102,31 @@ const Cart = () => {
                     <p className="font-bold mt-1">${item.price}</p>
                   </div>
                   <div className="flex flex-col items-end gap-2">
-                    <button
-                      onClick={() => handleRemoveItem(item.id)}
-                      className="text-gray-400 hover:text-red-500 transition-colors"
-                    >
-                      <img src={trashIcon} alt="Remove" className="w-5 h-5" />
-                    </button>
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => handleQuantityChange(item.id, -1)}
-                        className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:border-black transition-colors cursor-pointer"
+                        className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:border-black hover:bg-black hover:text-white transition-all cursor-pointer"
                       >
                         <img src={frame4} alt="Decrease" className="w-4 h-4" />
                       </button>
-                      <span className="w-8 text-center">{item.quantity}</span>
+                      <span className="w-8 text-center font-medium">{item.quantity}</span>
                       <button
                         onClick={() => handleQuantityChange(item.id, 1)}
-                        className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:border-black transition-colors cursor-pointer"
+                        className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:border-black hover:bg-black hover:text-white transition-all cursor-pointer"
                       >
                         <img src={frame5} alt="Increase" className="w-4 h-4" />
                       </button>
                     </div>
+                    <button
+                      onClick={() => handleRemoveItem(item.id)}
+                      className="flex items-center gap-1 text-gray-400 hover:text-red-500 transition-colors bg-gray-100 hover:bg-red-50 px-2 py-1 rounded-md cursor-pointer mt-4"
+                      title="Remove item"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 6H21M8 6V4C8 3.44772 8.44772 3 9 3H15C15.5523 3 16 3.44772 16 4V6M19 6V20C19 20.5523 18.5523 21 18 21H6C5.44772 21 5 20.5523 5 20V6M12 11V17M12 17V11M10 17H14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                      <span className="text-xs font-medium">Remove</span>
+                    </button>
                   </div>
                 </div>
               ))}
