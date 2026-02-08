@@ -1,10 +1,114 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 
 const CustomerReview = ({ testimonials = [], arrowDownBold2, arrowDownBold1, title = "OUR HAPPY CUSTOMERS" }) => {
+  // All hooks must be at the top level - before any early returns
   const [currentSlide, setCurrentSlide] = useState(0);
-  const intervalRef = React.useRef(null);
+  const intervalRef = useRef(null);
+  const isAutoScrolling = useRef(true);
   
-  // Early return if no testimonials
+  // Determine how many cards to show based on screen size
+  const getCardsToShow = useCallback(() => {
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth >= 1024) return 3; // Desktop: 3 cards
+      if (window.innerWidth >= 768) return 2;  // Tablet: 2 cards
+      return 1; // Mobile: 1 card
+    }
+    return 1; // Default to 1 on server-side rendering
+  }, []);
+  
+  const [cardsToShow, setCardsToShow] = useState(() => getCardsToShow());
+  
+  // Auto-scroll functionality - single interval
+  useEffect(() => {
+    if (testimonials.length <= cardsToShow) return;
+    
+    const startAutoScroll = () => {
+      isAutoScrolling.current = true;
+      intervalRef.current = setInterval(() => {
+        if (isAutoScrolling.current) {
+          setCurrentSlide(prev => (prev >= testimonials.length - cardsToShow ? 0 : prev + 1));
+        }
+      }, 5000);
+    };
+    
+    startAutoScroll();
+    
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
+  }, [testimonials.length, cardsToShow]);
+  
+  // Update cards to show on window resize with debouncing
+  useEffect(() => {
+    let timeoutId = null;
+    
+    const handleResize = () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      timeoutId = setTimeout(() => {
+        setCardsToShow(getCardsToShow());
+      }, 100);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [getCardsToShow]);
+  
+  // Handle slide change
+  const goToSlide = useCallback((index) => {
+    isAutoScrolling.current = false;
+    setCurrentSlide(index);
+    
+    // Restart auto-scroll after user interaction
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    intervalRef.current = setInterval(() => {
+      if (isAutoScrolling.current) {
+        setCurrentSlide(prev => (prev >= testimonials.length - cardsToShow ? 0 : prev + 1));
+      }
+    }, 5000);
+  }, [testimonials.length, cardsToShow]);
+  
+  // Navigation functions
+  const nextSlide = useCallback(() => {
+    isAutoScrolling.current = false;
+    setCurrentSlide(prev => (prev >= testimonials.length - cardsToShow ? 0 : prev + 1));
+    
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    intervalRef.current = setInterval(() => {
+      if (isAutoScrolling.current) {
+        setCurrentSlide(prev => (prev >= testimonials.length - cardsToShow ? 0 : prev + 1));
+      }
+    }, 5000);
+  }, [testimonials.length, cardsToShow]);
+  
+  const prevSlide = useCallback(() => {
+    isAutoScrolling.current = false;
+    setCurrentSlide(prev => (prev === 0 ? Math.max(0, testimonials.length - cardsToShow) : prev - 1));
+    
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    intervalRef.current = setInterval(() => {
+      if (isAutoScrolling.current) {
+        setCurrentSlide(prev => (prev >= testimonials.length - cardsToShow ? 0 : prev + 1));
+      }
+    }, 5000);
+  }, [testimonials.length, cardsToShow]);
+  
+  // Early return if no testimonials - after all hooks
   if (!testimonials || testimonials.length === 0) {
     return (
       <div className="flex flex-col gap-6 items-start justify-start self-stretch flex-shrink-0 relative">
@@ -17,75 +121,6 @@ const CustomerReview = ({ testimonials = [], arrowDownBold2, arrowDownBold1, tit
       </div>
     );
   }
-  
-  // Determine how many cards to show based on screen size
-  const getCardsToShow = () => {
-    if (typeof window !== 'undefined') {
-      if (window.innerWidth >= 1024) return 3; // Desktop: 3 cards
-      if (window.innerWidth >= 768) return 2;  // Tablet: 2 cards
-      return 1; // Mobile: 1 card
-    }
-    return 1; // Default to 1 on server-side rendering
-  };
-  
-  const [cardsToShow, setCardsToShow] = useState(getCardsToShow());
-  
-  // Update cards to show on window resize
-  useEffect(() => {
-    const handleResize = () => {
-      setCardsToShow(getCardsToShow());
-    };
-    
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-  
-  // Auto-scroll functionality
-  useEffect(() => {
-    if (testimonials.length <= cardsToShow) return; // Don't auto-scroll if all cards are visible
-    
-    intervalRef.current = setInterval(() => {
-      setCurrentSlide(prev => (prev >= testimonials.length - cardsToShow ? 0 : prev + 1));
-    }, 5000); // Change slide every 5 seconds
-    
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, [testimonials.length, cardsToShow]);
-  
-  // Handle slide change
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = setInterval(() => {
-        setCurrentSlide(prev => (prev >= testimonials.length - cardsToShow ? 0 : prev + 1));
-      }, 5000);
-    }
-  };
-  
-  // Navigation functions
-  const nextSlide = () => {
-    setCurrentSlide(currentSlide >= testimonials.length - cardsToShow ? 0 : currentSlide + 1);
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = setInterval(() => {
-        setCurrentSlide(prev => (prev >= testimonials.length - cardsToShow ? 0 : prev + 1));
-      }, 5000);
-    }
-  };
-  
-  const prevSlide = () => {
-    setCurrentSlide(currentSlide === 0 ? Math.max(0, testimonials.length - cardsToShow) : currentSlide - 1);
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = setInterval(() => {
-        setCurrentSlide(prev => (prev >= testimonials.length - cardsToShow ? 0 : prev + 1));
-      }, 5000);
-    }
-  };
   
   // Calculate card width based on cards to show
   const cardWidth = 100 / cardsToShow;
@@ -106,6 +141,7 @@ const CustomerReview = ({ testimonials = [], arrowDownBold2, arrowDownBold1, tit
               src={arrowDownBold2} 
               alt="Previous" 
               className="w-full h-full" 
+              loading="lazy"
             />
           </button>
           <button 
@@ -117,23 +153,23 @@ const CustomerReview = ({ testimonials = [], arrowDownBold2, arrowDownBold1, tit
               src={arrowDownBold1} 
               alt="Next" 
               className="w-full h-full" 
+              loading="lazy"
             />
           </button>
         </div>
       </div>
       
       {/* Carousel Container */}
-      <div className="customer-review-carousel relative w-full">
+      <div className="customer-review-carousel relative w-full overflow-hidden">
         <div 
-          className="customer-review-slide flex"
+          className="customer-review-slide flex transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${currentSlide * cardWidth}%)` }}
         >
-          {testimonials.map((testimonial, index) => (
+          {testimonials.map((testimonial) => (
             <div 
               key={testimonial.id} 
               className="flex-shrink-0"
               style={{ width: `${cardWidth}%` }}
-              onClick={() => console.log(`Card ${index} clicked`)}
             >
               <div className="px-2 h-full">
                 {/* Responsive height card container */}
@@ -143,6 +179,7 @@ const CustomerReview = ({ testimonials = [], arrowDownBold2, arrowDownBold1, tit
                       src={testimonial.rating} 
                       alt="Rating" 
                       className="shrink-0 w-auto h-5 relative overflow-visible" 
+                      loading="lazy"
                     />
                   </div>
                   <div className="flex flex-col gap-3 items-start justify-start flex-grow">
@@ -154,6 +191,7 @@ const CustomerReview = ({ testimonials = [], arrowDownBold2, arrowDownBold1, tit
                         src={testimonial.verified} 
                         alt="Verified" 
                         className="shrink-0 w-5 h-5 relative overflow-visible" 
+                        loading="lazy"
                       />
                     </div>
                     <div className="text-black text-opacity-60 text-left font-normal text-sm leading-5 relative flex-grow">
@@ -167,21 +205,24 @@ const CustomerReview = ({ testimonials = [], arrowDownBold2, arrowDownBold1, tit
         </div>
         
         {/* Dots indicator */}
-        <div className="customer-review-dots">
-          {Array.from({ length: Math.max(1, testimonials.length - cardsToShow + 1) }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`customer-review-dot ${
-                currentSlide === index ? 'active' : ''
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
+        {testimonials.length > cardsToShow && (
+          <div className="customer-review-dots flex justify-center gap-2 mt-4">
+            {Array.from({ length: Math.max(1, testimonials.length - cardsToShow + 1) }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`w-2 h-2 rounded-full transition-colors cursor-pointer ${
+                  currentSlide === index ? 'bg-black' : 'bg-gray-300'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
 export default CustomerReview;
+
