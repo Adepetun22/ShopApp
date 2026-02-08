@@ -123,11 +123,11 @@ const MobileNav = () => {
           <div className="bg-white border border-gray-200 rounded-lg p-4 w-full">
             <div className="flex flex-col gap-4">
               {/* On Sale */}
-              <Link to="/category?category=On Sale" className="text-sm xs:text-xs sm:text-sm text-black cursor-pointer hover:text-gray-600 transition-colors">On Sale</Link>
+              <Link to="/category?category=On Sale" className="text-sm xs:text-xs sm:text-sm text-black">On Sale</Link>
               {/* New Arrivals */}
-              <Link to="/category?category=New Arrivals" className="text-sm xs:text-xs sm:text-sm text-black cursor-pointer hover:text-gray-600 transition-colors">New Arrivals</Link>
+              <Link to="/category?category=New Arrivals" className="text-sm xs:text-xs sm:text-sm text-black">New Arrivals</Link>
               {/* Brands */}
-              <Link to="/category?category=Brands" className="text-sm xs:text-xs sm:text-sm text-black cursor-pointer hover:text-gray-600 transition-colors">Brands</Link>
+              <Link to="/category?category=Brands" className="text-sm xs:text-xs sm:text-sm text-black">Brands</Link>
               {/* Profile */}
               <Link to="/profile" className="flex items-center cursor-pointer pt-2 border-t border-gray-200">
                 <img 
