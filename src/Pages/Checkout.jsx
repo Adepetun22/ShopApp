@@ -71,7 +71,7 @@ const Checkout = () => {
     // Process checkout
     console.log('Processing checkout:', formData);
     // Navigate to success page
-    navigate('/order-success');
+    navigate('/OrderSuccess');
   };
 
   if (cartItems.length === 0) {

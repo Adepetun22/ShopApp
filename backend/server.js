@@ -21,11 +21,13 @@ const corsOptions = {
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
     
-    // Allow localhost:5173 and localhost:5174 for development
+    // Allow localhost:5173, 5174, and 5175 for development
     if (origin === 'http://localhost:5173' || 
         origin === 'http://localhost:5174' ||
+        origin === 'http://localhost:5175' ||
         origin === 'http://127.0.0.1:5173' ||
-        origin === 'http://127.0.0.1:5174') {
+        origin === 'http://127.0.0.1:5174' ||
+        origin === 'http://127.0.0.1:5175') {
       return callback(null, true);
     }
     
