@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import { decodeId } from '../utils/hashIds';
 import image2 from '../assets/image-2.png';
 import image5 from '../assets/image-50.png';
@@ -82,86 +82,83 @@ const getRatingImage = (rating) => {
 const ProductDetails = () => {
   const { addToCart } = useCart();
   const [searchParams] = useSearchParams();
+  const location = useLocation();
   const productId = searchParams.get('id');
   
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [relatedProducts, setRelatedProducts] = useState([]);
   
   const [selectedSize, setSelectedSize] = useState('Small');
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState('gray');
   const [activeTab, setActiveTab] = useState('product-details');
 
-  // Fetch product data from API
+  // Initialize product data from passed state or fetch from API
   useEffect(() => {
-    const fetchProduct = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        // Decode the encoded ID
-        const decodedProductId = decodeId(productId);
-        
-        if (decodedProductId === null) {
-          setError('Invalid product ID');
-          setLoading(false);
-          return;
-        }
-
-        const response = await fetch(`/api/products/${decodedProductId}`);
-        const data = await response.json();
-        
-        if (data.success) {
-          setProduct(data.product);
-          // Set default selected color based on product data
-          if (data.product.colors && data.product.colors.length > 0) {
-            setSelectedColor(data.product.colors[0].name);
-          }
-          // Set default selected size based on product data
-          if (data.product.sizes && data.product.sizes.length > 0) {
-            const firstSizeWithStock = data.product.sizes.find(s => s.stock > 0);
-            if (firstSizeWithStock) {
-              setSelectedSize(firstSizeWithStock.size);
-            }
-          }
-        } else {
-          setError(data.message || 'Product not found');
-        }
-      } catch (err) {
-        setError('Failed to fetch product details');
-        console.error('Error fetching product:', err);
-      } finally {
-        setLoading(false);
+    // Check if product data was passed via navigation state
+    const passedProduct = location.state?.product;
+    
+    if (passedProduct) {
+      // Use passed product data directly
+      setProduct(passedProduct);
+      // Set default selected color based on product data
+      if (passedProduct.colors && passedProduct.colors.length > 0) {
+        setSelectedColor(passedProduct.colors[0].name);
       }
-    };
-
-    const fetchRelatedProducts = async () => {
-      try {
-        const response = await fetch(`/api/products?featured=true`);
-        const data = await response.json();
-        
-        if (data.success) {
-          // Filter out current product and limit to 4
-          const decodedProductId = decodeId(productId);
-          const related = data.products
-            .filter(p => p._id !== decodedProductId)
-            .slice(0, 4);
-          setRelatedProducts(related);
+      // Set default selected size based on product data
+      if (passedProduct.sizes && passedProduct.sizes.length > 0) {
+        const firstSizeWithStock = passedProduct.sizes.find(s => s.stock > 0);
+        if (firstSizeWithStock) {
+          setSelectedSize(firstSizeWithStock.size);
         }
-      } catch (err) {
-        console.error('Error fetching related products:', err);
       }
-    };
-
-    if (productId) {
-      fetchProduct();
-      fetchRelatedProducts();
-    } else {
-      setError('No product ID provided');
       setLoading(false);
+    } else {
+      // Fetch product data from API if no state data
+      const fetchProduct = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+          // Decode the encoded ID
+          const decodedProductId = decodeId(productId);
+          
+          if (decodedProductId === null) {
+            setError('Invalid product ID');
+            setLoading(false);
+            return;
+          }
+
+          const response = await fetch(`/api/products/${decodedProductId}`);
+          const data = await response.json();
+          
+          if (data.success) {
+            setProduct(data.product);
+            // Set default selected color based on product data
+            if (data.product.colors && data.product.colors.length > 0) {
+              setSelectedColor(data.product.colors[0].name);
+            }
+            // Set default selected size based on product data
+            if (data.product.sizes && data.product.sizes.length > 0) {
+              const firstSizeWithStock = data.product.sizes.find(s => s.stock > 0);
+              if (firstSizeWithStock) {
+                setSelectedSize(firstSizeWithStock.size);
+              }
+            }
+          } else {
+            setError(data.message || 'Product not found');
+          }
+        } catch (err) {
+          setError('Failed to fetch product details');
+          console.error('Error fetching product:', err);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchProduct();
     }
-  }, [productId]);
+  }, [productId, location.state]);
 
   // Calculate discount percentage
   const calculateDiscount = (price, originalPrice) => {
@@ -175,10 +172,10 @@ const ProductDetails = () => {
   const handleAddToCart = () => {
     if (product) {
       const productForCart = {
-        id: product._id,
+        id: product._id || product.id,
         name: product.name,
         price: product.price,
-        image: product.images?.[0]?.url || image2,
+        image: product.images?.[0]?.url || product.image || image2,
         selectedSize,
         selectedColor,
         quantity
@@ -243,20 +240,6 @@ const ProductDetails = () => {
   // Handle color selection
   const handleColorClick = (color) => {
     setSelectedColor(color);
-  };
-
-  // Generate ProductCard props from fetched product
-  const createProductCardProps = (prod) => {
-    const discount = calculateDiscount(prod.price, prod.originalPrice);
-    return {
-      id: prod._id,
-      image: prod.images?.[0]?.url || image2,
-      title: prod.name,
-      rating: `${prod.rating?.average || 0}/5`,
-      price: `$${prod.price}`,
-      originalPrice: prod.originalPrice ? `$${prod.originalPrice}` : null,
-      discount: discount ? `-${discount}%` : null
-    };
   };
 
   return (
@@ -569,47 +552,39 @@ const ProductDetails = () => {
       {/* You might also like section */}
       <div className="container mx-auto px-4 mb-12 xs:mb-8 sm:mb-16">
         <h2 className="text-2xl xs:text-xl sm:text-2xl md:text-3xl font-bold mb-6 xs:mb-4 sm:mb-8">You might also like</h2>
-        {relatedProducts.length > 0 ? (
-          <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-2 sm:gap-6">
-            {relatedProducts.map((prod) => (
-              <ProductCard key={prod._id} {...createProductCardProps(prod)} />
-            ))}
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-2 sm:gap-6">
-            <ProductCard 
-              image={image7}
-              title="Polo with Contrast Trims"
-              rating="4.0/5"
-              price="$212"
-              originalPrice="$242"
-              discount="-20%"
-            />
-            
-            <ProductCard 
-              image={image8}
-              title="Gradient Graphic T-shirt"
-              rating="3.5/5"
-              price="$145"
-            />
-            
-            <ProductCard 
-              image={image9}
-              title="Polo with Tipping Details"
-              rating="4.5/5"
-              price="$180"
-            />
-            
-            <ProductCard 
-              image={image10}
-              title="Black Striped T-shirt"
-              rating="5.0/5"
-              price="$120"
-              originalPrice="$150"
-              discount="-30%"
-            />
-          </div>
-        )}
+        <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-2 sm:gap-6">
+          <ProductCard 
+            image={image7}
+            title="Polo with Contrast Trims"
+            rating="4.0/5"
+            price="$212"
+            originalPrice="$242"
+            discount="-20%"
+          />
+          
+          <ProductCard 
+            image={image8}
+            title="Gradient Graphic T-shirt"
+            rating="3.5/5"
+            price="$145"
+          />
+          
+          <ProductCard 
+            image={image9}
+            title="Polo with Tipping Details"
+            rating="4.5/5"
+            price="$180"
+          />
+          
+          <ProductCard 
+            image={image10}
+            title="Black Striped T-shirt"
+            rating="5.0/5"
+            price="$120"
+            originalPrice="$150"
+            discount="-30%"
+          />
+        </div>
       </div>
       
       {/* Newsletter section */}

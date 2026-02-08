@@ -77,6 +77,260 @@ const HomePage = () => {
       quote: "As someone who's always on the lookout for unique fashion pieces, I'm thrilled to have stumbled upon Shop.co. The selection of clothes is not only diverse but also on-point with the latest trends."
     }
   ];
+
+  // Complete product data for NEW ARRIVALS section
+  const newArrivalsProducts = [
+    {
+      id: 1,
+      name: "T-SHIRT WITH TAPE DETAILS",
+      price: 120,
+      originalPrice: null,
+      discount: null,
+      rating: { average: 4.5, count: 38 },
+      description: "Premium cotton t-shirt with modern tape details. Perfect for casual wear with a stylish edge.",
+      images: [{ url: image7 }],
+      colors: [
+        { name: "Black", hex: "#000000" },
+        { name: "White", hex: "#FFFFFF" },
+        { name: "Gray", hex: "#6B7280" }
+      ],
+      sizes: [
+        { size: "XS", stock: 15 },
+        { size: "S", stock: 25 },
+        { size: "M", stock: 30 },
+        { size: "L", stock: 20 },
+        { size: "XL", stock: 10 }
+      ],
+      category: "T-shirts",
+      style: "Casual",
+      features: [
+        "Premium 100% cotton",
+        "Modern tape details",
+        "Regular fit",
+        "Crew neck",
+        "Machine washable"
+      ]
+    },
+    {
+      id: 2,
+      name: "SKINNY FIT JEANS",
+      price: 240,
+      originalPrice: 260,
+      discount: 20,
+      rating: { average: 4.5, count: 52 },
+      description: "Slim-fitting jeans with a modern silhouette. Made from premium stretch denim for comfort and style.",
+      images: [{ url: image82 }],
+      colors: [
+        { name: "Blue", hex: "#1E40AF" },
+        { name: "Black", hex: "#000000" }
+      ],
+      sizes: [
+        { size: "28", stock: 10 },
+        { size: "30", stock: 15 },
+        { size: "32", stock: 20 },
+        { size: "34", stock: 18 },
+        { size: "36", stock: 8 }
+      ],
+      category: "Jeans",
+      style: "Casual",
+      features: [
+        "Premium stretch denim",
+        "Skinny fit silhouette",
+        "5-pocket styling",
+        "Button fly",
+        "Machine wash cold"
+      ]
+    },
+    {
+      id: 3,
+      name: "CHECKERED SHIRT",
+      price: 180,
+      originalPrice: null,
+      discount: null,
+      rating: { average: 4.5, count: 28 },
+      description: "Classic checkered shirt made from soft cotton. Versatile design perfect for casual or semi-formal occasions.",
+      images: [{ url: image9 }],
+      colors: [
+        { name: "Red", hex: "#DC2626" },
+        { name: "Navy", hex: "#1E3A8A" },
+        { name: "White", hex: "#FFFFFF" }
+      ],
+      sizes: [
+        { size: "S", stock: 12 },
+        { size: "M", stock: 20 },
+        { size: "L", stock: 18 },
+        { size: "XL", stock: 10 },
+        { size: "XXL", stock: 5 }
+      ],
+      category: "Shirts",
+      style: "Casual",
+      features: [
+        "100% cotton flannel",
+        "Classic checkered pattern",
+        "Button-down collar",
+        "Chest pocket",
+        "Machine washable"
+      ]
+    },
+    {
+      id: 4,
+      name: "SLEEVES STRIPED T-SHIRT",
+      price: 130,
+      originalPrice: 160,
+      discount: 30,
+      rating: { average: 4.5, count: 45 },
+      description: "Stylish t-shirt with stripe details on sleeves. A modern twist on a classic design.",
+      images: [{ url: image11 }],
+      colors: [
+        { name: "Green", hex: "#059669" },
+        { name: "Blue", hex: "#2563EB" },
+        { name: "White", hex: "#FFFFFF" }
+      ],
+      sizes: [
+        { size: "XS", stock: 10 },
+        { size: "S", stock: 18 },
+        { size: "M", stock: 25 },
+        { size: "L", stock: 22 },
+        { size: "XL", stock: 12 }
+      ],
+      category: "T-shirts",
+      style: "Casual",
+      features: [
+        "Premium cotton blend",
+        "Striped sleeve details",
+        "Regular fit",
+        "Round neck",
+        "Easy care"
+      ]
+    }
+  ];
+
+  // Complete product data for TOP SELLING section
+  const topSellingProducts = [
+    {
+      id: 5,
+      name: "VERTICAL STRIPED SHIRT",
+      price: 212,
+      originalPrice: 232,
+      discount: 20,
+      rating: { average: 5.0, count: 65 },
+      description: "Elegant shirt with vertical stripes. Perfect for both office and casual settings.",
+      images: [{ url: image86 }],
+      colors: [
+        { name: "Blue", hex: "#3B82F6" },
+        { name: "White", hex: "#FFFFFF" },
+        { name: "Navy", hex: "#1E3A5F" }
+      ],
+      sizes: [
+        { size: "S", stock: 15 },
+        { size: "M", stock: 22 },
+        { size: "L", stock: 20 },
+        { size: "XL", stock: 14 },
+        { size: "XXL", stock: 8 }
+      ],
+      category: "Shirts",
+      style: "Formal",
+      features: [
+        "Premium cotton fabric",
+        "Vertical stripe pattern",
+        "Slim fit",
+        "Button-down collar",
+        "Machine washable"
+      ]
+    },
+    {
+      id: 6,
+      name: "COURAGE GRAPHIC T-SHIRT",
+      price: 145,
+      originalPrice: null,
+      discount: null,
+      rating: { average: 4.5, count: 42 },
+      description: "Bold graphic t-shirt with inspiring design. Made from soft, breathable cotton.",
+      images: [{ url: image92 }],
+      colors: [
+        { name: "Black", hex: "#000000" },
+        { name: "White", hex: "#FFFFFF" },
+        { name: "Yellow", hex: "#FACC15" }
+      ],
+      sizes: [
+        { size: "XS", stock: 12 },
+        { size: "S", stock: 20 },
+        { size: "M", stock: 28 },
+        { size: "L", stock: 24 },
+        { size: "XL", stock: 16 }
+      ],
+      category: "T-shirts",
+      style: "Casual",
+      features: [
+        "100% organic cotton",
+        "Bold graphic print",
+        "Relaxed fit",
+        "Crew neck",
+        "Eco-friendly printing"
+      ]
+    },
+    {
+      id: 7,
+      name: "FADED SKINNY JEANS",
+      price: 120,
+      originalPrice: null,
+      discount: null,
+      rating: { average: 4.5, count: 36 },
+      description: "Trendy skinny jeans with a faded wash. Comfortable stretch denim with a worn-in look.",
+      images: [{ url: image12 }],
+      colors: [
+        { name: "Light Blue", hex: "#93C5FD" },
+        { name: "Medium Blue", hex: "#60A5FA" }
+      ],
+      sizes: [
+        { size: "26", stock: 8 },
+        { size: "28", stock: 12 },
+        { size: "30", stock: 18 },
+        { size: "32", stock: 16 },
+        { size: "34", stock: 10 },
+        { size: "36", stock: 6 }
+      ],
+      category: "Jeans",
+      style: "Casual",
+      features: [
+        "Stretch denim blend",
+        "Skinny fit",
+        "Faded wash details",
+        "5-pocket styling",
+        "Machine wash cold"
+      ]
+    },
+    {
+      id: 8,
+      name: "LOOSE FIT BERMUDA SHORTS",
+      price: 80,
+      originalPrice: null,
+      discount: null,
+      rating: { average: 4.5, count: 29 },
+      description: "Comfortable Bermuda shorts with a relaxed fit. Perfect for warm weather.",
+      images: [{ url: image10 }],
+      colors: [
+        { name: "Khaki", hex: "#C4A35A" },
+        { name: "Navy", hex: "#1E3A8A" },
+        { name: "Black", hex: "#000000" }
+      ],
+      sizes: [
+        { size: "S", stock: 14 },
+        { size: "M", stock: 20 },
+        { size: "L", stock: 18 },
+        { size: "XL", stock: 12 }
+      ],
+      category: "Shorts",
+      style: "Casual",
+      features: [
+        "Lightweight cotton blend",
+        "Loose fit for comfort",
+        "Elastic waistband",
+        "Side pockets",
+        "Machine washable"
+      ]
+    }
+  ];
   
 
 
@@ -154,48 +408,56 @@ const HomePage = () => {
           {/* Product 1 */}
           <div className="w-full">
             <ProductCard 
-              id={1}
-              image={image7}
-              title="T-SHIRT WITH TAPE DETAILS"
-              rating="4.5/5"
-              price="$120"
+              {...newArrivalsProducts[0]}
+              image={newArrivalsProducts[0].images[0].url}
+              title={newArrivalsProducts[0].name}
+              rating={`${newArrivalsProducts[0].rating.average}/5`}
+              price={`$${newArrivalsProducts[0].price}`}
+              originalPrice={newArrivalsProducts[0].originalPrice ? `$${newArrivalsProducts[0].originalPrice}` : null}
+              discount={newArrivalsProducts[0].discount ? `-${newArrivalsProducts[0].discount}%` : null}
+              product={newArrivalsProducts[0]}
             />
           </div>
           
           {/* Product 2 */}
           <div className="w-full">
             <ProductCard 
-              id={2}
-              image={image82}
-              title="SKINNY FIT JEANS"
-              rating="4.5/5"
-              price="$240"
-              originalPrice="$260"
-              discount="-20%"
+              {...newArrivalsProducts[1]}
+              image={newArrivalsProducts[1].images[0].url}
+              title={newArrivalsProducts[1].name}
+              rating={`${newArrivalsProducts[1].rating.average}/5`}
+              price={`$${newArrivalsProducts[1].price}`}
+              originalPrice={newArrivalsProducts[1].originalPrice ? `$${newArrivalsProducts[1].originalPrice}` : null}
+              discount={newArrivalsProducts[1].discount ? `-${newArrivalsProducts[1].discount}%` : null}
+              product={newArrivalsProducts[1]}
             />
           </div>
           
           {/* Product 3 */}
           <div className="w-full">
             <ProductCard 
-              id={3}
-              image={image9}
-              title="CHECKERED SHIRT"
-              rating="4.5/5"
-              price="$180"
+              {...newArrivalsProducts[2]}
+              image={newArrivalsProducts[2].images[0].url}
+              title={newArrivalsProducts[2].name}
+              rating={`${newArrivalsProducts[2].rating.average}/5`}
+              price={`$${newArrivalsProducts[2].price}`}
+              originalPrice={newArrivalsProducts[2].originalPrice ? `$${newArrivalsProducts[2].originalPrice}` : null}
+              discount={newArrivalsProducts[2].discount ? `-${newArrivalsProducts[2].discount}%` : null}
+              product={newArrivalsProducts[2]}
             />
           </div>
           
           {/* Product 4 */}
           <div className="w-full">
             <ProductCard 
-              id={4}
-              image={image11}
-              title="SLEEVES STRIPED T-SHIRT"
-              rating="4.5/5"
-              price="$130"
-              originalPrice="$160"
-              discount="-30%"
+              {...newArrivalsProducts[3]}
+              image={newArrivalsProducts[3].images[0].url}
+              title={newArrivalsProducts[3].name}
+              rating={`${newArrivalsProducts[3].rating.average}/5`}
+              price={`$${newArrivalsProducts[3].price}`}
+              originalPrice={newArrivalsProducts[3].originalPrice ? `$${newArrivalsProducts[3].originalPrice}` : null}
+              discount={newArrivalsProducts[3].discount ? `-${newArrivalsProducts[3].discount}%` : null}
+              product={newArrivalsProducts[3]}
             />
           </div>
         </div>
@@ -215,46 +477,56 @@ const HomePage = () => {
           {/* Product 1 */}
           <div className="w-full">
             <ProductCard 
-              id={5}
-              image={image86}
-              title="VERTICAL STRIPED SHIRT"
-              rating="5.0/5"
-              price="$212"
-              originalPrice="$232"
-              discount="-20%"
+              {...topSellingProducts[0]}
+              image={topSellingProducts[0].images[0].url}
+              title={topSellingProducts[0].name}
+              rating={`${topSellingProducts[0].rating.average}/5`}
+              price={`$${topSellingProducts[0].price}`}
+              originalPrice={topSellingProducts[0].originalPrice ? `$${topSellingProducts[0].originalPrice}` : null}
+              discount={topSellingProducts[0].discount ? `-${topSellingProducts[0].discount}%` : null}
+              product={topSellingProducts[0]}
             />
           </div>
           
           {/* Product 2 */}
           <div className="w-full">
             <ProductCard 
-              id={6}
-              image={image92}
-              title="COURAGE GRAPHIC T-SHIRT"
-              rating="4.5/5"
-              price="$145"
+              {...topSellingProducts[1]}
+              image={topSellingProducts[1].images[0].url}
+              title={topSellingProducts[1].name}
+              rating={`${topSellingProducts[1].rating.average}/5`}
+              price={`$${topSellingProducts[1].price}`}
+              originalPrice={topSellingProducts[1].originalPrice ? `$${topSellingProducts[1].originalPrice}` : null}
+              discount={topSellingProducts[1].discount ? `-${topSellingProducts[1].discount}%` : null}
+              product={topSellingProducts[1]}
             />
           </div>
           
           {/* Product 3 */}
           <div className="w-full">
             <ProductCard 
-              id={7}
-              image={image12}
-              title="FADED SKINNY JEANS"
-              rating="4.5/5"
-              price="$120"
+              {...topSellingProducts[2]}
+              image={topSellingProducts[2].images[0].url}
+              title={topSellingProducts[2].name}
+              rating={`${topSellingProducts[2].rating.average}/5`}
+              price={`$${topSellingProducts[2].price}`}
+              originalPrice={topSellingProducts[2].originalPrice ? `$${topSellingProducts[2].originalPrice}` : null}
+              discount={topSellingProducts[2].discount ? `-${topSellingProducts[2].discount}%` : null}
+              product={topSellingProducts[2]}
             />
           </div>
           
           {/* Product 4 */}
           <div className="w-full">
             <ProductCard 
-              id={8}
-              image={image10}
-              title="LOOSE FIT BERMUDA SHORTS"
-              rating="4.5/5"
-              price="$80"
+              {...topSellingProducts[3]}
+              image={topSellingProducts[3].images[0].url}
+              title={topSellingProducts[3].name}
+              rating={`${topSellingProducts[3].rating.average}/5`}
+              price={`$${topSellingProducts[3].price}`}
+              originalPrice={topSellingProducts[3].originalPrice ? `$${topSellingProducts[3].originalPrice}` : null}
+              discount={topSellingProducts[3].discount ? `-${topSellingProducts[3].discount}%` : null}
+              product={topSellingProducts[3]}
             />
           </div>
         </div>

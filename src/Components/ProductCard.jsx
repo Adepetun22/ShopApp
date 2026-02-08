@@ -14,7 +14,7 @@ const StarRating = () => (
 );
 
 // Memoized ProductCard component to prevent unnecessary re-renders
-const ProductCard = memo(function ProductCard({ id, image, title, rating, price, originalPrice, discount, onClick }) {
+const ProductCard = memo(function ProductCard({ id, image, title, rating, price, originalPrice, discount, product, onClick }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -22,7 +22,12 @@ const ProductCard = memo(function ProductCard({ id, image, title, rating, price,
       onClick();
     } else if (id) {
       const encodedProductId = encodeId(id);
-      navigate(`/ProductDetails?id=${encodedProductId}`);
+      // Pass product data via state if available, otherwise navigate with just ID
+      if (product) {
+        navigate(`/ProductDetails?id=${encodedProductId}`, { state: { product } });
+      } else {
+        navigate(`/ProductDetails?id=${encodedProductId}`);
+      }
     }
   };
 

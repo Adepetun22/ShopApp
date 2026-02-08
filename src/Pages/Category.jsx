@@ -13,15 +13,6 @@ import frameUt0 from '../assets/frame-2-ut0.svg';
 import frameAda0 from '../assets/frame-3-ada0.svg';
 import frameEr0 from '../assets/frame-80-er0.svg';
 import frame7 from '../assets/frame7.svg';
-import frame100 from '../assets/frame-100.svg';
-import frame101 from '../assets/frame-101.svg';
-import frame102 from '../assets/frame-102.svg';
-import frame103 from '../assets/frame-103.svg';
-import frame104 from '../assets/frame-104.svg';
-import frame105 from '../assets/frame-105.svg';
-import frame106 from '../assets/frame-106.svg';
-import frame107 from '../assets/frame-107.svg';
-import frame108 from '../assets/frame-108.svg';
 import image80 from '../assets/image-80.png';
 import image90 from '../assets/image-90.png';
 import image100 from '../assets/image-100.png';
@@ -45,7 +36,7 @@ const colorOptions = [
   { name: 'White', code: '#ffffff' },
 ];
 
-// Product data
+// Product data with complete details
 const products = [
   {
     id: 1,
@@ -53,12 +44,27 @@ const products = [
     price: 145,
     originalPrice: null,
     discount: null,
-    rating: 3.5,
+    rating: { average: 3.5, count: 22 },
     image: image80,
     category: 'T-shirts',
-    colors: ['Green', 'Blue'],
-    sizes: ['Small', 'Medium', 'Large'],
-    style: 'Casual'
+    colors: [
+      { name: 'Green', hex: '#00c12b' },
+      { name: 'Blue', hex: '#06caf5' }
+    ],
+    sizes: [
+      { size: 'Small', stock: 15 },
+      { size: 'Medium', stock: 25 },
+      { size: 'Large', stock: 20 }
+    ],
+    style: 'Casual',
+    description: 'Stylish gradient graphic t-shirt with modern design. Made from premium cotton for all-day comfort.',
+    features: [
+      'Premium cotton fabric',
+      'Gradient graphic print',
+      'Regular fit',
+      'Crew neck',
+      'Machine washable'
+    ]
   },
   {
     id: 2,
@@ -66,12 +72,27 @@ const products = [
     price: 180,
     originalPrice: null,
     discount: null,
-    rating: 4.5,
+    rating: { average: 4.5, count: 35 },
     image: image90,
     category: 'Shirts',
-    colors: ['White', 'Blue'],
-    sizes: ['Medium', 'Large', 'X-Large'],
-    style: 'Casual'
+    colors: [
+      { name: 'White', hex: '#ffffff' },
+      { name: 'Blue', hex: '#06caf5' }
+    ],
+    sizes: [
+      { size: 'Medium', stock: 18 },
+      { size: 'Large', stock: 22 },
+      { size: 'X-Large', stock: 14 }
+    ],
+    style: 'Casual',
+    description: 'Classic polo shirt with elegant tipping details. Perfect for both casual and semi-formal occasions.',
+    features: [
+      '100% pima cotton',
+      'Tipping details on collar and sleeves',
+      'Slim fit',
+      'Button placket',
+      'Machine washable'
+    ]
   },
   {
     id: 3,
@@ -79,12 +100,27 @@ const products = [
     price: 120,
     originalPrice: 150,
     discount: 30,
-    rating: 5.0,
+    rating: { average: 5.0, count: 48 },
     image: image100,
     category: 'T-shirts',
-    colors: ['Black', 'White'],
-    sizes: ['Small', 'Medium', 'Large'],
-    style: 'Casual'
+    colors: [
+      { name: 'Black', hex: '#000000' },
+      { name: 'White', hex: '#ffffff' }
+    ],
+    sizes: [
+      { size: 'Small', stock: 20 },
+      { size: 'Medium', stock: 30 },
+      { size: 'Large', stock: 25 }
+    ],
+    style: 'Casual',
+    description: 'Classic black and white striped t-shirt. Timeless design that never goes out of style.',
+    features: [
+      'Premium cotton blend',
+      'Horizontal stripe pattern',
+      'Regular fit',
+      'Crew neck',
+      'Easy care'
+    ]
   },
   {
     id: 4,
@@ -92,12 +128,27 @@ const products = [
     price: 240,
     originalPrice: 260,
     discount: 20,
-    rating: 3.5,
+    rating: { average: 3.5, count: 28 },
     image: image81,
     category: 'Jeans',
-    colors: ['Blue', 'Black'],
-    sizes: ['Medium', 'Large', 'X-Large'],
-    style: 'Casual'
+    colors: [
+      { name: 'Blue', hex: '#1E40AF' },
+      { name: 'Black', hex: '#000000' }
+    ],
+    sizes: [
+      { size: 'Medium', stock: 12 },
+      { size: 'Large', stock: 18 },
+      { size: 'X-Large', stock: 10 }
+    ],
+    style: 'Casual',
+    description: 'Modern skinny fit jeans with a sleek silhouette. Premium stretch denim for comfort and style.',
+    features: [
+      'Stretch denim blend',
+      'Skinny fit silhouette',
+      '5-pocket styling',
+      'Button fly',
+      'Machine wash cold'
+    ]
   },
   {
     id: 5,
@@ -105,12 +156,27 @@ const products = [
     price: 180,
     originalPrice: null,
     discount: null,
-    rating: 4.5,
+    rating: { average: 4.5, count: 42 },
     image: image91,
     category: 'Shirts',
-    colors: ['Red', 'Blue'],
-    sizes: ['Small', 'Medium', 'Large'],
-    style: 'Formal'
+    colors: [
+      { name: 'Red', hex: '#f50606' },
+      { name: 'Blue', hex: '#06caf5' }
+    ],
+    sizes: [
+      { size: 'Small', stock: 14 },
+      { size: 'Medium', stock: 24 },
+      { size: 'Large', stock: 20 }
+    ],
+    style: 'Formal',
+    description: 'Classic checkered shirt made from soft cotton flannel. Versatile design for any occasion.',
+    features: [
+      '100% cotton flannel',
+      'Classic checkered pattern',
+      'Button-down collar',
+      'Chest pocket',
+      'Machine washable'
+    ]
   },
   {
     id: 6,
@@ -118,12 +184,26 @@ const products = [
     price: 130,
     originalPrice: 160,
     discount: 30,
-    rating: 4.5,
+    rating: { average: 4.5, count: 38 },
     image: image101,
     category: 'T-shirts',
-    colors: ['Orange', 'White'],
-    sizes: ['Small', 'Medium'],
-    style: 'Casual'
+    colors: [
+      { name: 'Orange', hex: '#f57906' },
+      { name: 'White', hex: '#ffffff' }
+    ],
+    sizes: [
+      { size: 'Small', stock: 10 },
+      { size: 'Medium', stock: 18 }
+    ],
+    style: 'Casual',
+    description: 'Stylish t-shirt with stripe details on sleeves. A modern twist on a classic design.',
+    features: [
+      'Premium cotton blend',
+      'Striped sleeve details',
+      'Regular fit',
+      'Round neck',
+      'Easy care'
+    ]
   },
   {
     id: 7,
@@ -131,12 +211,27 @@ const products = [
     price: 212,
     originalPrice: 232,
     discount: 20,
-    rating: 5.0,
+    rating: { average: 5.0, count: 56 },
     image: image70,
     category: 'Shirts',
-    colors: ['Blue', 'White'],
-    sizes: ['Medium', 'Large', 'X-Large'],
-    style: 'Formal'
+    colors: [
+      { name: 'Blue', hex: '#06caf5' },
+      { name: 'White', hex: '#ffffff' }
+    ],
+    sizes: [
+      { size: 'Medium', stock: 20 },
+      { size: 'Large', stock: 25 },
+      { size: 'X-Large', stock: 15 }
+    ],
+    style: 'Formal',
+    description: 'Elegant shirt with vertical stripes. Perfect for both office and casual settings.',
+    features: [
+      'Premium cotton fabric',
+      'Vertical stripe pattern',
+      'Slim fit',
+      'Button-down collar',
+      'Machine washable'
+    ]
   },
   {
     id: 8,
@@ -144,12 +239,27 @@ const products = [
     price: 145,
     originalPrice: null,
     discount: null,
-    rating: 4.0,
+    rating: { average: 4.0, count: 32 },
     image: image82,
     category: 'T-shirts',
-    colors: ['Yellow', 'Green'],
-    sizes: ['Small', 'Medium', 'Large'],
-    style: 'Casual'
+    colors: [
+      { name: 'Yellow', hex: '#f5dd06' },
+      { name: 'Green', hex: '#00c12b' }
+    ],
+    sizes: [
+      { size: 'Small', stock: 16 },
+      { size: 'Medium', stock: 28 },
+      { size: 'Large', stock: 22 }
+    ],
+    style: 'Casual',
+    description: 'Bold graphic t-shirt with inspiring design. Made from soft, breathable cotton.',
+    features: [
+      '100% organic cotton',
+      'Bold graphic print',
+      'Relaxed fit',
+      'Crew neck',
+      'Eco-friendly printing'
+    ]
   },
   {
     id: 9,
@@ -157,12 +267,26 @@ const products = [
     price: 80,
     originalPrice: null,
     discount: null,
-    rating: 3.0,
+    rating: { average: 3.0, count: 18 },
     image: image92,
     category: 'Shorts',
-    colors: ['Purple', 'Pink'],
-    sizes: ['Medium', 'Large'],
-    style: 'Casual'
+    colors: [
+      { name: 'Purple', hex: '#7d06f5' },
+      { name: 'Pink', hex: '#f506a4' }
+    ],
+    sizes: [
+      { size: 'Medium', stock: 14 },
+      { size: 'Large', stock: 18 }
+    ],
+    style: 'Casual',
+    description: 'Comfortable Bermuda shorts with a relaxed fit. Perfect for warm weather activities.',
+    features: [
+      'Lightweight cotton blend',
+      'Loose fit for comfort',
+      'Elastic waistband',
+      'Side pockets',
+      'Machine washable'
+    ]
   }
 ];
 
@@ -702,13 +826,14 @@ React.useEffect(() => {
                 return (
                   <ProductCard
                     key={product.id}
-                    id={product.id}
+                    {...product}
                     image={product.image}
                     title={product.name}
-                    rating={`${product.rating}/5`}
+                    rating={`${product.rating.average}/5`}
                     price={`$${product.price}`}
                     originalPrice={product.originalPrice ? `$${product.originalPrice}` : null}
                     discount={discount}
+                    product={product}
                   />
                 );
               })}
