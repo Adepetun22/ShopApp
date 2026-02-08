@@ -6,7 +6,7 @@ import { useAuth } from '../AuthContext';
 import frame0 from '../assets/frame0.svg';
 
 const Checkout = () => {
-  const { cartItems } = useCart();
+  const { cartItems, clearCart } = useCart();
   const { user, isAuthenticated, loading: authLoading } = useAuth();
   const navigate = useNavigate();
   
@@ -70,6 +70,10 @@ const Checkout = () => {
     
     // Process checkout
     console.log('Processing checkout:', formData);
+    
+    // Clear the cart after successful payment
+    clearCart();
+    
     // Navigate to success page
     navigate('/OrderSuccess');
   };
