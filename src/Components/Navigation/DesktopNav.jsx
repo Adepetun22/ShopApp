@@ -3,12 +3,10 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useSearch } from '../../SearchContext';
 import { useAuth } from '../../AuthContext';
 import MobileNav from './MobileNav';
-import hamburgerIcon from '../../assets/harmburger0.svg';
 import searchIcon from '../../assets/search-780.svg';
 import cartIcon from '../../assets/cart0.svg';
 import profileIcon from '../../assets/profile0.svg';
 import frameIcon from '../../assets/frame0.svg';
-import frame054rt from '../../assets/Frame054rt.png';
 import { useCart } from '../../CartContext';
 
 // Memoized DesktopNav component to prevent unnecessary re-renders
@@ -63,14 +61,6 @@ const DesktopNav = memo(function DesktopNav() {
             <div className="flex items-center space-x-6 xs:space-x-4 sm:space-x-6 md:space-x-10 w-auto">
               <div className="text-2xl xs:text-xl sm:text-3xl font-extrabold">SHOP.CO</div>
               <div className="hidden md:flex space-x-4 xs:space-x-2 sm:space-x-4 md:space-x-6 w-auto">
-                <div className="flex items-center">
-                  <span className="text-sm xs:text-xs sm:text-sm">Shop</span>
-                  <img 
-                    alt="" 
-                    className="ml-1 w-4 h-4" 
-                    src={frame054rt}
-                  />
-                </div>
                 <span className="text-sm xs:text-xs sm:text-sm">On Sale</span>
                 <span className="text-sm xs:text-xs sm:text-sm">New Arrivals</span>
                 <span className="text-sm xs:text-xs sm:text-sm">Brands</span>
