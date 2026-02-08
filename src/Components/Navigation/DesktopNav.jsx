@@ -63,9 +63,9 @@ const DesktopNav = memo(function DesktopNav() {
                 SHOP.CO
               </Link>
               <div className="hidden md:flex space-x-4 xs:space-x-2 sm:space-x-4 md:space-x-6 w-auto">
-                <Link to="/category?category=On Sale" className="text-sm xs:text-xs sm:text-sm hover:text-gray-600 transition-colors cursor-pointer">On Sale</Link>
-                <Link to="/category?category=New Arrivals" className="text-sm xs:text-xs sm:text-sm hover:text-gray-600 transition-colors cursor-pointer">New Arrivals</Link>
-                <Link to="/category?category=Brands" className="text-sm xs:text-xs sm:text-sm hover:text-gray-600 transition-colors cursor-pointer">Brands</Link>
+                <Link to="/category?category=On Sale" className="text-sm xs:text-xs sm:text-sm text-black">On Sale</Link>
+                <Link to="/category?category=New Arrivals" className="text-sm xs:text-xs sm:text-sm text-black">New Arrivals</Link>
+                <Link to="/category?category=Brands" className="text-sm xs:text-xs sm:text-sm text-black">Brands</Link>
               </div>
             </div>
             <div className="hidden md:flex items-center bg-gray-100 rounded-full px-3 xs:px-2 sm:px-4 py-1 xs:py-0.5 sm:py-2 w-full max-w-[400px] mx-2 xs:mx-1 sm:mx-4">
