@@ -1,14 +1,15 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../CartContext';
+import { useAuth } from '../AuthContext';
 import frame0 from '../assets/frame0.svg';
-import frame4 from '../assets/frame4.svg';
-import frame5 from '../assets/frame5.svg';
 
 const Checkout = () => {
   const { cartItems } = useCart();
+  const { user, isAuthenticated, loading: authLoading } = useAuth();
   const navigate = useNavigate();
+  
   const [formData, setFormData] = useState({
     email: '',
     firstName: '',
@@ -24,6 +25,24 @@ const Checkout = () => {
     cardCvc: ''
   });
   const [shippingMethod, setShippingMethod] = useState('standard');
+
+  // Initialize form with user data when authenticated
+  useEffect(() => {
+    if (!authLoading && isAuthenticated && user) {
+      setFormData(prev => ({
+        ...prev,
+        email: user.email || '',
+        firstName: user.firstName || '',
+        lastName: user.lastName || '',
+        phone: user.phone || '',
+        address: user.address || '',
+        apartment: user.apartment || '',
+        city: user.city || '',
+        country: user.country || '',
+        postalCode: user.postalCode || user.zipCode || ''
+      }));
+    }
+  }, [authLoading, isAuthenticated, user]);
 
   const subtotal = cartItems.reduce((total, item) => {
     return total + (item.price * item.quantity);
@@ -41,6 +60,14 @@ const Checkout = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Check if user is logged in
+    if (!isAuthenticated) {
+      // Redirect to login page with return URL
+      navigate('/login?returnUrl=/checkout');
+      return;
+    }
+    
     // Process checkout
     console.log('Processing checkout:', formData);
     // Navigate to success page
