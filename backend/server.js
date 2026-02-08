@@ -15,9 +15,22 @@ const app = express();
 // Connect to MongoDB
 connectDB();
 
-// CORS configuration
+// CORS configuration - allow multiple origins for development
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    // Allow localhost:5173 and localhost:5174 for development
+    if (origin === 'http://localhost:5173' || 
+        origin === 'http://localhost:5174' ||
+        origin === 'http://127.0.0.1:5173' ||
+        origin === 'http://127.0.0.1:5174') {
+      return callback(null, true);
+    }
+    
+    callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
