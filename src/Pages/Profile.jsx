@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import frame0 from '../assets/frame0.svg';
-import OrderCard from '../components/OrderCard';
+import OrderCard from '../Components/OrderCard';
 import Addresses from '../Components/Addresses';
 
 const Profile = () => {
