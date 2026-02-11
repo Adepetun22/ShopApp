@@ -20,8 +20,8 @@ export const AuthProvider = ({ children }) => {
     message: ''
   });
 
-  // Configure API base URL
-  const API_URL = 'http://localhost:5000/api';
+  // Configure API base URL - use environment variable in production
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
   // Show auth alert
   const showAuthAlert = (severity, message) => {

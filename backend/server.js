@@ -15,19 +15,44 @@ const app = express();
 // Connect to MongoDB
 connectDB();
 
-// CORS configuration - allow multiple origins for development
+// CORS configuration - allow multiple origins for development and production
 const corsOptions = {
   origin: function (origin, callback) {
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
     
-    // Allow localhost:5173, 5174, and 5175 for development
-    if (origin === 'http://localhost:5173' || 
-        origin === 'http://localhost:5174' ||
-        origin === 'http://localhost:5175' ||
-        origin === 'http://127.0.0.1:5173' ||
-        origin === 'http://127.0.0.1:5174' ||
-        origin === 'http://127.0.0.1:5175') {
+    // Allow localhost for development
+    const localhostPattern = /^http:\/\/(localhost|127\.0\.0\.1):\d+$/;
+    if (localhostPattern.test(origin)) {
+      return callback(null, true);
+    }
+    
+    // Allow Netlify deployments (wildcard subdomains)
+    const netlifyPattern = /^https:\/\/[a-zA-Z0-9-]+\.netlify\.app$/;
+    if (netlifyPattern.test(origin)) {
+      return callback(null, true);
+    }
+    
+    // Allow Vercel deployments
+    const vercelPattern = /^https:\/\/[a-zA-Z0-9-]+\.vercel\.app$/;
+    if (vercelPattern.test(origin)) {
+      return callback(null, true);
+    }
+    
+    // Allow any render.com deployment
+    const renderPattern = /^https:\/\/[a-zA-Z0-9-]+\.onrender\.com$/;
+    if (renderPattern.test(origin)) {
+      return callback(null, true);
+    }
+    
+    // Allow any herokuapp.com deployment
+    const herokuPattern = /^https:\/\/[a-zA-Z0-9-]+\.herokuapp\.com$/;
+    if (herokuPattern.test(origin)) {
+      return callback(null, true);
+    }
+    
+    // For development, allow all (remove this in production for security)
+    if (process.env.NODE_ENV !== 'production') {
       return callback(null, true);
     }
     
