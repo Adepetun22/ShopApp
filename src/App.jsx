@@ -1,5 +1,5 @@
-import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { Suspense, lazy, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import DesktopNav from './Components/Navigation/DesktopNav';
 import FooterComponent from './Components/Footer/FooterComponent';
 import { CartProvider } from './CartContext';
@@ -26,13 +26,30 @@ const LoadingSpinner = () => (
   </div>
 );
 
+// ScrollToTop component that scrolls window to top on route changes
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // Scroll window to top (0, 0) on every route change
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant' // Use 'instant' for immediate scroll without animation
+    });
+  }, [pathname]);
+
+  return null;
+}
+
 function App() {
   return (
     <AuthProvider>
       <CartProvider>
         <AlertWrapper />
         <SearchProvider>
-          <Router>
+          <Router scrollRestoration="manual">
+            <ScrollToTop />
             <DesktopNav />
             <Suspense fallback={<LoadingSpinner />}>
               <Routes>
