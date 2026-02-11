@@ -59,8 +59,8 @@ const DesktopNav = memo(function DesktopNav() {
         <div className="py-4 xs:py-3 sm:py-5 px-4 border-b">
           <div className="container mx-auto flex flex-row items-center justify-between flex-wrap">
             <div className="flex items-center space-x-6 xs:space-x-4 sm:space-x-6 md:space-x-10 w-auto">
-              <Link to="/" className="text-2xl xs:text-xl sm:text-3xl font-extrabold hover:text-gray-700 transition-colors cursor-pointer">
-                SHOP.CO
+<Link to="/" className="text-2xl xs:text-xl sm:text-3xl font-extrabold hover:text-gray-700 transition-colors cursor-pointer">
+                SHOPPILE
               </Link>
               <div className="hidden md:flex space-x-4 xs:space-x-2 sm:space-x-4 md:space-x-6 w-auto">
                 <Link to="/category?category=On Sale" className="text-sm xs:text-xs sm:text-sm text-black">On Sale</Link>

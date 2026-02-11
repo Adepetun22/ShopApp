@@ -69,7 +69,7 @@ const MobileNav = () => {
             onClick={toggleMenu}
           />
           <Link to="/" className="text-black text-[25px] font-bold font-integralcf leading-6 flex items-center justify-start hover:text-gray-700 transition-colors cursor-pointer">
-            SHOP.CO
+            SHOPPILE
           </Link>
         </div>
         <div className="flex flex-row gap-3 items-start justify-start">
@@ -147,3 +147,4 @@ const MobileNav = () => {
 };
 
 export default MobileNav;
+

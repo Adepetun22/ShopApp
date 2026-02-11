@@ -16,7 +16,7 @@ const Footer = memo(function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 xs:gap-4 sm:gap-8 mb-6 xs:mb-4 sm:mb-8">
           <div className="md:col-span-2">
-            <h3 className="text-xl xs:text-lg sm:text-xl md:text-xl font-bold mb-3 xs:mb-2 sm:mb-4">SHOP.CO</h3>
+            <h3 className="text-xl xs:text-lg sm:text-xl md:text-xl font-bold mb-3 xs:mb-2 sm:mb-4">SHOPPILE</h3>
             <p className="text-gray-600 mb-3 xs:mb-2 sm:mb-4 text-sm xs:text-xs sm:text-base">
               We have clothes that suits your style and which you're proud to wear. 
               From women to men.
@@ -63,7 +63,7 @@ const Footer = memo(function Footer() {
         <div className="pt-6 xs:pt-4 sm:pt-8 border-t border-gray-300">
           <div className="flex flex-col xs:flex-col sm:flex-row justify-between items-center">
             <div className="text-gray-600 mb-4 xs:mb-3 sm:mb-0 text-sm xs:text-xs">
-              Shop.co © 2000-2023, All Rights Reserved
+              SHOPPILE © 2000-2023, All Rights Reserved
             </div>
             <div className="flex space-x-1 xs:space-x-0.5 sm:space-x-2">
               <img alt="Badge" className="w-6 xs:w-4 sm:w-8 h-6 xs:h-4 sm:h-8" src={badge0} loading="lazy" decoding="async" />
@@ -80,3 +80,4 @@ const Footer = memo(function Footer() {
 });
 
 export default Footer;
+
