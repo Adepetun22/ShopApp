@@ -63,7 +63,7 @@ const Footer = memo(function Footer() {
         <div className="pt-6 xs:pt-4 sm:pt-8 border-t border-gray-300">
           <div className="flex flex-col xs:flex-col sm:flex-row justify-between items-center">
             <div className="text-gray-600 mb-4 xs:mb-3 sm:mb-0 text-sm xs:text-xs">
-              SHOPPILE © 2000-2023, All Rights Reserved
+SHOPPILE © 2025-2026, All Rights Reserved
             </div>
             <div className="flex space-x-1 xs:space-x-0.5 sm:space-x-2">
               <img alt="Badge" className="w-6 xs:w-4 sm:w-8 h-6 xs:h-4 sm:h-8" src={badge0} loading="lazy" decoding="async" />
