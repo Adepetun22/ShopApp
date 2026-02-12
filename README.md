@@ -1,14 +1,12 @@
 # Shoppile
-A fashionable ecommerce platform, that is fully responsive on all devices. 
+Shoppile is a responsive, fashion-focused e-commerce platform that makes shopping effortless across all devices.
 
-Signup as a new shopper or Login as an existing shopper.
+Seamless Onboarding — Sign up or log in as a returning shopper
 
+Smart Cart & Checkout — Add items and complete test payments in seconds
 
-## React + Vite
+Live Order Tracking — Follow your delivery from processing to arrival
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Tech Stack: React.js · Tailwind CSS · React Icons
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Visit Live link: https://fortress-crypto.vercel.app/
