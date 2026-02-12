@@ -1,5 +1,8 @@
 # Shoppile
-A fashionable ecommerce platform, that is fully responsive on all devices.
+A fashionable ecommerce platform, that is fully responsive on all devices. 
+
+Signup as a new shopper or Login as an existing shopper.
+
 
 ## React + Vite
 
