@@ -1,3 +1,4 @@
+
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -12,50 +13,47 @@ dotenv.config();
 
 const app = express();
 
-// Connect to MongoDB
-connectDB();
-
 // CORS configuration - allow multiple origins for development and production
 const corsOptions = {
   origin: function (origin, callback) {
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-    
+
     // Allow localhost for development
     const localhostPattern = /^http:\/\/(localhost|127\.0\.0\.1):\d+$/;
     if (localhostPattern.test(origin)) {
       return callback(null, true);
     }
-    
+
     // Allow Netlify deployments (wildcard subdomains)
     const netlifyPattern = /^https:\/\/[a-zA-Z0-9-]+\.netlify\.app$/;
     if (netlifyPattern.test(origin)) {
       return callback(null, true);
     }
-    
+
     // Allow Vercel deployments
     const vercelPattern = /^https:\/\/[a-zA-Z0-9-]+\.vercel\.app$/;
     if (vercelPattern.test(origin)) {
       return callback(null, true);
     }
-    
+
     // Allow any render.com deployment
     const renderPattern = /^https:\/\/[a-zA-Z0-9-]+\.onrender\.com$/;
     if (renderPattern.test(origin)) {
       return callback(null, true);
     }
-    
+
     // Allow any herokuapp.com deployment
     const herokuPattern = /^https:\/\/[a-zA-Z0-9-]+\.herokuapp\.com$/;
     if (herokuPattern.test(origin)) {
       return callback(null, true);
     }
-    
+
     // For development, allow all (remove this in production for security)
     if (process.env.NODE_ENV !== 'production') {
       return callback(null, true);
     }
-    
+
     callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
@@ -82,8 +80,19 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📝 Environment: ${process.env.NODE_ENV || 'development'}`);
-});
+// Connect to MongoDB and start server - wait for DB connection before listening
+const startServer = async () => {
+  try {
+    await connectDB();
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+      console.log(`📝 Environment: ${process.env.NODE_ENV || 'development'}`);
+    });
+  } catch (error) {
+    console.error('Failed to start server:', error.message);
+    process.exit(1);
+  }
+};
+
+startServer();
 
