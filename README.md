@@ -9,4 +9,4 @@ Live Order Tracking — Follow your delivery from processing to arrival
 
 Tech Stack: React.js · Tailwind CSS · React Icons
 
-Visit Live link: https://fortress-crypto.vercel.app/
+Visit Live link: https://shoppile.netlify.app/
